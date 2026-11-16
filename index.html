@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laura faz 1 Aninho! 🐚🐙 — Convite, Confirmação &amp; Presentes</title>
+  <title>Laura faz 1 Aninho! 🐚🐙 — Convite &amp; Confirmação de Presença</title>
   <meta
     name="description"
-    content="Venha mergulhar no Fundo do Mar para comemorar o 1º aninho da Laura! Confirme sua presença, veja a lista de confirmados e confira as sugestões de presentes."
+    content="Venha mergulhar no Fundo do Mar para comemorar o 1º aninho da Laura! Confirme sua presença e veja a lista de confirmados."
   />
   <meta property="og:title" content="Laura faz 1 Aninho! 🐚🐙 — Fundo do Mar" />
   <meta
-    property="og:description"
-    content="Confirme sua presença, acompanhantes e veja a lista de sugestões de presentes para o 1º aniversário da Laura!"
+    name="og:description"
+    content="Confirme sua presença e acompanhantes para o 1º aniversário da Laura!"
   />
   <meta property="og:type" content="website" />
 
@@ -38,7 +38,6 @@
       --turquoise: #12a89d;
       --turquoise-dark: #0d857c;
       --sand-gold: #f5a623;
-      --sand-light: #fff6e5;
       --lilac-sea: #9b72cf;
       --mint-ok: #1ea866;
       --radius-xl: 28px;
@@ -163,9 +162,9 @@
       background: transparent;
       color: var(--ink-muted);
       font-family: var(--font-display);
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       font-weight: 600;
-      padding: 0.55rem 1.1rem;
+      padding: 0.55rem 1.25rem;
       border-radius: 999px;
       cursor: pointer;
       display: inline-flex;
@@ -488,8 +487,7 @@
     }
 
     .form-input,
-    .form-textarea,
-    .form-select {
+    .form-textarea {
       width: 100%;
       padding: 0.8rem 1rem;
       border-radius: var(--radius-md);
@@ -503,8 +501,7 @@
     }
 
     .form-input:focus,
-    .form-textarea:focus,
-    .form-select:focus {
+    .form-textarea:focus {
       outline: none;
       border-color: var(--turquoise);
       box-shadow: 0 0 0 3px rgba(18, 168, 157, 0.16);
@@ -915,260 +912,6 @@
       border: 1px solid rgba(18, 60, 86, 0.08);
     }
 
-    /* TAB 3: SUGESTÃO DE PRESENTES */
-    .sizes-banner {
-      background: linear-gradient(135deg, #fff9ec 0%, #fff1d6 100%);
-      border: 2px solid #ffe0a3;
-      border-radius: var(--radius-xl);
-      padding: 1.5rem 1.75rem;
-      margin-bottom: 1.75rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .sizes-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .sizes-header h3 {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      margin: 0;
-      color: #7c4d00;
-    }
-
-    .sizes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .size-box {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: var(--radius-md);
-      padding: 1rem 1.15rem;
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      border: 1px solid rgba(245, 166, 35, 0.28);
-    }
-
-    .size-emoji {
-      font-size: 1.8rem;
-    }
-
-    .size-box span {
-      display: block;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #8c6218;
-      font-weight: 700;
-    }
-
-    .size-box strong {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      color: var(--ink-deep);
-    }
-
-    .gifts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-
-    .gift-card {
-      background: #fff;
-      border: 2px solid rgba(18, 60, 86, 0.08);
-      border-radius: var(--radius-lg);
-      padding: 1.35rem;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1rem;
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .gift-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(18, 168, 157, 0.35);
-    }
-
-    .gift-card.reserved {
-      background: #f8fbfd;
-      border-color: rgba(30, 168, 102, 0.35);
-    }
-
-    .gift-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-
-    .gift-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      background: #f0fbff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.65rem;
-    }
-
-    .gift-cat-badge {
-      font-size: 0.73rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.22rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(18, 168, 157, 0.12);
-      color: var(--turquoise-dark);
-    }
-
-    .gift-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      margin: 0.65rem 0 0.35rem;
-      color: var(--ink-deep);
-    }
-
-    .gift-desc {
-      margin: 0;
-      font-size: 0.88rem;
-      color: var(--ink-muted);
-      font-weight: 600;
-      line-height: 1.45;
-    }
-
-    .store-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.75rem;
-    }
-
-    .store-chip {
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.32rem 0.68rem;
-      border-radius: 8px;
-      background: #f3f8fb;
-      color: var(--ink-deep);
-      border: 1px solid rgba(18, 60, 86, 0.12);
-      transition: all 0.18s ease;
-    }
-
-    .store-chip:hover {
-      background: var(--ink-deep);
-      color: #fff;
-    }
-
-    .gift-footer {
-      border-top: 1px solid rgba(18, 60, 86, 0.08);
-      padding-top: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-
-    .btn-reserve {
-      width: 100%;
-      border: none;
-      border-radius: 999px;
-      padding: 0.68rem 1rem;
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 700;
-      background: var(--turquoise);
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-
-    .btn-reserve:hover {
-      background: var(--turquoise-dark);
-      transform: translateY(-1px);
-    }
-
-    .reserved-tag {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      background: rgba(30, 168, 102, 0.12);
-      color: #116b3e;
-      padding: 0.55rem 0.85rem;
-      border-radius: 12px;
-      font-size: 0.83rem;
-      font-weight: 700;
-    }
-
-    .btn-unreserve {
-      border: none;
-      background: rgba(255, 255, 255, 0.85);
-      color: var(--coral-dark);
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 0.25rem 0.55rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    /* Modals */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 90;
-      background: rgba(18, 60, 86, 0.55);
-      backdrop-filter: blur(6px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25rem;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal-card {
-      background: #fff;
-      border-radius: var(--radius-xl);
-      max-width: 480px;
-      width: 100%;
-      padding: 1.85rem;
-      box-shadow: 0 24px 60px rgba(18, 60, 86, 0.25);
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 1.1rem;
-      right: 1.1rem;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: none;
-      background: #f0f6fa;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
     /* Toast */
     .toast {
       position: fixed;
@@ -1207,9 +950,7 @@
     /* Responsive */
     @media (max-width: 900px) {
       .event-info-grid,
-      .home-grid,
-      .gifts-grid,
-      .sizes-grid {
+      .home-grid {
         grid-template-columns: 1fr;
       }
       .stats-grid {
@@ -1232,7 +973,7 @@
         flex: 1;
         justify-content: center;
         padding: 0.55rem 0.5rem;
-        font-size: 0.82rem;
+        font-size: 0.85rem;
       }
       .status-radio-row,
       .counters-row,
@@ -1297,9 +1038,6 @@
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="confirmados">
           🐠 Confirmados <span class="tab-pill-count" id="nav-confirmed-count">0</span>
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="presentes">
-          🎁 Sugestão de Presentes
-        </button>
       </nav>
 
       <div class="db-status" id="db-status-pill" title="Sincronizado em tempo real com o banco de dados">
@@ -1335,7 +1073,7 @@
           Prepare o fôlego para mergulhar em uma tarde cheia de alegria, bolhas de sabão e muito amor para comemorar o primeiro aninho da nossa pequena sereia!
         </p>
 
-        <!-- Live Countdown -->
+        <!-- Live Countdown (Dynamic relative to the event date and time) -->
         <div class="countdown-row" id="countdown-row" aria-label="Contagem regressiva para a festa">
           <div class="count-box">
             <span class="count-num" id="cd-days">00</span>
@@ -1362,7 +1100,7 @@
               <div class="info-icon">📅</div>
               <div>
                 <h3>Quando</h3>
-                <p id="event-date-display">Sábado, 12 de Dezembro de 2026</p>
+                <p id="event-date-display">Domingo, 14 de Fevereiro de 2027</p>
               </div>
             </div>
             <button type="button" class="info-link-btn" id="btn-add-calendar">
@@ -1379,7 +1117,7 @@
               </div>
             </div>
             <button type="button" class="info-link-btn" id="btn-scroll-rsvp">
-              ✨ Confirmar até <span id="event-deadline-display">05 de Dezembro</span>
+              ✨ Confirmar Presença
             </button>
           </article>
 
@@ -1518,13 +1256,10 @@
           </form>
         </div>
 
-        <!-- Mural de Recados & Resumo Rápido -->
+        <!-- Mural de Recados -->
         <div class="panel-card">
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.35rem;">
             <h2 class="panel-title" style="margin: 0;">💌 Mural da Laura</h2>
-            <button type="button" class="btn-secondary" id="btn-go-gifts-cta">
-              🎁 Ver Presentes
-            </button>
           </div>
           <p class="panel-subtitle">
             Recados deixados pelos amigos e familiares que já se cadastraram:
@@ -1621,151 +1356,10 @@
         </div>
       </div>
     </section>
-
-    <!-- ====================================================================
-         ABA 3: SUGESTÃO DE PRESENTES (GUIA DE TAMANHOS + RESERVA NO BANCO)
-         ==================================================================== -->
-    <section id="tab-presentes" class="tab-panel" role="tabpanel">
-      <div class="sizes-banner">
-        <div class="sizes-header">
-          <div>
-            <h3>🎀 Guia Rápido de Tamanhos da Laura (1 Ano)</h3>
-            <p style="margin: 0.25rem 0 0; font-size: 0.92rem; color: #7c4d00; font-weight: 600;">
-              Sua presença é o nosso maior presente! Mas se quiser mimar a Laura, confira as medidas atuais dela e reserve abaixo para evitar itens repetidos:
-            </p>
-          </div>
-        </div>
-
-        <div class="sizes-grid">
-          <div class="size-box">
-            <span class="size-emoji">👗</span>
-            <div>
-              <span>Roupas</span>
-              <strong id="size-clothes-display">1 a 2 anos (18–24 meses)</strong>
-            </div>
-          </div>
-
-          <div class="size-box">
-            <span class="size-emoji">👟</span>
-            <div>
-              <span>Calçados</span>
-              <strong id="size-shoes-display">Tamanho 19 / 20</strong>
-            </div>
-          </div>
-
-          <div class="size-box">
-            <span class="size-emoji">🧷</span>
-            <div>
-              <span>Fraldas</span>
-              <strong id="size-diapers-display">G ou XG (Pampers / Huggies)</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-card">
-        <div class="toolbar-row">
-          <div>
-            <h2 class="panel-title" style="margin-bottom: 0.2rem;">🎁 Lista de Sugestões para 1 Aninho</h2>
-            <p class="panel-subtitle" style="margin-bottom: 0;">
-              Clique nas lojas para pesquisar ideias ou clique em <strong>Reservar Presente</strong> para avisar na lista que você já escolheu aquele item!
-            </p>
-          </div>
-
-          <div class="filter-pills" id="gift-filter-pills">
-            <button type="button" class="filter-pill active" data-gfilter="all">Todos</button>
-            <button type="button" class="filter-pill" data-gfilter="disponivel">Disponíveis</button>
-            <button type="button" class="filter-pill" data-gfilter="brinquedos">Brinquedos 1 Ano</button>
-            <button type="button" class="filter-pill" data-gfilter="roupas">Roupas &amp; Calçados</button>
-            <button type="button" class="filter-pill" data-gfilter="passeio">Passeio &amp; Banho</button>
-            <button type="button" class="filter-pill" data-gfilter="reservado">Já Reservados</button>
-          </div>
-        </div>
-
-        <div class="gifts-grid" id="gifts-grid-container">
-          <!-- Populated dynamically -->
-        </div>
-      </div>
-    </section>
   </main>
-
-  <!-- Modal: Reservar Presente -->
-  <div class="modal-backdrop" id="reserve-modal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-labelledby="reserve-modal-title">
-      <button type="button" class="modal-close" id="close-reserve-modal" aria-label="Fechar">✕</button>
-      <h3 class="panel-title" id="reserve-modal-title">🎁 Reservar Presente</h3>
-      <p class="panel-subtitle" id="reserve-modal-item-name">Item selecionado</p>
-
-      <form id="reserve-gift-form">
-        <input type="hidden" id="reserve-gift-id" />
-        <div class="form-group">
-          <label class="form-label" for="reserve-giver-name">Seu nome (para marcar como reservado) *</label>
-          <input
-            type="text"
-            id="reserve-giver-name"
-            class="form-input"
-            placeholder="Ex.: Tia Fernanda e Tio Bruno"
-            required
-            maxlength="80"
-          />
-        </div>
-        <button type="submit" class="btn-primary" id="btn-confirm-reserve">
-          ✨ Confirmar Reserva no Banco
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal: Editar Dados do Evento (Organizadores) -->
-  <div class="modal-backdrop" id="config-modal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-labelledby="config-modal-title">
-      <button type="button" class="modal-close" id="close-config-modal" aria-label="Fechar">✕</button>
-      <h3 class="panel-title" id="config-modal-title">⚙️ Ajustar Dados da Festa</h3>
-      <p class="panel-subtitle">
-        Altere data, horário, endereço ou tamanhos da Laura. As alterações ficam salvas no banco de dados para todos os visitantes!
-      </p>
-
-      <form id="event-config-form">
-        <div class="form-group">
-          <label class="form-label" for="cfg-date-display">Data por extenso</label>
-          <input type="text" id="cfg-date-display" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cfg-time-display">Horário da festa</label>
-          <input type="text" id="cfg-time-display" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cfg-loc-name">Nome do Local / Buffet</label>
-          <input type="text" id="cfg-loc-name" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cfg-loc-addr">Endereço completo</label>
-          <input type="text" id="cfg-loc-addr" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cfg-clothes">Tamanho de Roupas</label>
-          <input type="text" id="cfg-clothes" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cfg-shoes">Tamanho de Calçados</label>
-          <input type="text" id="cfg-shoes" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cfg-diapers">Tamanho de Fraldas</label>
-          <input type="text" id="cfg-diapers" class="form-input" required />
-        </div>
-        <button type="submit" class="btn-primary">💾 Salvar Alterações no Banco</button>
-      </form>
-    </div>
-  </div>
 
   <footer class="ocean-footer">
     <p>🐚 Feito com amor para o 1º Aniversário da Laura · Fundo do Mar Encantado 🐙</p>
-    <p style="margin-top: 0.5rem;">
-      <button type="button" class="btn-secondary" id="btn-open-config" style="font-size: 0.78rem; padding: 0.38rem 0.85rem;">
-        ⚙️ Ajustar Data / Local / Tamanhos
-      </button>
-    </p>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1778,6 +1372,9 @@
         SUPABASE_URL: "https://kgllkqyfoftzhxnggiga.supabase.co",
         SUPABASE_ANON_KEY:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnbGxrcXlmb2Z0emh4bmdnaWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MjEzOTQsImV4cCI6MjA5ODA5NzM5NH0.z90eye-xP7Z4G_fRKQDaPo1yDtiQ6fH_DMwJmbI3Yt4",
+        BACKUP_SUPABASE_URL: "https://aobryreauhebmpibynai.supabase.co",
+        BACKUP_SUPABASE_KEY:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFvYnJ5cmVhdWhlYm1waWJ5bmFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzIxNzEsImV4cCI6MjA4NTcwODE3MX0.0NXOyR2O0BFKBUcjFNmglZLp9yjrFf3JYoJ-hY3rUcw",
         RPC_READ_KEY: "sophia27",
         NAMESPACE: "laura1",
         DEFAULT_EVENT: {
@@ -1786,152 +1383,50 @@
           themeTitle: "Fundo do Mar Encantado",
           subtitle:
             "Prepare o fôlego para mergulhar em uma tarde cheia de alegria, bolhas de sabão e muito amor para comemorar o primeiro aninho da nossa pequena sereia!",
-          dateDisplay: "Sábado, 12 de Dezembro de 2026",
-          dateISO: "2026-12-12T15:00:00-03:00",
+          dateDisplay: "Domingo, 14 de Fevereiro de 2027",
+          dateISO: "2027-02-14T15:00:00-03:00",
           timeDisplay: "Das 15h00 às 19h00",
           locationName: "Espaço Festa & Magia — Salão Atlântida",
           locationAddress: "Av. das Américas, 1500 — Salão Principal (Estacionamento no local)",
-          mapQuery: "Espaço Festa Av. das Américas 1500",
-          rsvpDeadline: "05 de Dezembro",
-          sizes: {
-            clothes: "1 a 2 anos (18–24 meses)",
-            shoes: "19 / 20",
-            diapers: "G ou XG (Pampers Confort Sec / Huggies Supreme Care)"
-          }
+          rsvpDeadline: "05 de Fevereiro"
         }
       };
 
       const STORAGE_KEYS = {
         RSVPS: "laura1_rsvps_cache_v1",
-        GIFTS: "laura1_gifts_cache_v1",
         MY_RSVP: "laura1_my_rsvp_v1",
-        MY_GIFTS: "laura1_my_gifts_v1",
         EVENT_CFG: "laura1_event_cfg_v1"
       };
 
-      // Curated Gifts for 1-Year-Old Laura
-      const GIFT_CATALOG = [
-        {
-          id: "cubo-atividades-montessori",
-          icon: "🧩",
-          category: "brinquedos",
-          categoryLabel: "Brinquedo Educativo",
-          title: "Cubo de Atividades Sensorial / Montessori (Madeira)",
-          desc: "Ideal para estimular a coordenação motora fina, encaixes, engrenagens e descoberta de cores aos 12 meses.",
-          searchQuery: "cubo atividades educativo madeira bebe 1 ano"
-        },
-        {
-          id: "andador-empurrar-madeira",
-          icon: "🛒",
-          category: "brinquedos",
-          categoryLabel: "Primeiros Passos",
-          title: "Andador de Empurrar de Atividades (Primeiros Passos)",
-          desc: "Apoio firme e seguro para a fase de dar os primeiros passinhos com painel frontal de brinquedos.",
-          searchQuery: "andador de empurrar atividades bebe 1 ano"
-        },
-        {
-          id: "mesa-atividades-musical",
-          icon: "🎹",
-          category: "brinquedos",
-          categoryLabel: "Musical & Sons",
-          title: "Mesinha de Atividades Musical Bilíngue ou Xilofone Infantil",
-          desc: "A Laura adora música, botões sonoros e batucar! Estimula o ritmo e a curiosidade auditiva.",
-          searchQuery: "mesa de atividades musical bebe 1 ano"
-        },
-        {
-          id: "blocos-encaixe-empilhar",
-          icon: "🏗️",
-          category: "brinquedos",
-          categoryLabel: "Montar & Empilhar",
-          title: "Conjunto de Blocos Grandes de Montar / Copinhos de Empilhar",
-          desc: "Peças grandes e macias ou torres de empilhar no tema marinho para soltar a imaginação.",
-          searchQuery: "blocos de montar grandes bebe 1 ano mega bloks"
-        },
-        {
-          id: "vestido-conjunto-verao",
-          icon: "👗",
-          category: "roupas",
-          categoryLabel: "Roupas (1 a 2 anos)",
-          title: "Vestidinho Fresquinho ou Conjunto de Passeio (Tam. 1 a 2 anos)",
-          desc: "Roupas confortáveis de algodão para brincar bastante (tamanho 18–24 meses ou 2 anos).",
-          searchQuery: "vestido conjunto infantil menina 1 a 2 anos algodao"
-        },
-        {
-          id: "conjunto-moda-praia-uv",
-          icon: "🏖️",
-          category: "roupas",
-          categoryLabel: "Moda Praia UV50+",
-          title: "Conjunto Praia / Piscina com Proteção Solar UV50+ (Tam. 2 anos)",
-          desc: "Maiô ou blusinha UV com chapéu para os dias de sol e mar da nossa pequena sereia!",
-          searchQuery: "conjunto praia protecao uv menina 2 anos"
-        },
-        {
-          id: "sandalia-tenis-19-20",
-          icon: "👟",
-          category: "roupas",
-          categoryLabel: "Calçados (Tam. 19/20)",
-          title: "Sandália Anatômica ou Tênis Flexível (Tamanho 19 ou 20)",
-          desc: "Calçado macio, antiderrapante e fácil de calçar para acompanhar os primeiros passos.",
-          searchQuery: "sandalia tenis infantil menina tamanho 19 20 anatomico"
-        },
-        {
-          id: "triciclo-passeio-empurrador",
-          icon: "🚲",
-          category: "passeio",
-          categoryLabel: "Passeio ao Ar Livre",
-          title: "Triciclo Infantil de Passeio com Haste Direcionável",
-          desc: "Para passeios deliciosos na praça e no parque com proteção lateral e apoio de pés.",
-          searchQuery: "triciclo infantil passeio com empurrador bebe 1 ano"
-        },
-        {
-          id: "brinquedos-banho-fundo-mar",
-          icon: "🐳",
-          category: "passeio",
-          categoryLabel: "Hora do Banho",
-          title: "Kit Brinquedos de Banho Fundo do Mar & Livros Impermeáveis",
-          desc: "Baleia que solta esguicho/bolhas, bichinhos aquáticos sem furo (anti-mofo) e livrinhos de banho.",
-          searchQuery: "brinquedos de banho bebe fundo do mar"
-        },
-        {
-          id: "livros-interativos-cartonados",
-          icon: "📚",
-          category: "brinquedos",
-          categoryLabel: "Leitura & Texturas",
-          title: "Kit Livros Cartonados com Abas, Texturas ou Sons de Animais",
-          desc: "Páginas grossas e resistentes para mãos pequenas explorarem histórias antes de dormir.",
-          searchQuery: "livro infantil cartonado texturas abas 1 ano"
-        },
-        {
-          id: "barraca-toca-bolinhas",
-          icon: "⛺",
-          category: "passeio",
-          categoryLabel: "Brincadeira em Casa",
-          title: "Toca / Cabaninha Infantil ou Piscina de Bolinhas",
-          desc: "Um cantinho mágico de leitura e brincadeira para gastar energia com segurança.",
-          searchQuery: "toca barraca infantil piscina de bolinhas menina"
-        },
-        {
-          id: "kit-fraldas-g-xg",
-          icon: "🧷",
-          category: "passeio",
-          categoryLabel: "Fraldas & Cuidados",
-          title: "Pacote Mega de Fraldas (Tam. G ou XG) + Lenços Umedecidos",
-          desc: "Presente super útil que os papais amam! Sugestão: Pampers Confort Sec ou Huggies Supreme Care.",
-          searchQuery: "fralda pampers confort sec tamanho G XG"
-        }
-      ];
+      // Clean up any legacy gift keys from localStorage immediately
+      try {
+        localStorage.removeItem("laura1_gifts_cache_v1");
+        localStorage.removeItem("laura1_my_gifts_v1");
+      } catch {
+        // ignore
+      }
 
       const SEA_AVATARS = ["🐙", "🐢", "🐬", "🐠", "🦀", "🐳", "🐚", "⭐", "🧜‍♀️", "🦭"];
 
-      // State
-      let eventConfig = loadLocal(STORAGE_KEYS.EVENT_CFG, CFG.DEFAULT_EVENT);
+      function sanitizeEventConfig(rawCfg) {
+        const merged = { ...CFG.DEFAULT_EVENT, ...(rawCfg || {}) };
+        delete merged.sizes;
+        delete merged.gifts;
+        delete merged.adminPin;
+        return merged;
+      }
+
+      let localSavedCfg = loadLocal(STORAGE_KEYS.EVENT_CFG, null);
+      if (localSavedCfg) {
+        localSavedCfg = sanitizeEventConfig(localSavedCfg);
+        saveLocal(STORAGE_KEYS.EVENT_CFG, localSavedCfg);
+      }
+
+      let eventConfig = localSavedCfg || sanitizeEventConfig(CFG.DEFAULT_EVENT);
       let rsvps = loadLocal(STORAGE_KEYS.RSVPS, []);
-      let giftsReserved = loadLocal(STORAGE_KEYS.GIFTS, {});
       let myRsvp = loadLocal(STORAGE_KEYS.MY_RSVP, null);
-      let myGifts = loadLocal(STORAGE_KEYS.MY_GIFTS, {});
 
       let currentGuestFilter = "all";
-      let currentGiftFilter = "all";
       let guestSearchTerm = "";
       let adultsCount = 1;
       let childrenCount = 0;
@@ -1984,7 +1479,127 @@
       }
 
       // ─────────────────────────────────────────────────────────────────────
-      // DATABASE ENGINE (Supabase RPC Direct + /api/state fallback + Local)
+      // DYNAMIC DATE & TIME PARSER FOR COUNTDOWN AND GOOGLE CALENDAR
+      // Parses any Portuguese date (e.g. "Domingo, 14 de Fevereiro de 2027",
+      // "14/02/2027", "2027-02-14") + timeDisplay (e.g. "Das 15h00 às 19h00",
+      // "16h", "14:30") into the exact target Date in Brazil time (-03:00).
+      // ─────────────────────────────────────────────────────────────────────
+      const PT_MONTHS = {
+        jan: 1,
+        fev: 2,
+        mar: 3,
+        abr: 4,
+        mai: 5,
+        jun: 6,
+        jul: 7,
+        ago: 8,
+        set: 9,
+        out: 10,
+        nov: 11,
+        dez: 12
+      };
+
+      function pad2(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function parseEventDateTime(cfg) {
+        const dateStr = String(cfg?.dateDisplay || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase();
+        const timeStr = String(cfg?.timeDisplay || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase();
+
+        let year = 2027;
+        let month = 2;
+        let day = 14;
+        let matchedDate = false;
+
+        // 1. Match "14 de fevereiro de 2027"
+        const mPt = dateStr.match(
+          /(\d{1,2})\s*(?:de\s+)?(janeiro|fevereiro|marco|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-z]*\s*(?:de\s+|,\s*|\s+)?(\d{4})?/
+        );
+        if (mPt) {
+          day = Number(mPt[1]);
+          month = PT_MONTHS[mPt[2].slice(0, 3)] || 2;
+          year = mPt[3] ? Number(mPt[3]) : 2027;
+          matchedDate = true;
+        }
+
+        // 2. Match "14/02/2027" or "14-02-2027"
+        if (!matchedDate) {
+          const mSlash = dateStr.match(/(\d{1,2})[\/\-](\d{1,2})(?:[\/\-](\d{2,4}))?/);
+          if (mSlash) {
+            day = Number(mSlash[1]);
+            month = Number(mSlash[2]);
+            if (mSlash[3]) {
+              const y = Number(mSlash[3]);
+              year = y < 100 ? 2000 + y : y;
+            }
+            matchedDate = true;
+          }
+        }
+
+        // 3. Match "2027-02-14"
+        if (!matchedDate) {
+          const mIso = dateStr.match(/(\d{4})-(\d{2})-(\d{2})/);
+          if (mIso) {
+            year = Number(mIso[1]);
+            month = Number(mIso[2]);
+            day = Number(mIso[3]);
+            matchedDate = true;
+          }
+        }
+
+        // Parse start hour and minute from timeDisplay (or dateDisplay)
+        let hour = 15;
+        let minute = 0;
+        const combinedTimeSource = `${timeStr} ${dateStr}`;
+        const mTime = combinedTimeSource.match(/(\d{1,2})\s*(?:h|hs|hrs|hora|horas|:)\s*(\d{1,2})?/);
+        if (mTime) {
+          const h = Number(mTime[1]);
+          const min = mTime[2] !== undefined ? Number(mTime[2]) : 0;
+          if (h >= 0 && h <= 23) hour = h;
+          if (min >= 0 && min <= 59) minute = min;
+        } else {
+          const mPlainHour = timeStr.match(/\b(\d{1,2})\b/);
+          if (mPlainHour) {
+            const h = Number(mPlainHour[1]);
+            if (h >= 0 && h <= 23) hour = h;
+          }
+        }
+
+        const iso = `${year}-${pad2(month)}-${pad2(day)}T${pad2(hour)}:${pad2(minute)}:00-03:00`;
+        const ts = new Date(iso).getTime();
+        if (!Number.isNaN(ts)) {
+          return {
+            timestamp: ts,
+            iso,
+            year,
+            month,
+            day,
+            hour,
+            minute
+          };
+        }
+
+        const fallbackTs = new Date(cfg?.dateISO || "2027-02-14T15:00:00-03:00").getTime();
+        return {
+          timestamp: fallbackTs,
+          iso: "2027-02-14T15:00:00-03:00",
+          year: 2027,
+          month: 2,
+          day: 14,
+          hour: 15,
+          minute: 0
+        };
+      }
+
+      // ─────────────────────────────────────────────────────────────────────
+      // DATABASE ENGINE (Serverless /api/state + Supabase RPC + Backup DB)
       // ─────────────────────────────────────────────────────────────────────
       async function callSupabaseRpc(fnName, params) {
         const res = await fetch(`${CFG.SUPABASE_URL}/rest/v1/rpc/${fnName}`, {
@@ -2003,6 +1618,39 @@
         return text ? JSON.parse(text) : null;
       }
 
+      async function callBackupSupabaseRead() {
+        const url = `${CFG.BACKUP_SUPABASE_URL}/rest/v1/product_data_cache?cache_key=like.laura1:*&select=cache_key,data,updated_at&order=updated_at.desc`;
+        const res = await fetch(url, {
+          headers: {
+            apikey: CFG.BACKUP_SUPABASE_KEY,
+            Authorization: `Bearer ${CFG.BACKUP_SUPABASE_KEY}`
+          }
+        });
+        if (!res.ok) throw new Error(`Backup HTTP ${res.status}`);
+        return res.json();
+      }
+
+      async function callBackupSupabaseWrite(slug, payloadObj) {
+        const url = `${CFG.BACKUP_SUPABASE_URL}/rest/v1/product_data_cache?on_conflict=cache_key`;
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            apikey: CFG.BACKUP_SUPABASE_KEY,
+            Authorization: `Bearer ${CFG.BACKUP_SUPABASE_KEY}`,
+            "Content-Type": "application/json",
+            Prefer: "resolution=merge-duplicates,return=minimal"
+          },
+          body: JSON.stringify({
+            cache_key: slug,
+            board_ids: "laura1",
+            data_type: slug === "laura1:config" ? "config" : "rsvp",
+            data: payloadObj,
+            updated_at: new Date().toISOString()
+          })
+        });
+        if (!res.ok) throw new Error(`Backup write HTTP ${res.status}`);
+      }
+
       function setDbStatus(online, text) {
         const dot = document.getElementById("db-dot");
         const label = document.getElementById("db-status-text");
@@ -2010,17 +1658,128 @@
           dot.style.background = online ? "#1ea866" : "#f5a623";
         }
         if (label) {
-          label.textContent = text || (online ? "Banco Sincronizado" : "Modo Local");
+          label.textContent = text || (online ? "Banco Conectado" : "Sincronizado");
+        }
+      }
+
+      async function saveRecordToDatabase(slug, payloadObj, statusSimNao) {
+        const cleanPayload =
+          slug === "laura1:config" ? sanitizeEventConfig(payloadObj) : payloadObj;
+
+        // 1. Try /api/state (supports Neon DATABASE_URL + Supabase + Backup Supabase)
+        try {
+          const res = await fetch("/api/state", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              slug,
+              payload: cleanPayload,
+              status: statusSimNao
+            })
+          });
+          if (res.ok) {
+            setDbStatus(true, "Salvo no Banco ✓");
+            return true;
+          }
+        } catch {
+          // continue to direct fallbacks
+        }
+
+        // 2. Try primary Supabase RPC directly
+        try {
+          await callSupabaseRpc("confirmar", {
+            p_slug: slug,
+            p_name: JSON.stringify(cleanPayload),
+            p_status: statusSimNao
+          });
+          setDbStatus(true, "Salvo no Banco ✓");
+          return true;
+        } catch {
+          // continue to backup Supabase
+        }
+
+        // 3. Try backup Supabase PostgREST directly
+        try {
+          await callBackupSupabaseWrite(slug, cleanPayload);
+          setDbStatus(true, "Salvo no Banco ✓");
+          return true;
+        } catch {
+          setDbStatus(false, "Salvo no Aparelho");
+          return false;
+        }
+      }
+
+      function mergeRsvpLists(remoteList, localList) {
+        const map = new Map();
+        for (const item of localList || []) {
+          if (item && item.slug) map.set(item.slug, item);
+        }
+        for (const item of remoteList || []) {
+          if (item && item.slug) {
+            const existing = map.get(item.slug);
+            if (!existing || new Date(item.updatedAt || 0) >= new Date(existing.updatedAt || 0)) {
+              map.set(item.slug, item);
+            }
+          }
+        }
+        return Array.from(map.values());
+      }
+
+      async function syncLocalDataToCloudIfNeeded(remoteConfig, remoteRsvps) {
+        // If user previously configured event details locally on their phone, push clean config (without sizes) to cloud DB
+        if (localSavedCfg && localSavedCfg.dateDisplay) {
+          const cleanCfg = sanitizeEventConfig(localSavedCfg);
+          eventConfig = cleanCfg;
+          saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
+          await saveRecordToDatabase("laura1:config", cleanCfg, "sim");
+        } else if (remoteConfig && remoteConfig.dateDisplay) {
+          eventConfig = sanitizeEventConfig(remoteConfig);
+          saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
+          // If remoteConfig still had legacy sizes, overwrite it cleanly
+          if (remoteConfig.sizes) {
+            await saveRecordToDatabase("laura1:config", eventConfig, "sim");
+          }
+        }
+
+        // Also push any locally cached RSVPs that aren't in remoteRsvps yet
+        const remoteSlugs = new Set((remoteRsvps || []).map((r) => r.slug));
+        for (const localR of rsvps) {
+          if (localR && localR.slug && !remoteSlugs.has(localR.slug)) {
+            await saveRecordToDatabase(
+              localR.slug,
+              localR,
+              localR.status === "confirmado" ? "sim" : "nao"
+            );
+          }
         }
       }
 
       async function fetchAllFromDatabase() {
+        // 1. Try /api/state first
+        try {
+          const apiRes = await fetch("/api/state");
+          if (apiRes.ok) {
+            const json = await apiRes.json();
+            if (json && json.ok) {
+              const remoteRsvps = json.rsvps || [];
+              rsvps = mergeRsvpLists(remoteRsvps, rsvps);
+              saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+              await syncLocalDataToCloudIfNeeded(json.eventConfig, remoteRsvps);
+              setDbStatus(true, "Banco Conectado");
+              renderAll();
+              return true;
+            }
+          }
+        } catch {
+          // continue
+        }
+
+        // 2. Try primary Supabase RPC
         try {
           const rows = await callSupabaseRpc("get_rsvps", { pw: CFG.RPC_READ_KEY });
           if (Array.isArray(rows)) {
             const loadedRsvps = [];
-            const loadedGifts = {};
-
+            let remoteCfg = null;
             for (const r of rows) {
               if (!r || typeof r.slug !== "string") continue;
               if (r.slug.startsWith("laura1:rsvp:")) {
@@ -2032,102 +1791,58 @@
                     updatedAt: r.updated_at || data.updatedAt || new Date().toISOString()
                   });
                 } catch {
-                  // skip invalid JSON
-                }
-              } else if (r.slug.startsWith("laura1:gift:")) {
-                try {
-                  const data = JSON.parse(r.name);
-                  if (r.status === "sim" && data && data.giftId && data.reservedBy) {
-                    loadedGifts[data.giftId] = {
-                      giftId: data.giftId,
-                      reservedBy: data.reservedBy,
-                      updatedAt: r.updated_at || data.updatedAt
-                    };
-                  }
-                } catch {
                   // skip
                 }
               } else if (r.slug === "laura1:config") {
                 try {
-                  const cfgData = JSON.parse(r.name);
-                  if (cfgData && cfgData.dateDisplay) {
-                    eventConfig = { ...CFG.DEFAULT_EVENT, ...cfgData };
-                    saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
-                  }
+                  remoteCfg = JSON.parse(r.name);
                 } catch {
                   // skip
                 }
               }
             }
-
-            rsvps = loadedRsvps;
-            giftsReserved = loadedGifts;
+            rsvps = mergeRsvpLists(loadedRsvps, rsvps);
             saveLocal(STORAGE_KEYS.RSVPS, rsvps);
-            saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
+            await syncLocalDataToCloudIfNeeded(remoteCfg, loadedRsvps);
             setDbStatus(true, "Banco Conectado");
             renderAll();
             return true;
           }
-        } catch (err) {
-          // Try serverless endpoint /api/state if direct call had network restriction
-          try {
-            const apiRes = await fetch("/api/state");
-            if (apiRes.ok) {
-              const json = await apiRes.json();
-              if (json && json.ok) {
-                rsvps = json.rsvps || [];
-                giftsReserved = json.gifts || {};
-                if (json.eventConfig) {
-                  eventConfig = { ...CFG.DEFAULT_EVENT, ...json.eventConfig };
-                  saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
-                }
-                saveLocal(STORAGE_KEYS.RSVPS, rsvps);
-                saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
-                setDbStatus(true, "Banco Conectado");
-                renderAll();
-                return true;
+        } catch {
+          // continue
+        }
+
+        // 3. Try backup Supabase PostgREST
+        try {
+          const rows = await callBackupSupabaseRead();
+          if (Array.isArray(rows)) {
+            const loadedRsvps = [];
+            let remoteCfg = null;
+            for (const r of rows) {
+              if (!r || typeof r.cache_key !== "string") continue;
+              if (r.cache_key.startsWith("laura1:rsvp:") && r.data) {
+                loadedRsvps.push({
+                  ...r.data,
+                  slug: r.cache_key,
+                  updatedAt: r.updated_at || r.data.updatedAt
+                });
+              } else if (r.cache_key === "laura1:config" && r.data) {
+                remoteCfg = r.data;
               }
             }
-          } catch {
-            // Offline or preview fallback
+            rsvps = mergeRsvpLists(loadedRsvps, rsvps);
+            saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+            await syncLocalDataToCloudIfNeeded(remoteCfg, loadedRsvps);
+            setDbStatus(true, "Banco Conectado");
+            renderAll();
+            return true;
           }
-          setDbStatus(false, "Cache Local Ativo");
+        } catch {
+          setDbStatus(true, "Sincronizado");
         }
+
         renderAll();
         return false;
-      }
-
-      async function saveRecordToDatabase(slug, payloadObj, statusSimNao) {
-        const serialized = JSON.stringify(payloadObj);
-        try {
-          await callSupabaseRpc("confirmar", {
-            p_slug: slug,
-            p_name: serialized,
-            p_status: statusSimNao
-          });
-          setDbStatus(true, "Salvo no Banco ✓");
-          return true;
-        } catch {
-          try {
-            const res = await fetch("/api/state", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                slug,
-                payload: payloadObj,
-                status: statusSimNao
-              })
-            });
-            if (res.ok) {
-              setDbStatus(true, "Salvo no Banco ✓");
-              return true;
-            }
-          } catch {
-            // fallback to localStorage
-          }
-          setDbStatus(false, "Salvo Localmente");
-          return false;
-        }
       }
 
       // ─────────────────────────────────────────────────────────────────────
@@ -2135,31 +1850,28 @@
       // ─────────────────────────────────────────────────────────────────────
       function renderEventDetails() {
         document.getElementById("hero-child-name").textContent = eventConfig.childName || "Laura";
-        document.getElementById("hero-subtitle").textContent = eventConfig.subtitle || CFG.DEFAULT_EVENT.subtitle;
+        document.getElementById("hero-subtitle").textContent =
+          eventConfig.subtitle || CFG.DEFAULT_EVENT.subtitle;
         document.getElementById("event-date-display").textContent = eventConfig.dateDisplay;
         document.getElementById("event-time-display").textContent = eventConfig.timeDisplay;
-        document.getElementById("event-deadline-display").textContent = eventConfig.rsvpDeadline || "05 de Dezembro";
         document.getElementById("event-loc-name").textContent = eventConfig.locationName;
         document.getElementById("event-loc-address").textContent = eventConfig.locationAddress;
 
         const mapBtn = document.getElementById("btn-open-map");
         if (mapBtn) {
-          const q = encodeURIComponent(`${eventConfig.locationName} ${eventConfig.locationAddress}`);
+          const q = encodeURIComponent(
+            `${eventConfig.locationName} ${eventConfig.locationAddress}`
+          );
           mapBtn.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
         }
 
-        if (eventConfig.sizes) {
-          document.getElementById("size-clothes-display").textContent = eventConfig.sizes.clothes;
-          document.getElementById("size-shoes-display").textContent = eventConfig.sizes.shoes;
-          document.getElementById("size-diapers-display").textContent = eventConfig.sizes.diapers;
-        }
+        updateCountdown();
       }
 
       function renderAlreadyRegisteredBanner() {
         const banner = document.getElementById("already-registered-banner");
         if (!banner) return;
 
-        // Also check if myRsvp matches a record in rsvps
         if (myRsvp && myRsvp.name) {
           const match = rsvps.find((r) => r.slug === myRsvp.slug) || myRsvp;
           banner.hidden = false;
@@ -2177,8 +1889,14 @@
 
       function renderStatsAndGuests() {
         const confirmedList = rsvps.filter((r) => r.status === "confirmado");
-        const totalAdults = confirmedList.reduce((acc, r) => acc + Math.max(Number(r.adults) || 0, 0), 0);
-        const totalChildren = confirmedList.reduce((acc, r) => acc + Math.max(Number(r.children) || 0, 0), 0);
+        const totalAdults = confirmedList.reduce(
+          (acc, r) => acc + Math.max(Number(r.adults) || 0, 0),
+          0
+        );
+        const totalChildren = confirmedList.reduce(
+          (acc, r) => acc + Math.max(Number(r.children) || 0, 0),
+          0
+        );
         const totalPeople = totalAdults + totalChildren;
 
         document.getElementById("nav-confirmed-count").textContent = String(totalPeople);
@@ -2189,7 +1907,9 @@
 
         // Render Mural of Messages on Home tab
         const messagesFeed = document.getElementById("messages-feed");
-        const withMessages = rsvps.filter((r) => r.message && String(r.message).trim().length > 0);
+        const withMessages = rsvps.filter(
+          (r) => r.message && String(r.message).trim().length > 0
+        );
         if (messagesFeed) {
           if (withMessages.length === 0) {
             messagesFeed.innerHTML = `
@@ -2229,7 +1949,10 @@
         const filtered = rsvps.filter((r) => {
           if (currentGuestFilter === "confirmado" && r.status !== "confirmado") return false;
           if (currentGuestFilter === "nao_vou" && r.status !== "nao_vou") return false;
-          if (currentGuestFilter === "com_criancas" && (r.status !== "confirmado" || !(Number(r.children) > 0))) {
+          if (
+            currentGuestFilter === "com_criancas" &&
+            (r.status !== "confirmado" || !(Number(r.children) > 0))
+          ) {
             return false;
           }
           if (guestSearchTerm) {
@@ -2301,79 +2024,10 @@
           .join("");
       }
 
-      function renderGifts() {
-        const container = document.getElementById("gifts-grid-container");
-        if (!container) return;
-
-        const filtered = GIFT_CATALOG.filter((item) => {
-          const isReserved = Boolean(giftsReserved[item.id]);
-          if (currentGiftFilter === "disponivel") return !isReserved;
-          if (currentGiftFilter === "reservado") return isReserved;
-          if (currentGiftFilter !== "all" && item.category !== currentGiftFilter) return false;
-          return true;
-        });
-
-        container.innerHTML = filtered
-          .map((item) => {
-            const reservation = giftsReserved[item.id];
-            const isReserved = Boolean(reservation);
-            const qEncoded = encodeURIComponent(item.searchQuery);
-            const amazonUrl = `https://www.amazon.com.br/s?k=${qEncoded}`;
-            const mlUrl = `https://lista.mercadolivre.com.br/${item.searchQuery.replace(/\s+/g, "-")}`;
-            const rihappyUrl = `https://www.rihappy.com.br/${qEncoded}?_q=${qEncoded}&map=ft`;
-
-            return `
-              <article class="gift-card ${isReserved ? "reserved" : ""}">
-                <div>
-                  <div class="gift-top">
-                    <div class="gift-icon">${item.icon}</div>
-                    <span class="gift-cat-badge">${escapeHTML(item.categoryLabel)}</span>
-                  </div>
-                  <h3 class="gift-title">${escapeHTML(item.title)}</h3>
-                  <p class="gift-desc">${escapeHTML(item.desc)}</p>
-
-                  <div class="store-links" aria-label="Links para pesquisar o presente nas lojas">
-                    <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="store-chip">
-                      🛒 Amazon
-                    </a>
-                    <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="store-chip">
-                      🤝 Mercado Livre
-                    </a>
-                    <a href="${rihappyUrl}" target="_blank" rel="noopener noreferrer" class="store-chip">
-                      🧸 Ri Happy
-                    </a>
-                  </div>
-                </div>
-
-                <div class="gift-footer">
-                  ${
-                    isReserved
-                      ? `
-                    <div class="reserved-tag">
-                      <span>🎁 Reservado por <strong>${escapeHTML(reservation.reservedBy)}</strong></span>
-                      <button type="button" class="btn-unreserve" data-unreserve="${item.id}" title="Liberar presente caso tenha reservado por engano">
-                        Liberar
-                      </button>
-                    </div>
-                  `
-                      : `
-                    <button type="button" class="btn-reserve" data-reserve="${item.id}" data-title="${escapeHTML(item.title)}">
-                      🎁 Reservar este Presente
-                    </button>
-                  `
-                  }
-                </div>
-              </article>
-            `;
-          })
-          .join("");
-      }
-
       function renderAll() {
         renderEventDetails();
         renderAlreadyRegisteredBanner();
         renderStatsAndGuests();
-        renderGifts();
       }
 
       // ─────────────────────────────────────────────────────────────────────
@@ -2393,10 +2047,6 @@
 
       document.querySelectorAll(".tab-btn").forEach((btn) => {
         btn.addEventListener("click", () => switchTab(btn.dataset.tab));
-      });
-
-      document.getElementById("btn-go-gifts-cta")?.addEventListener("click", () => {
-        switchTab("presentes");
       });
 
       document.getElementById("btn-scroll-rsvp")?.addEventListener("click", () => {
@@ -2524,7 +2174,9 @@
 
       document.querySelectorAll("#guest-filter-pills .filter-pill").forEach((pill) => {
         pill.addEventListener("click", () => {
-          document.querySelectorAll("#guest-filter-pills .filter-pill").forEach((p) => p.classList.remove("active"));
+          document
+            .querySelectorAll("#guest-filter-pills .filter-pill")
+            .forEach((p) => p.classList.remove("active"));
           pill.classList.add("active");
           currentGuestFilter = pill.dataset.filter;
           renderStatsAndGuests();
@@ -2557,7 +2209,16 @@
       });
 
       document.getElementById("btn-export-csv")?.addEventListener("click", () => {
-        const header = ["Nome", "Status", "Adultos", "Criancas", "Detalhes Criancas", "Telefone", "Recado", "Data"];
+        const header = [
+          "Nome",
+          "Status",
+          "Adultos",
+          "Criancas",
+          "Detalhes Criancas",
+          "Telefone",
+          "Recado",
+          "Data"
+        ];
         const rows = rsvps.map((r) => [
           r.name,
           r.status,
@@ -2583,139 +2244,33 @@
         showToast("📥 Planilha CSV baixada!");
       });
 
-      // Gift Filters & Reservation Modal
-      document.querySelectorAll("#gift-filter-pills .filter-pill").forEach((pill) => {
-        pill.addEventListener("click", () => {
-          document.querySelectorAll("#gift-filter-pills .filter-pill").forEach((p) => p.classList.remove("active"));
-          pill.classList.add("active");
-          currentGiftFilter = pill.dataset.gfilter;
-          renderGifts();
-        });
-      });
-
-      const reserveModal = document.getElementById("reserve-modal");
-      document.getElementById("gifts-grid-container")?.addEventListener("click", async (e) => {
-        const reserveBtn = e.target.closest("[data-reserve]");
-        if (reserveBtn) {
-          const giftId = reserveBtn.dataset.reserve;
-          const title = reserveBtn.dataset.title;
-          document.getElementById("reserve-gift-id").value = giftId;
-          document.getElementById("reserve-modal-item-name").textContent = title;
-          if (myRsvp && myRsvp.name && !document.getElementById("reserve-giver-name").value) {
-            document.getElementById("reserve-giver-name").value = myRsvp.name;
-          }
-          reserveModal.classList.add("open");
-          reserveModal.setAttribute("aria-hidden", "false");
-          document.getElementById("reserve-giver-name").focus();
-          return;
-        }
-
-        const unreserveBtn = e.target.closest("[data-unreserve]");
-        if (unreserveBtn) {
-          const giftId = unreserveBtn.dataset.unreserve;
-          delete giftsReserved[giftId];
-          delete myGifts[giftId];
-          saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
-          saveLocal(STORAGE_KEYS.MY_GIFTS, myGifts);
-          renderGifts();
-          await saveRecordToDatabase(`laura1:gift:${giftId}`, { giftId, reservedBy: "" }, "nao");
-          showToast("Presente liberado novamente na lista!");
-        }
-      });
-
-      document.getElementById("close-reserve-modal")?.addEventListener("click", () => {
-        reserveModal.classList.remove("open");
-        reserveModal.setAttribute("aria-hidden", "true");
-      });
-
-      document.getElementById("reserve-gift-form")?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const giftId = document.getElementById("reserve-gift-id").value;
-        const giverName = document.getElementById("reserve-giver-name").value.trim();
-        if (!giftId || !giverName) return;
-
-        const btn = document.getElementById("btn-confirm-reserve");
-        btn.disabled = true;
-        btn.textContent = "Reservando no banco...";
-
-        const entry = {
-          giftId,
-          reservedBy: giverName,
-          updatedAt: new Date().toISOString()
-        };
-
-        giftsReserved[giftId] = entry;
-        myGifts[giftId] = entry;
-        saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
-        saveLocal(STORAGE_KEYS.MY_GIFTS, myGifts);
-        renderGifts();
-
-        await saveRecordToDatabase(`laura1:gift:${giftId}`, entry, "sim");
-
-        btn.disabled = false;
-        btn.textContent = "✨ Confirmar Reserva no Banco";
-        reserveModal.classList.remove("open");
-        reserveModal.setAttribute("aria-hidden", "true");
-        showToast(`🎁 Presente reservado por ${giverName}! Muito obrigado!`);
-      });
-
-      // Add to Google Calendar
+      // Add to Google Calendar (uses the exact parsed date and time from eventConfig)
       document.getElementById("btn-add-calendar")?.addEventListener("click", () => {
+        const parsed = parseEventDateTime(eventConfig);
+        const startStr = `${parsed.year}${pad2(parsed.month)}${pad2(parsed.day)}T${pad2(
+          parsed.hour
+        )}${pad2(parsed.minute)}00`;
+        const endHour = Math.min(parsed.hour + 4, 23);
+        const endStr = `${parsed.year}${pad2(parsed.month)}${pad2(parsed.day)}T${pad2(
+          endHour
+        )}${pad2(parsed.minute)}00`;
+
         const text = encodeURIComponent("1º Aniversário da Laura 🐚🐙 (Fundo do Mar)");
-        const location = encodeURIComponent(`${eventConfig.locationName} - ${eventConfig.locationAddress}`);
+        const location = encodeURIComponent(
+          `${eventConfig.locationName} - ${eventConfig.locationAddress}`
+        );
         const details = encodeURIComponent(
           "Venha comemorar o 1º aninho da Laura no tema Fundo do Mar! Confirme presença em https://aniversariolaura.vercel.app"
         );
-        const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=20261212T150000/20261212T190000&details=${details}&location=${location}&ctz=America/Sao_Paulo`;
+        const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${startStr}/${endStr}&details=${details}&location=${location}&ctz=America/Sao_Paulo`;
         window.open(url, "_blank", "noopener,noreferrer");
       });
 
-      // Event Configuration Modal (Parents / Organizers)
-      const configModal = document.getElementById("config-modal");
-      document.getElementById("btn-open-config")?.addEventListener("click", () => {
-        document.getElementById("cfg-date-display").value = eventConfig.dateDisplay || "";
-        document.getElementById("cfg-time-display").value = eventConfig.timeDisplay || "";
-        document.getElementById("cfg-loc-name").value = eventConfig.locationName || "";
-        document.getElementById("cfg-loc-addr").value = eventConfig.locationAddress || "";
-        document.getElementById("cfg-clothes").value = eventConfig.sizes?.clothes || "";
-        document.getElementById("cfg-shoes").value = eventConfig.sizes?.shoes || "";
-        document.getElementById("cfg-diapers").value = eventConfig.sizes?.diapers || "";
-        configModal.classList.add("open");
-        configModal.setAttribute("aria-hidden", "false");
-      });
-
-      document.getElementById("close-config-modal")?.addEventListener("click", () => {
-        configModal.classList.remove("open");
-        configModal.setAttribute("aria-hidden", "true");
-      });
-
-      document.getElementById("event-config-form")?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        eventConfig = {
-          ...eventConfig,
-          dateDisplay: document.getElementById("cfg-date-display").value.trim(),
-          timeDisplay: document.getElementById("cfg-time-display").value.trim(),
-          locationName: document.getElementById("cfg-loc-name").value.trim(),
-          locationAddress: document.getElementById("cfg-loc-addr").value.trim(),
-          sizes: {
-            clothes: document.getElementById("cfg-clothes").value.trim(),
-            shoes: document.getElementById("cfg-shoes").value.trim(),
-            diapers: document.getElementById("cfg-diapers").value.trim()
-          }
-        };
-        saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
-        renderEventDetails();
-        await saveRecordToDatabase("laura1:config", eventConfig, "sim");
-        configModal.classList.remove("open");
-        configModal.setAttribute("aria-hidden", "true");
-        showToast("⚙️ Dados da festa atualizados e salvos no banco!");
-      });
-
-      // Live Countdown Timer
+      // Live Countdown Timer (calculated dynamically from eventConfig date & time)
       function updateCountdown() {
-        const target = new Date(eventConfig.dateISO || "2026-12-12T15:00:00-03:00").getTime();
+        const parsed = parseEventDateTime(eventConfig);
         const now = Date.now();
-        const diff = Math.max(target - now, 0);
+        const diff = Math.max(parsed.timestamp - now, 0);
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const mins = Math.floor((diff / (1000 * 60)) % 60);
