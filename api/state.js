@@ -1,18 +1,46 @@
 import { neon } from "@neondatabase/serverless";
+import pg from "pg";
 
-// Se você conectar um banco dedicado na aba Storage do projeto `aniversariolaura` na Vercel,
-// a Vercel preenche DATABASE_URL / POSTGRES_URL automaticamente.
-// Enquanto não houver variável no painel da Vercel, usa o schema isolado `aniversario_laura`.
 const FALLBACK_NEON_URL =
   "postgresql://neondb_owner:npg_VHxOI2vsD3YP@ep-steep-surf-a4igari9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require";
 
-function getSql() {
-  const url =
+function getConnectionString() {
+  return (
     process.env.DATABASE_URL ||
     process.env.POSTGRES_URL ||
     process.env.NEON_DATABASE_URL ||
-    FALLBACK_NEON_URL;
-  return neon(url, { fullResults: true });
+    FALLBACK_NEON_URL
+  );
+}
+
+let pgPool = null;
+function getPool(connectionString) {
+  if (!pgPool) {
+    pgPool = new pg.Pool({
+      connectionString,
+      ssl: { rejectUnauthorized: false },
+      max: 3,
+      connectionTimeoutMillis: 8000,
+      idleTimeoutMillis: 10000,
+    });
+  }
+  return pgPool;
+}
+
+async function runQuery(text, params = []) {
+  const connectionString = getConnectionString();
+  try {
+    const sql = neon(connectionString, { fullResults: true });
+    if (typeof sql.query === "function") {
+      const res = await sql.query(text, params);
+      return Array.isArray(res) ? { rows: res } : res;
+    }
+    const res = await sql(text, params);
+    return Array.isArray(res) ? { rows: res } : res;
+  } catch (neonErr) {
+    const pool = getPool(connectionString);
+    return await pool.query(text, params);
+  }
 }
 
 function sanitizeEventConfig(cfg) {
@@ -25,10 +53,10 @@ function sanitizeEventConfig(cfg) {
 }
 
 let schemaReady = false;
-async function ensureIsolatedSchema(sql) {
+async function ensureIsolatedSchema() {
   if (schemaReady) return;
-  await sql.query(`CREATE SCHEMA IF NOT EXISTS aniversario_laura`);
-  await sql.query(
+  await runQuery(`CREATE SCHEMA IF NOT EXISTS aniversario_laura`);
+  await runQuery(
     `CREATE TABLE IF NOT EXISTS aniversario_laura.rsvps_store (
       slug TEXT PRIMARY KEY,
       payload JSONB NOT NULL,
@@ -50,14 +78,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const sql = getSql();
-    await ensureIsolatedSchema(sql);
+    await ensureIsolatedSchema();
 
     if (req.method === "GET") {
       const rsvps = [];
       let eventConfig = null;
 
-      const result = await sql.query(
+      const result = await runQuery(
         `SELECT slug, payload, status, updated_at
          FROM aniversario_laura.rsvps_store
          ORDER BY updated_at DESC`
@@ -109,7 +136,7 @@ export default async function handler(req, res) {
             ? sanitizeEventConfig(item.payload)
             : item.payload;
 
-        await sql.query(
+        await runQuery(
           `INSERT INTO aniversario_laura.rsvps_store (slug, payload, status, updated_at)
            VALUES ($1, $2::jsonb, $3, NOW())
            ON CONFLICT (slug) DO UPDATE SET
@@ -129,8 +156,10 @@ export default async function handler(req, res) {
 
     return res.status(405).json({ ok: false, error: "Method not allowed" });
   } catch (err) {
-    return res
-      .status(500)
-      .json({ ok: false, error: err.message || "Erro interno no banco" });
+    return res.status(500).json({
+      ok: false,
+      error: err.message || "Erro interno no banco",
+      code: err.code || null,
+    });
   }
 }

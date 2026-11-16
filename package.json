@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Convite e confirmação de presença — 1º Aniversário da Laura (aniversariolaura.vercel.app)",
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.4"
+    "@neondatabase/serverless": "^1.2.0",
+    "pg": "^8.13.1"
   }
 }

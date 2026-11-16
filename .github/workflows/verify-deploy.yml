@@ -1,0 +1,15 @@
+name: Verify Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel deployment and verify /api/state
+        run: |
+          sleep 20
+          curl -sS -i https://aniversariolaura.vercel.app/api/state
