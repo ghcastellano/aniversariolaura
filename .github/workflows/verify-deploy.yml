@@ -11,5 +11,12 @@ jobs:
     steps:
       - name: Wait for Vercel deployment and verify /api/state
         run: |
-          sleep 20
+          sleep 22
+          echo "=== GET /api/state ==="
           curl -sS -i https://aniversariolaura.vercel.app/api/state
+          echo ""
+          echo "=== Reverse Geocode Map Coordinates ==="
+          curl -sS -A "AniversarioLaura/1.0" "https://nominatim.openstreetmap.org/reverse?format=json&lat=-23.95459899&lon=-46.2856147&zoom=18&addressdetails=1"
+          echo ""
+          echo "=== Google Maps Place Title ==="
+          curl -sS -L -A "Mozilla/5.0" "https://www.google.com/maps/place//data=!4m2!3m1!1s0x94ce017e1d1c58b5:0xfad5c4ce2297b083?hl=pt-BR" | grep -oE '<meta content="[^"]+" property="og:(title|description)"' || true

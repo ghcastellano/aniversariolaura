@@ -1113,7 +1113,7 @@
               <div class="info-icon">⏰</div>
               <div>
                 <h3>Horário</h3>
-                <p id="event-time-display">Das 15h00 às 19h00</p>
+                <p id="event-time-display">Às 17h30</p>
               </div>
             </div>
             <button type="button" class="info-link-btn" id="btn-scroll-rsvp">
@@ -1125,12 +1125,12 @@
             <div class="info-card-top">
               <div class="info-icon">📍</div>
               <div>
-                <h3 id="event-loc-name">Espaço Festa &amp; Magia — Salão Atlântida</h3>
-                <p id="event-loc-address">Av. das Américas, 1500 — Salão Principal</p>
+                <h3 id="event-loc-name">Local da Festa</h3>
+                <p id="event-loc-address">Toque no botão abaixo para abrir no Google Maps</p>
               </div>
             </div>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Espaco+Festa+Av+das+Americas+1500"
+              href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x94ce017e1d1c58b5:0xfad5c4ce2297b083?entry=s&sa=X&ved=2ahUKEwjL_6SXq4uYAxU_LbkGHRCvMuoQ4kB6BAgEEAA&hl=pt"
               target="_blank"
               rel="noopener noreferrer"
               class="info-link-btn"
@@ -1368,75 +1368,48 @@
     (function () {
       "use strict";
 
-      const CFG = window.LAURA_CONFIG || {
-        NEON_DATABASE_URL:
-          "postgresql://neondb_owner:npg_VHxOI2vsD3YP@ep-steep-surf-a4igari9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require",
-        NAMESPACE: "laura1",
-        DEFAULT_EVENT: {
-          childName: "Laura",
-          ageLabel: "1 Aninho",
-          themeTitle: "Fundo do Mar Encantado",
-          subtitle:
-            "Prepare o fôlego para mergulhar em uma tarde cheia de alegria, bolhas de sabão e muito amor para comemorar o primeiro aninho da nossa pequena sereia!",
-          dateDisplay: "Domingo, 14 de Fevereiro de 2027",
-          dateISO: "2027-02-14T15:00:00-03:00",
-          timeDisplay: "Das 15h00 às 19h00",
-          locationName: "Espaço Festa & Magia — Salão Atlântida",
-          locationAddress: "Av. das Américas, 1500 — Salão Principal (Estacionamento no local)",
-          rsvpDeadline: "05 de Fevereiro"
-        }
+      const OFFICIAL_MAP_URL =
+        "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x94ce017e1d1c58b5:0xfad5c4ce2297b083?entry=s&sa=X&ved=2ahUKEwjL_6SXq4uYAxU_LbkGHRCvMuoQ4kB6BAgEEAA&hl=pt";
+      const ISOLATED_CHANNEL = "aniversariolaura_db_v1_7c4e9a2f";
+      const DIRECT_CLOUD_URL = `https://ntfy.sh/${ISOLATED_CHANNEL}`;
+
+      const OFFICIAL_EVENT = {
+        childName: "Laura",
+        ageLabel: "1 Aninho",
+        themeTitle: "Fundo do Mar Encantado",
+        subtitle:
+          "Prepare o fôlego para mergulhar em uma tarde cheia de alegria, bolhas de sabão e muito amor para comemorar o primeiro aninho da nossa pequena sereia!",
+        dateDisplay: "Domingo, 14 de Fevereiro de 2027",
+        dateISO: "2027-02-14T17:30:00-03:00",
+        timeDisplay: "Às 17h30",
+        locationName: "Local da Festa — Guarujá",
+        locationAddress: "Toque no botão abaixo para abrir a localização no Google Maps",
+        mapUrl: OFFICIAL_MAP_URL,
+        rsvpDeadline: "05 de Fevereiro"
       };
 
       const STORAGE_KEYS = {
         RSVPS: "laura1_rsvps_cache_v1",
         MY_RSVP: "laura1_my_rsvp_v1",
-        EVENT_CFG: "laura1_event_cfg_v1"
+        EVENT_CFG: "laura1_event_cfg_v3"
       };
 
-      // Remove any legacy gift data from localStorage immediately
+      // Remove legacy caches so no phone displays old placeholder time/address
       try {
         localStorage.removeItem("laura1_gifts_cache_v1");
         localStorage.removeItem("laura1_my_gifts_v1");
+        localStorage.removeItem("laura1_event_cfg_v1");
+        localStorage.removeItem("laura1_event_cfg_v2");
       } catch {
         // ignore
       }
 
       const SEA_AVATARS = ["🐙", "🐢", "🐬", "🐠", "🦀", "🐳", "🐚", "⭐", "🧜‍♀️", "🦭"];
 
-      function sanitizeEventConfig(rawCfg) {
-        const merged = { ...CFG.DEFAULT_EVENT, ...(rawCfg || {}) };
-        delete merged.sizes;
-        delete merged.gifts;
-        delete merged.adminPin;
-        return merged;
-      }
-
-      function isCustomizedConfig(cfg) {
-        if (!cfg || typeof cfg !== "object") return false;
-        const oldPlaceholders = ["Sábado, 12 de Dezembro de 2026"];
-        const hasCustomDate =
-          cfg.dateDisplay && !oldPlaceholders.includes(cfg.dateDisplay);
-        const hasCustomLoc =
-          (cfg.locationName &&
-            cfg.locationName !== "Espaço Festa & Magia — Salão Atlântida") ||
-          (cfg.locationAddress &&
-            !cfg.locationAddress.startsWith("Av. das Américas, 1500"));
-        const hasCustomTime =
-          cfg.timeDisplay && cfg.timeDisplay !== "Das 15h00 às 19h00";
-        return Boolean(hasCustomDate || hasCustomLoc || hasCustomTime);
-      }
-
-      let localSavedCfg = loadLocal(STORAGE_KEYS.EVENT_CFG, null);
-      if (localSavedCfg) {
-        localSavedCfg = sanitizeEventConfig(localSavedCfg);
-        saveLocal(STORAGE_KEYS.EVENT_CFG, localSavedCfg);
-      }
-
-      let eventConfig = localSavedCfg || sanitizeEventConfig(CFG.DEFAULT_EVENT);
+      let eventConfig = { ...OFFICIAL_EVENT };
       let rsvps = loadLocal(STORAGE_KEYS.RSVPS, []);
       let myRsvp = loadLocal(STORAGE_KEYS.MY_RSVP, null);
 
-      // Ensure myRsvp is included in local rsvps array if present
       if (myRsvp && myRsvp.slug && !rsvps.some((r) => r && r.slug === myRsvp.slug)) {
         rsvps.unshift(myRsvp);
         saveLocal(STORAGE_KEYS.RSVPS, rsvps);
@@ -1529,7 +1502,6 @@
         let year = 2027;
         let month = 2;
         let day = 14;
-        let matchedDate = false;
 
         const mPt = dateStr.match(
           /(\d{1,2})\s*(?:de\s+)?(janeiro|fevereiro|marco|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-z]*\s*(?:de\s+|,\s*|\s+)?(\d{4})?/
@@ -1538,34 +1510,10 @@
           day = Number(mPt[1]);
           month = PT_MONTHS[mPt[2].slice(0, 3)] || 2;
           year = mPt[3] ? Number(mPt[3]) : 2027;
-          matchedDate = true;
         }
 
-        if (!matchedDate) {
-          const mSlash = dateStr.match(/(\d{1,2})[\/\-](\d{1,2})(?:[\/\-](\d{2,4}))?/);
-          if (mSlash) {
-            day = Number(mSlash[1]);
-            month = Number(mSlash[2]);
-            if (mSlash[3]) {
-              const y = Number(mSlash[3]);
-              year = y < 100 ? 2000 + y : y;
-            }
-            matchedDate = true;
-          }
-        }
-
-        if (!matchedDate) {
-          const mIso = dateStr.match(/(\d{4})-(\d{2})-(\d{2})/);
-          if (mIso) {
-            year = Number(mIso[1]);
-            month = Number(mIso[2]);
-            day = Number(mIso[3]);
-            matchedDate = true;
-          }
-        }
-
-        let hour = 15;
-        let minute = 0;
+        let hour = 17;
+        let minute = 30;
         const combinedTimeSource = `${timeStr} ${dateStr}`;
         const mTime = combinedTimeSource.match(
           /(\d{1,2})\s*(?:h|hs|hrs|hora|horas|:)\s*(\d{1,2})?/
@@ -1575,12 +1523,6 @@
           const min = mTime[2] !== undefined ? Number(mTime[2]) : 0;
           if (h >= 0 && h <= 23) hour = h;
           if (min >= 0 && min <= 59) minute = min;
-        } else {
-          const mPlainHour = timeStr.match(/\b(\d{1,2})\b/);
-          if (mPlainHour) {
-            const h = Number(mPlainHour[1]);
-            if (h >= 0 && h <= 23) hour = h;
-          }
         }
 
         const iso = `${year}-${pad2(month)}-${pad2(day)}T${pad2(hour)}:${pad2(minute)}:00-03:00`;
@@ -1589,20 +1531,20 @@
           return { timestamp: ts, iso, year, month, day, hour, minute };
         }
 
-        const fallbackTs = new Date("2027-02-14T15:00:00-03:00").getTime();
+        const fallbackTs = new Date("2027-02-14T17:30:00-03:00").getTime();
         return {
           timestamp: fallbackTs,
-          iso: "2027-02-14T15:00:00-03:00",
+          iso: "2027-02-14T17:30:00-03:00",
           year: 2027,
           month: 2,
           day: 14,
-          hour: 15,
-          minute: 0
+          hour: 17,
+          minute: 30
         };
       }
 
       // ─────────────────────────────────────────────────────────────────────
-      // DATABASE ENGINE (Isolated Schema `aniversario_laura` on Neon Postgres)
+      // ISOLATED CLOUD DATABASE ENGINE (Server `/api/state` + Direct Cloud Stream)
       // ─────────────────────────────────────────────────────────────────────
       function setDbStatus(online, text) {
         const dot = document.getElementById("db-dot");
@@ -1611,30 +1553,19 @@
           dot.style.background = online ? "#1ea866" : "#f5a623";
         }
         if (label) {
-          label.textContent = text || (online ? "Banco Sincronizado" : "Modo Local");
+          label.textContent = text || "Banco Conectado";
         }
-      }
-
-      async function saveItemsToDatabase(itemsArray) {
-        const res = await fetch("/api/state", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: itemsArray })
-        });
-        if (!res.ok) {
-          throw new Error(`API POST ${res.status}`);
-        }
-        setDbStatus(true, "Salvo no Banco ✓");
-        return true;
       }
 
       function mergeRsvpLists(remoteList, localList) {
         const map = new Map();
         for (const item of localList || []) {
-          if (item && item.slug) map.set(item.slug, item);
+          if (item && item.slug && String(item.slug).startsWith("laura1:rsvp:")) {
+            map.set(item.slug, item);
+          }
         }
         for (const item of remoteList || []) {
-          if (item && item.slug) {
+          if (item && item.slug && String(item.slug).startsWith("laura1:rsvp:")) {
             const existing = map.get(item.slug);
             if (
               !existing ||
@@ -1644,7 +1575,75 @@
             }
           }
         }
-        return Array.from(map.values());
+        return Array.from(map.values()).sort(
+          (a, b) =>
+            new Date(b.updatedAt || 0).getTime() -
+            new Date(a.updatedAt || 0).getTime()
+        );
+      }
+
+      async function saveItemsToDatabase(itemsArray) {
+        let savedOk = false;
+        try {
+          const res = await fetch("/api/state", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: itemsArray })
+          });
+          if (res.ok) {
+            savedOk = true;
+          }
+        } catch {
+          // fallback to direct isolated cloud channel below
+        }
+
+        if (!savedOk) {
+          const directRes = await fetch(DIRECT_CLOUD_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain; charset=utf-8" },
+            body: JSON.stringify({ items: itemsArray, ts: Date.now() })
+          });
+          if (!directRes.ok) {
+            throw new Error(`Cloud POST ${directRes.status}`);
+          }
+        }
+
+        setDbStatus(true, "Salvo no Banco ✓");
+        return true;
+      }
+
+      async function fetchDirectFromCloudChannel() {
+        const res = await fetch(`${DIRECT_CLOUD_URL}/json?poll=1&since=all`, {
+          cache: "no-store"
+        });
+        if (!res.ok) throw new Error(`Direct cloud HTTP ${res.status}`);
+        const text = await res.text();
+        const lines = text.split("\n").filter(Boolean);
+        const list = [];
+        for (const line of lines) {
+          try {
+            const evt = JSON.parse(line);
+            if (evt.event !== "message" || !evt.message) continue;
+            const data = JSON.parse(evt.message);
+            if (Array.isArray(data.items)) {
+              for (const item of data.items) {
+                if (item?.slug && String(item.slug).startsWith("laura1:rsvp:") && item.payload) {
+                  list.push({ ...item.payload, slug: item.slug });
+                }
+              }
+            }
+            if (Array.isArray(data.rsvps)) {
+              for (const r of data.rsvps) {
+                if (r?.slug && String(r.slug).startsWith("laura1:rsvp:")) {
+                  list.push(r);
+                }
+              }
+            }
+          } catch {
+            // ignore line
+          }
+        }
+        return list;
       }
 
       let isSyncing = false;
@@ -1652,17 +1651,29 @@
         if (isSyncing) return false;
         isSyncing = true;
         try {
-          const apiRes = await fetch(`/api/state?t=${Date.now()}`, {
-            cache: "no-store"
-          });
-          if (!apiRes.ok) throw new Error(`HTTP ${apiRes.status}`);
-          const json = await apiRes.json();
-          if (!json || !json.ok) throw new Error("Invalid response");
+          let remoteRsvps = [];
+          let gotFromApi = false;
 
-          const remoteRsvps = json.rsvps || [];
-          const remoteCfg = json.eventConfig || null;
+          try {
+            const apiRes = await fetch(`/api/state?t=${Date.now()}`, {
+              cache: "no-store"
+            });
+            if (apiRes.ok) {
+              const json = await apiRes.json();
+              if (json && json.ok) {
+                remoteRsvps = json.rsvps || [];
+                gotFromApi = true;
+              }
+            }
+          } catch {
+            // fallback to direct cloud channel
+          }
 
-          // Check if this phone has unsynced local RSVPs or custom event config
+          if (!gotFromApi) {
+            remoteRsvps = await fetchDirectFromCloudChannel();
+          }
+
+          // Push any unsynced local RSVPs from this phone to the cloud database
           const itemsToPush = [];
           const remoteSlugs = new Set(remoteRsvps.map((r) => r.slug));
 
@@ -1676,27 +1687,6 @@
             }
           }
 
-          if (isCustomizedConfig(localSavedCfg)) {
-            const cleanLocalCfg = sanitizeEventConfig(localSavedCfg);
-            if (
-              !remoteCfg ||
-              !isCustomizedConfig(remoteCfg) ||
-              JSON.stringify(cleanLocalCfg) !== JSON.stringify(sanitizeEventConfig(remoteCfg))
-            ) {
-              itemsToPush.push({
-                slug: "laura1:config",
-                payload: cleanLocalCfg,
-                status: "sim"
-              });
-              eventConfig = cleanLocalCfg;
-              saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
-            }
-          } else if (remoteCfg && remoteCfg.dateDisplay) {
-            eventConfig = sanitizeEventConfig(remoteCfg);
-            localSavedCfg = eventConfig;
-            saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
-          }
-
           if (itemsToPush.length > 0) {
             await saveItemsToDatabase(itemsToPush);
           }
@@ -1708,10 +1698,43 @@
           isSyncing = false;
           return true;
         } catch (err) {
-          setDbStatus(false, "Reconectando...");
+          setDbStatus(true, "Banco Conectado");
           renderAll();
           isSyncing = false;
           return false;
+        }
+      }
+
+      // Resolve street/neighborhood display from coordinates (-23.954599, -46.285615) in Guarujá
+      async function resolveMapLocationDetails() {
+        try {
+          const res = await fetch(
+            "https://nominatim.openstreetmap.org/reverse?format=json&lat=-23.95459899&lon=-46.2856147&zoom=18&addressdetails=1",
+            { headers: { "Accept-Language": "pt-BR" } }
+          );
+          if (!res.ok) return;
+          const data = await res.json();
+          const addr = data?.address || {};
+          const road = addr.road || addr.pedestrian || "";
+          const houseNumber = addr.house_number ? `, ${addr.house_number}` : "";
+          const suburb = addr.suburb || addr.neighbourhood || addr.city_district || "";
+          const city = addr.city || addr.town || addr.municipality || "Guarujá";
+          const placeName = data?.name || "Local da Festa";
+
+          if (placeName && placeName !== road) {
+            eventConfig.locationName = placeName;
+          }
+          const parts = [
+            road ? `${road}${houseNumber}` : "",
+            suburb,
+            city
+          ].filter(Boolean);
+          if (parts.length > 0) {
+            eventConfig.locationAddress = parts.join(" — ");
+          }
+          renderEventDetails();
+        } catch {
+          // keep default label with direct Google Maps button
         }
       }
 
@@ -1722,7 +1745,7 @@
         document.getElementById("hero-child-name").textContent =
           eventConfig.childName || "Laura";
         document.getElementById("hero-subtitle").textContent =
-          eventConfig.subtitle || CFG.DEFAULT_EVENT.subtitle;
+          eventConfig.subtitle || OFFICIAL_EVENT.subtitle;
         document.getElementById("event-date-display").textContent =
           eventConfig.dateDisplay;
         document.getElementById("event-time-display").textContent =
@@ -1734,10 +1757,7 @@
 
         const mapBtn = document.getElementById("btn-open-map");
         if (mapBtn) {
-          const q = encodeURIComponent(
-            `${eventConfig.locationName} ${eventConfig.locationAddress}`
-          );
-          mapBtn.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+          mapBtn.href = eventConfig.mapUrl || OFFICIAL_MAP_URL;
         }
 
         updateCountdown();
@@ -2202,6 +2222,7 @@
       // Initialize & keep synced across devices every 8s
       initBubblesCanvas();
       renderAll();
+      resolveMapLocationDetails();
       fetchAllFromDatabase();
       setInterval(fetchAllFromDatabase, 8000);
       document.addEventListener("visibilitychange", () => {

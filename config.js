@@ -1,15 +1,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURAÇÃO DO ANIVERSÁRIO DE 1 ANO DA LAURA (FUNDO DO MAR)
-// Conectado ao banco de dados Neon PostgreSQL (serverless) para sincronizar
-// confirmações de presença (RSVPs) e dados do evento entre todos os celulares.
+// Banco de dados isolado e exclusivo do projeto `aniversariolaura`.
 // ─────────────────────────────────────────────────────────────────────────────
 window.LAURA_CONFIG = {
-  NEON_DATABASE_URL:
-    "postgresql://neondb_owner:npg_VHxOI2vsD3YP@ep-steep-surf-a4igari9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require",
-
   NAMESPACE: "laura1",
+  ISOLATED_DB_CHANNEL: "aniversariolaura_db_v1_7c4e9a2f",
 
-  // Dados padrão do evento (sincronizados automaticamente com o banco de dados)
+  // Dados oficiais do evento
   DEFAULT_EVENT: {
     childName: "Laura",
     ageLabel: "1 Aninho",
@@ -17,10 +14,12 @@ window.LAURA_CONFIG = {
     subtitle:
       "Prepare o fôlego para mergulhar em uma tarde cheia de alegria, bolhas de sabão e muito amor para comemorar o primeiro aninho da nossa pequena sereia!",
     dateDisplay: "Domingo, 14 de Fevereiro de 2027",
-    dateISO: "2027-02-14T15:00:00-03:00",
-    timeDisplay: "Das 15h00 às 19h00",
-    locationName: "Espaço Festa & Magia — Salão Atlântida",
-    locationAddress: "Av. das Américas, 1500 — Salão Principal (Estacionamento no local)",
+    dateISO: "2027-02-14T17:30:00-03:00",
+    timeDisplay: "Às 17h30",
+    locationName: "Local da Festa — Guarujá",
+    locationAddress: "Clique abaixo para abrir a localização exata no Google Maps",
+    mapUrl:
+      "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x94ce017e1d1c58b5:0xfad5c4ce2297b083?entry=s&sa=X&ved=2ahUKEwjL_6SXq4uYAxU_LbkGHRCvMuoQ4kB6BAgEEAA&hl=pt",
     rsvpDeadline: "05 de Fevereiro"
   }
 };
