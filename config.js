@@ -1,21 +1,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURAÇÃO DO ANIVERSÁRIO DE 1 ANO DA LAURA (FUNDO DO MAR)
-// Conectado ao banco de dados para persistir confirmações de presença (RSVPs)
-// e ler os dados oficiais do evento em tempo real.
+// Conectado ao banco de dados Neon PostgreSQL (serverless) para sincronizar
+// confirmações de presença (RSVPs) e dados do evento entre todos os celulares.
 // ─────────────────────────────────────────────────────────────────────────────
 window.LAURA_CONFIG = {
-  SUPABASE_URL: "https://kgllkqyfoftzhxnggiga.supabase.co",
-  SUPABASE_ANON_KEY:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnbGxrcXlmb2Z0emh4bmdnaWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MjEzOTQsImV4cCI6MjA5ODA5NzM5NH0.z90eye-xP7Z4G_fRKQDaPo1yDtiQ6fH_DMwJmbI3Yt4",
+  NEON_DATABASE_URL:
+    "postgresql://neondb_owner:npg_VHxOI2vsD3YP@ep-steep-surf-a4igari9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require",
 
-  BACKUP_SUPABASE_URL: "https://aobryreauhebmpibynai.supabase.co",
-  BACKUP_SUPABASE_KEY:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFvYnJ5cmVhdWhlYm1waWJ5bmFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzIxNzEsImV4cCI6MjA4NTcwODE3MX0.0NXOyR2O0BFKBUcjFNmglZLp9yjrFf3JYoJ-hY3rUcw",
-
-  RPC_READ_KEY: "sophia27",
   NAMESPACE: "laura1",
 
-  // Dados fixos do evento (e sincronizados com o registro salvo no banco)
+  // Dados padrão do evento (sincronizados automaticamente com o banco de dados)
   DEFAULT_EVENT: {
     childName: "Laura",
     ageLabel: "1 Aninho",

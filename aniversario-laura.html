@@ -1369,13 +1369,8 @@
       "use strict";
 
       const CFG = window.LAURA_CONFIG || {
-        SUPABASE_URL: "https://kgllkqyfoftzhxnggiga.supabase.co",
-        SUPABASE_ANON_KEY:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnbGxrcXlmb2Z0emh4bmdnaWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MjEzOTQsImV4cCI6MjA5ODA5NzM5NH0.z90eye-xP7Z4G_fRKQDaPo1yDtiQ6fH_DMwJmbI3Yt4",
-        BACKUP_SUPABASE_URL: "https://aobryreauhebmpibynai.supabase.co",
-        BACKUP_SUPABASE_KEY:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFvYnJ5cmVhdWhlYm1waWJ5bmFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxMzIxNzEsImV4cCI6MjA4NTcwODE3MX0.0NXOyR2O0BFKBUcjFNmglZLp9yjrFf3JYoJ-hY3rUcw",
-        RPC_READ_KEY: "sophia27",
+        NEON_DATABASE_URL:
+          "postgresql://neondb_owner:npg_VHxOI2vsD3YP@ep-steep-surf-a4igari9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require",
         NAMESPACE: "laura1",
         DEFAULT_EVENT: {
           childName: "Laura",
@@ -1398,7 +1393,7 @@
         EVENT_CFG: "laura1_event_cfg_v1"
       };
 
-      // Clean up any legacy gift keys from localStorage immediately
+      // Remove any legacy gift data from localStorage immediately
       try {
         localStorage.removeItem("laura1_gifts_cache_v1");
         localStorage.removeItem("laura1_my_gifts_v1");
@@ -1416,6 +1411,21 @@
         return merged;
       }
 
+      function isCustomizedConfig(cfg) {
+        if (!cfg || typeof cfg !== "object") return false;
+        const oldPlaceholders = ["Sábado, 12 de Dezembro de 2026"];
+        const hasCustomDate =
+          cfg.dateDisplay && !oldPlaceholders.includes(cfg.dateDisplay);
+        const hasCustomLoc =
+          (cfg.locationName &&
+            cfg.locationName !== "Espaço Festa & Magia — Salão Atlântida") ||
+          (cfg.locationAddress &&
+            !cfg.locationAddress.startsWith("Av. das Américas, 1500"));
+        const hasCustomTime =
+          cfg.timeDisplay && cfg.timeDisplay !== "Das 15h00 às 19h00";
+        return Boolean(hasCustomDate || hasCustomLoc || hasCustomTime);
+      }
+
       let localSavedCfg = loadLocal(STORAGE_KEYS.EVENT_CFG, null);
       if (localSavedCfg) {
         localSavedCfg = sanitizeEventConfig(localSavedCfg);
@@ -1425,6 +1435,12 @@
       let eventConfig = localSavedCfg || sanitizeEventConfig(CFG.DEFAULT_EVENT);
       let rsvps = loadLocal(STORAGE_KEYS.RSVPS, []);
       let myRsvp = loadLocal(STORAGE_KEYS.MY_RSVP, null);
+
+      // Ensure myRsvp is included in local rsvps array if present
+      if (myRsvp && myRsvp.slug && !rsvps.some((r) => r && r.slug === myRsvp.slug)) {
+        rsvps.unshift(myRsvp);
+        saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+      }
 
       let currentGuestFilter = "all";
       let guestSearchTerm = "";
@@ -1444,7 +1460,7 @@
         try {
           localStorage.setItem(key, JSON.stringify(val));
         } catch {
-          // ignore storage quota errors
+          // ignore
         }
       }
 
@@ -1480,9 +1496,6 @@
 
       // ─────────────────────────────────────────────────────────────────────
       // DYNAMIC DATE & TIME PARSER FOR COUNTDOWN AND GOOGLE CALENDAR
-      // Parses any Portuguese date (e.g. "Domingo, 14 de Fevereiro de 2027",
-      // "14/02/2027", "2027-02-14") + timeDisplay (e.g. "Das 15h00 às 19h00",
-      // "16h", "14:30") into the exact target Date in Brazil time (-03:00).
       // ─────────────────────────────────────────────────────────────────────
       const PT_MONTHS = {
         jan: 1,
@@ -1518,7 +1531,6 @@
         let day = 14;
         let matchedDate = false;
 
-        // 1. Match "14 de fevereiro de 2027"
         const mPt = dateStr.match(
           /(\d{1,2})\s*(?:de\s+)?(janeiro|fevereiro|marco|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)[a-z]*\s*(?:de\s+|,\s*|\s+)?(\d{4})?/
         );
@@ -1529,7 +1541,6 @@
           matchedDate = true;
         }
 
-        // 2. Match "14/02/2027" or "14-02-2027"
         if (!matchedDate) {
           const mSlash = dateStr.match(/(\d{1,2})[\/\-](\d{1,2})(?:[\/\-](\d{2,4}))?/);
           if (mSlash) {
@@ -1543,7 +1554,6 @@
           }
         }
 
-        // 3. Match "2027-02-14"
         if (!matchedDate) {
           const mIso = dateStr.match(/(\d{4})-(\d{2})-(\d{2})/);
           if (mIso) {
@@ -1554,11 +1564,12 @@
           }
         }
 
-        // Parse start hour and minute from timeDisplay (or dateDisplay)
         let hour = 15;
         let minute = 0;
         const combinedTimeSource = `${timeStr} ${dateStr}`;
-        const mTime = combinedTimeSource.match(/(\d{1,2})\s*(?:h|hs|hrs|hora|horas|:)\s*(\d{1,2})?/);
+        const mTime = combinedTimeSource.match(
+          /(\d{1,2})\s*(?:h|hs|hrs|hora|horas|:)\s*(\d{1,2})?/
+        );
         if (mTime) {
           const h = Number(mTime[1]);
           const min = mTime[2] !== undefined ? Number(mTime[2]) : 0;
@@ -1575,18 +1586,10 @@
         const iso = `${year}-${pad2(month)}-${pad2(day)}T${pad2(hour)}:${pad2(minute)}:00-03:00`;
         const ts = new Date(iso).getTime();
         if (!Number.isNaN(ts)) {
-          return {
-            timestamp: ts,
-            iso,
-            year,
-            month,
-            day,
-            hour,
-            minute
-          };
+          return { timestamp: ts, iso, year, month, day, hour, minute };
         }
 
-        const fallbackTs = new Date(cfg?.dateISO || "2027-02-14T15:00:00-03:00").getTime();
+        const fallbackTs = new Date("2027-02-14T15:00:00-03:00").getTime();
         return {
           timestamp: fallbackTs,
           iso: "2027-02-14T15:00:00-03:00",
@@ -1599,58 +1602,8 @@
       }
 
       // ─────────────────────────────────────────────────────────────────────
-      // DATABASE ENGINE (Serverless /api/state + Supabase RPC + Backup DB)
+      // DATABASE ENGINE (Isolated Schema `aniversario_laura` on Neon Postgres)
       // ─────────────────────────────────────────────────────────────────────
-      async function callSupabaseRpc(fnName, params) {
-        const res = await fetch(`${CFG.SUPABASE_URL}/rest/v1/rpc/${fnName}`, {
-          method: "POST",
-          headers: {
-            apikey: CFG.SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${CFG.SUPABASE_ANON_KEY}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(params)
-        });
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-        const text = await res.text();
-        return text ? JSON.parse(text) : null;
-      }
-
-      async function callBackupSupabaseRead() {
-        const url = `${CFG.BACKUP_SUPABASE_URL}/rest/v1/product_data_cache?cache_key=like.laura1:*&select=cache_key,data,updated_at&order=updated_at.desc`;
-        const res = await fetch(url, {
-          headers: {
-            apikey: CFG.BACKUP_SUPABASE_KEY,
-            Authorization: `Bearer ${CFG.BACKUP_SUPABASE_KEY}`
-          }
-        });
-        if (!res.ok) throw new Error(`Backup HTTP ${res.status}`);
-        return res.json();
-      }
-
-      async function callBackupSupabaseWrite(slug, payloadObj) {
-        const url = `${CFG.BACKUP_SUPABASE_URL}/rest/v1/product_data_cache?on_conflict=cache_key`;
-        const res = await fetch(url, {
-          method: "POST",
-          headers: {
-            apikey: CFG.BACKUP_SUPABASE_KEY,
-            Authorization: `Bearer ${CFG.BACKUP_SUPABASE_KEY}`,
-            "Content-Type": "application/json",
-            Prefer: "resolution=merge-duplicates,return=minimal"
-          },
-          body: JSON.stringify({
-            cache_key: slug,
-            board_ids: "laura1",
-            data_type: slug === "laura1:config" ? "config" : "rsvp",
-            data: payloadObj,
-            updated_at: new Date().toISOString()
-          })
-        });
-        if (!res.ok) throw new Error(`Backup write HTTP ${res.status}`);
-      }
-
       function setDbStatus(online, text) {
         const dot = document.getElementById("db-dot");
         const label = document.getElementById("db-status-text");
@@ -1658,55 +1611,21 @@
           dot.style.background = online ? "#1ea866" : "#f5a623";
         }
         if (label) {
-          label.textContent = text || (online ? "Banco Conectado" : "Sincronizado");
+          label.textContent = text || (online ? "Banco Sincronizado" : "Modo Local");
         }
       }
 
-      async function saveRecordToDatabase(slug, payloadObj, statusSimNao) {
-        const cleanPayload =
-          slug === "laura1:config" ? sanitizeEventConfig(payloadObj) : payloadObj;
-
-        // 1. Try /api/state (supports Neon DATABASE_URL + Supabase + Backup Supabase)
-        try {
-          const res = await fetch("/api/state", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              slug,
-              payload: cleanPayload,
-              status: statusSimNao
-            })
-          });
-          if (res.ok) {
-            setDbStatus(true, "Salvo no Banco ✓");
-            return true;
-          }
-        } catch {
-          // continue to direct fallbacks
+      async function saveItemsToDatabase(itemsArray) {
+        const res = await fetch("/api/state", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: itemsArray })
+        });
+        if (!res.ok) {
+          throw new Error(`API POST ${res.status}`);
         }
-
-        // 2. Try primary Supabase RPC directly
-        try {
-          await callSupabaseRpc("confirmar", {
-            p_slug: slug,
-            p_name: JSON.stringify(cleanPayload),
-            p_status: statusSimNao
-          });
-          setDbStatus(true, "Salvo no Banco ✓");
-          return true;
-        } catch {
-          // continue to backup Supabase
-        }
-
-        // 3. Try backup Supabase PostgREST directly
-        try {
-          await callBackupSupabaseWrite(slug, cleanPayload);
-          setDbStatus(true, "Salvo no Banco ✓");
-          return true;
-        } catch {
-          setDbStatus(false, "Salvo no Aparelho");
-          return false;
-        }
+        setDbStatus(true, "Salvo no Banco ✓");
+        return true;
       }
 
       function mergeRsvpLists(remoteList, localList) {
@@ -1717,7 +1636,10 @@
         for (const item of remoteList || []) {
           if (item && item.slug) {
             const existing = map.get(item.slug);
-            if (!existing || new Date(item.updatedAt || 0) >= new Date(existing.updatedAt || 0)) {
+            if (
+              !existing ||
+              new Date(item.updatedAt || 0) >= new Date(existing.updatedAt || 0)
+            ) {
               map.set(item.slug, item);
             }
           }
@@ -1725,137 +1647,90 @@
         return Array.from(map.values());
       }
 
-      async function syncLocalDataToCloudIfNeeded(remoteConfig, remoteRsvps) {
-        // If user previously configured event details locally on their phone, push clean config (without sizes) to cloud DB
-        if (localSavedCfg && localSavedCfg.dateDisplay) {
-          const cleanCfg = sanitizeEventConfig(localSavedCfg);
-          eventConfig = cleanCfg;
-          saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
-          await saveRecordToDatabase("laura1:config", cleanCfg, "sim");
-        } else if (remoteConfig && remoteConfig.dateDisplay) {
-          eventConfig = sanitizeEventConfig(remoteConfig);
-          saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
-          // If remoteConfig still had legacy sizes, overwrite it cleanly
-          if (remoteConfig.sizes) {
-            await saveRecordToDatabase("laura1:config", eventConfig, "sim");
-          }
-        }
-
-        // Also push any locally cached RSVPs that aren't in remoteRsvps yet
-        const remoteSlugs = new Set((remoteRsvps || []).map((r) => r.slug));
-        for (const localR of rsvps) {
-          if (localR && localR.slug && !remoteSlugs.has(localR.slug)) {
-            await saveRecordToDatabase(
-              localR.slug,
-              localR,
-              localR.status === "confirmado" ? "sim" : "nao"
-            );
-          }
-        }
-      }
-
+      let isSyncing = false;
       async function fetchAllFromDatabase() {
-        // 1. Try /api/state first
+        if (isSyncing) return false;
+        isSyncing = true;
         try {
-          const apiRes = await fetch("/api/state");
-          if (apiRes.ok) {
-            const json = await apiRes.json();
-            if (json && json.ok) {
-              const remoteRsvps = json.rsvps || [];
-              rsvps = mergeRsvpLists(remoteRsvps, rsvps);
-              saveLocal(STORAGE_KEYS.RSVPS, rsvps);
-              await syncLocalDataToCloudIfNeeded(json.eventConfig, remoteRsvps);
-              setDbStatus(true, "Banco Conectado");
-              renderAll();
-              return true;
+          const apiRes = await fetch(`/api/state?t=${Date.now()}`, {
+            cache: "no-store"
+          });
+          if (!apiRes.ok) throw new Error(`HTTP ${apiRes.status}`);
+          const json = await apiRes.json();
+          if (!json || !json.ok) throw new Error("Invalid response");
+
+          const remoteRsvps = json.rsvps || [];
+          const remoteCfg = json.eventConfig || null;
+
+          // Check if this phone has unsynced local RSVPs or custom event config
+          const itemsToPush = [];
+          const remoteSlugs = new Set(remoteRsvps.map((r) => r.slug));
+
+          for (const localR of rsvps) {
+            if (localR && localR.slug && !remoteSlugs.has(localR.slug)) {
+              itemsToPush.push({
+                slug: localR.slug,
+                payload: localR,
+                status: localR.status === "confirmado" ? "sim" : "nao"
+              });
             }
           }
-        } catch {
-          // continue
-        }
 
-        // 2. Try primary Supabase RPC
-        try {
-          const rows = await callSupabaseRpc("get_rsvps", { pw: CFG.RPC_READ_KEY });
-          if (Array.isArray(rows)) {
-            const loadedRsvps = [];
-            let remoteCfg = null;
-            for (const r of rows) {
-              if (!r || typeof r.slug !== "string") continue;
-              if (r.slug.startsWith("laura1:rsvp:")) {
-                try {
-                  const data = JSON.parse(r.name);
-                  loadedRsvps.push({
-                    ...data,
-                    slug: r.slug,
-                    updatedAt: r.updated_at || data.updatedAt || new Date().toISOString()
-                  });
-                } catch {
-                  // skip
-                }
-              } else if (r.slug === "laura1:config") {
-                try {
-                  remoteCfg = JSON.parse(r.name);
-                } catch {
-                  // skip
-                }
-              }
+          if (isCustomizedConfig(localSavedCfg)) {
+            const cleanLocalCfg = sanitizeEventConfig(localSavedCfg);
+            if (
+              !remoteCfg ||
+              !isCustomizedConfig(remoteCfg) ||
+              JSON.stringify(cleanLocalCfg) !== JSON.stringify(sanitizeEventConfig(remoteCfg))
+            ) {
+              itemsToPush.push({
+                slug: "laura1:config",
+                payload: cleanLocalCfg,
+                status: "sim"
+              });
+              eventConfig = cleanLocalCfg;
+              saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
             }
-            rsvps = mergeRsvpLists(loadedRsvps, rsvps);
-            saveLocal(STORAGE_KEYS.RSVPS, rsvps);
-            await syncLocalDataToCloudIfNeeded(remoteCfg, loadedRsvps);
-            setDbStatus(true, "Banco Conectado");
-            renderAll();
-            return true;
+          } else if (remoteCfg && remoteCfg.dateDisplay) {
+            eventConfig = sanitizeEventConfig(remoteCfg);
+            localSavedCfg = eventConfig;
+            saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
           }
-        } catch {
-          // continue
-        }
 
-        // 3. Try backup Supabase PostgREST
-        try {
-          const rows = await callBackupSupabaseRead();
-          if (Array.isArray(rows)) {
-            const loadedRsvps = [];
-            let remoteCfg = null;
-            for (const r of rows) {
-              if (!r || typeof r.cache_key !== "string") continue;
-              if (r.cache_key.startsWith("laura1:rsvp:") && r.data) {
-                loadedRsvps.push({
-                  ...r.data,
-                  slug: r.cache_key,
-                  updatedAt: r.updated_at || r.data.updatedAt
-                });
-              } else if (r.cache_key === "laura1:config" && r.data) {
-                remoteCfg = r.data;
-              }
-            }
-            rsvps = mergeRsvpLists(loadedRsvps, rsvps);
-            saveLocal(STORAGE_KEYS.RSVPS, rsvps);
-            await syncLocalDataToCloudIfNeeded(remoteCfg, loadedRsvps);
-            setDbStatus(true, "Banco Conectado");
-            renderAll();
-            return true;
+          if (itemsToPush.length > 0) {
+            await saveItemsToDatabase(itemsToPush);
           }
-        } catch {
-          setDbStatus(true, "Sincronizado");
-        }
 
-        renderAll();
-        return false;
+          rsvps = mergeRsvpLists(remoteRsvps, rsvps);
+          saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+          setDbStatus(true, "Banco Conectado");
+          renderAll();
+          isSyncing = false;
+          return true;
+        } catch (err) {
+          setDbStatus(false, "Reconectando...");
+          renderAll();
+          isSyncing = false;
+          return false;
+        }
       }
 
       // ─────────────────────────────────────────────────────────────────────
       // RENDERING
       // ─────────────────────────────────────────────────────────────────────
       function renderEventDetails() {
-        document.getElementById("hero-child-name").textContent = eventConfig.childName || "Laura";
+        document.getElementById("hero-child-name").textContent =
+          eventConfig.childName || "Laura";
         document.getElementById("hero-subtitle").textContent =
           eventConfig.subtitle || CFG.DEFAULT_EVENT.subtitle;
-        document.getElementById("event-date-display").textContent = eventConfig.dateDisplay;
-        document.getElementById("event-time-display").textContent = eventConfig.timeDisplay;
-        document.getElementById("event-loc-name").textContent = eventConfig.locationName;
-        document.getElementById("event-loc-address").textContent = eventConfig.locationAddress;
+        document.getElementById("event-date-display").textContent =
+          eventConfig.dateDisplay;
+        document.getElementById("event-time-display").textContent =
+          eventConfig.timeDisplay;
+        document.getElementById("event-loc-name").textContent =
+          eventConfig.locationName;
+        document.getElementById("event-loc-address").textContent =
+          eventConfig.locationAddress;
 
         const mapBtn = document.getElementById("btn-open-map");
         if (mapBtn) {
@@ -1905,7 +1780,6 @@
         document.getElementById("stat-total-children").textContent = String(totalChildren);
         document.getElementById("stat-total-families").textContent = String(rsvps.length);
 
-        // Render Mural of Messages on Home tab
         const messagesFeed = document.getElementById("messages-feed");
         const withMessages = rsvps.filter(
           (r) => r.message && String(r.message).trim().length > 0
@@ -1942,7 +1816,6 @@
           }
         }
 
-        // Filter & Search Guest List on Tab 2
         const guestContainer = document.getElementById("guest-list-container");
         if (!guestContainer) return;
 
@@ -2054,7 +1927,6 @@
         document.getElementById("rsvp-name")?.focus();
       });
 
-      // Stepper Controls (+ / - for Adults & Children)
       function updateSteppersUI() {
         document.getElementById("val-adults").textContent = String(adultsCount);
         document.getElementById("val-children").textContent = String(childrenCount);
@@ -2077,7 +1949,6 @@
         });
       });
 
-      // Toggle companions visibility if "Não poderemos ir" is selected
       document.querySelectorAll('input[name="rsvp-status"]').forEach((radio) => {
         radio.addEventListener("change", () => {
           const isGoing = document.getElementById("status-yes").checked;
@@ -2090,7 +1961,6 @@
         });
       });
 
-      // Prefill form when editing existing RSVP
       document.getElementById("btn-prefill-my-rsvp")?.addEventListener("click", () => {
         if (!myRsvp) return;
         const match = rsvps.find((r) => r.slug === myRsvp.slug) || myRsvp;
@@ -2112,7 +1982,6 @@
         document.getElementById("rsvp-name")?.focus();
       });
 
-      // Submit RSVP Form
       document.getElementById("rsvp-form")?.addEventListener("submit", async (e) => {
         e.preventDefault();
         const nameInput = document.getElementById("rsvp-name");
@@ -2143,7 +2012,6 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "Salvando no banco de dados...";
 
-        // Optimistic update
         const existingIdx = rsvps.findIndex((r) => r.slug === slug);
         if (existingIdx >= 0) {
           rsvps[existingIdx] = record;
@@ -2155,18 +2023,24 @@
         saveLocal(STORAGE_KEYS.MY_RSVP, myRsvp);
         renderAll();
 
-        await saveRecordToDatabase(slug, record, isGoing ? "sim" : "nao");
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = prevText;
-        showToast(
-          isGoing
-            ? `🎉 Presença de ${name} confirmada e salva no banco!`
-            : `💙 Obrigado por avisar, ${name}!`
-        );
+        try {
+          await saveItemsToDatabase([
+            { slug, payload: record, status: isGoing ? "sim" : "nao" }
+          ]);
+          await fetchAllFromDatabase();
+          showToast(
+            isGoing
+              ? `🎉 Presença de ${name} confirmada e sincronizada!`
+              : `💙 Obrigado por avisar, ${name}!`
+          );
+        } catch {
+          showToast("Salvo no aparelho — sincronizando em instantes...");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = prevText;
+        }
       });
 
-      // Guest Search & Filters
       document.getElementById("guest-search-input")?.addEventListener("input", (e) => {
         guestSearchTerm = e.target.value || "";
         renderStatsAndGuests();
@@ -2244,7 +2118,6 @@
         showToast("📥 Planilha CSV baixada!");
       });
 
-      // Add to Google Calendar (uses the exact parsed date and time from eventConfig)
       document.getElementById("btn-add-calendar")?.addEventListener("click", () => {
         const parsed = parseEventDateTime(eventConfig);
         const startStr = `${parsed.year}${pad2(parsed.month)}${pad2(parsed.day)}T${pad2(
@@ -2266,7 +2139,6 @@
         window.open(url, "_blank", "noopener,noreferrer");
       });
 
-      // Live Countdown Timer (calculated dynamically from eventConfig date & time)
       function updateCountdown() {
         const parsed = parseEventDateTime(eventConfig);
         const now = Date.now();
@@ -2284,7 +2156,6 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Animated Underwater Bubbles on Canvas
       function initBubblesCanvas() {
         const canvas = document.getElementById("bubbles-canvas");
         if (!canvas) return;
@@ -2328,10 +2199,16 @@
         draw();
       }
 
-      // Initialize
+      // Initialize & keep synced across devices every 8s
       initBubblesCanvas();
       renderAll();
       fetchAllFromDatabase();
+      setInterval(fetchAllFromDatabase, 8000);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          fetchAllFromDatabase();
+        }
+      });
     })();
   </script>
 </body>
