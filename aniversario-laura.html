@@ -1215,7 +1215,7 @@
       const bgAudio = document.getElementById("bg-ocean-audio");
       const btnMusicToggle = document.getElementById("btn-music-toggle");
       let userMuted = false;
-      let musicPlaying = false;
+      let musicEnabled = true;
 
       if (bgAudio) {
         bgAudio.volume = 0.45;
@@ -1223,49 +1223,59 @@
 
       function updateMusicUI() {
         if (!btnMusicToggle) return;
-        btnMusicToggle.classList.toggle("playing", musicPlaying);
-        btnMusicToggle.setAttribute("aria-pressed", String(musicPlaying));
-        btnMusicToggle.textContent = musicPlaying ? "🔊 Música" : "🔇 Mudo";
+        btnMusicToggle.classList.toggle("playing", musicEnabled);
+        btnMusicToggle.setAttribute("aria-pressed", String(musicEnabled));
+        btnMusicToggle.textContent = musicEnabled ? "🔊 Música" : "🔇 Mudo";
       }
 
       function tryStartMusic() {
-        if (!bgAudio || userMuted) return;
+        if (!bgAudio || userMuted || !musicEnabled) return;
+        if (!bgAudio.paused) {
+          updateMusicUI();
+          return;
+        }
         bgAudio
           .play()
           .then(() => {
-            musicPlaying = true;
             updateMusicUI();
           })
           .catch(() => {
-            musicPlaying = false;
+            // Keep musicEnabled = true so it starts on the very first interaction
             updateMusicUI();
           });
       }
 
-      // Attempt immediate playback on load, and unlock on first gesture if blocked by browser
+      // Attempt immediate playback on load and when audio is ready
+      updateMusicUI();
       tryStartMusic();
-      ["pointerdown", "touchstart", "click", "keydown"].forEach((evtName) => {
-        window.addEventListener(
-          evtName,
-          () => {
-            if (!userMuted && bgAudio && bgAudio.paused) {
-              tryStartMusic();
-            }
-          },
-          { once: true, passive: true }
-        );
+      bgAudio?.addEventListener("canplay", tryStartMusic, { once: true });
+      window.addEventListener("load", tryStartMusic, { once: true });
+
+      // Unlock audio seamlessly on any first user interaction if browser blocked autoplay
+      const unlockEvents = ["pointerdown", "touchstart", "touchend", "click", "scroll", "keydown"];
+      function handleFirstGesture() {
+        if (!userMuted && musicEnabled && bgAudio && bgAudio.paused) {
+          tryStartMusic();
+        }
+        if (bgAudio && !bgAudio.paused) {
+          unlockEvents.forEach((ev) => window.removeEventListener(ev, handleFirstGesture));
+        }
+      }
+      unlockEvents.forEach((evtName) => {
+        window.addEventListener(evtName, handleFirstGesture, { passive: true });
       });
 
       btnMusicToggle?.addEventListener("click", (e) => {
         e.stopPropagation();
         if (!bgAudio) return;
-        if (musicPlaying) {
+        if (musicEnabled) {
           userMuted = true;
+          musicEnabled = false;
           bgAudio.pause();
-          musicPlaying = false;
           updateMusicUI();
         } else {
           userMuted = false;
+          musicEnabled = true;
           tryStartMusic();
         }
       });
