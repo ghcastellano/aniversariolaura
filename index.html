@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laura faz 1 Aninho! 🐚🐙 — Convite, Confirmação &amp; Presentes</title>
+  <meta
+    name="description"
+    content="Venha mergulhar no Fundo do Mar para comemorar o 1º aninho da Laura! Confirme sua presença, veja a lista de confirmados e confira as sugestões de presentes."
+  />
+  <meta property="og:title" content="Laura faz 1 Aninho! 🐚🐙 — Fundo do Mar" />
+  <meta
+    property="og:description"
+    content="Confirme sua presença, acompanhantes e veja a lista de sugestões de presentes para o 1º aniversário da Laura!"
+  />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <script src="config.js"></script>
+
+  <style>
+    :root {
+      --ocean-bg-top: #e8f8ff;
+      --ocean-bg-mid: #cef0fc;
+      --ocean-bg-deep: #b3e5fa;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-border: rgba(255, 255, 255, 0.85);
+      --ink-deep: #123c56;
+      --ink-muted: #456d85;
+      --coral: #ff6b6b;
+      --coral-dark: #e85353;
+      --turquoise: #12a89d;
+      --turquoise-dark: #0d857c;
+      --sand-gold: #f5a623;
+      --sand-light: #fff6e5;
+      --lilac-sea: #9b72cf;
+      --mint-ok: #1ea866;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-float: 0 16px 40px rgba(18, 60, 86, 0.1);
+      --shadow-soft: 0 8px 24px rgba(18, 60, 86, 0.07);
+      --font-display: "Fredoka", sans-serif;
+      --font-body: "Quicksand", sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink-deep);
+      background: linear-gradient(180deg, var(--ocean-bg-top) 0%, var(--ocean-bg-mid) 52%, var(--ocean-bg-deep) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated Bubbles Canvas */
+    #bubbles-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Decorative Floating Sea Elements */
+    .sea-decor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.72;
+      animation: floatGentle 6s ease-in-out infinite;
+    }
+    .sea-decor.d1 { top: 9%; left: 3%; animation-delay: 0s; }
+    .sea-decor.d2 { top: 15%; right: 4%; animation-delay: -2s; }
+    .sea-decor.d3 { bottom: 14%; left: 4%; animation-delay: -3.5s; }
+    .sea-decor.d4 { bottom: 18%; right: 3%; animation-delay: -1.2s; }
+
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(4deg); }
+    }
+
+    @keyframes swimWave {
+      0%, 100% { transform: translateX(0) translateY(0) rotate(-2deg); }
+      50% { transform: translateX(8px) translateY(-6px) rotate(3deg); }
+    }
+
+    /* Top Sticky Navigation Bar */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(18, 168, 157, 0.16);
+      padding: 0.75rem 1.25rem;
+    }
+
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      color: var(--ink-deep);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--coral), #ff9a76);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.35);
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(18, 60, 86, 0.06);
+      padding: 0.32rem;
+      border-radius: 999px;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.22s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--ink-deep);
+    }
+
+    .tab-btn.active {
+      background: #fff;
+      color: var(--coral-dark);
+      box-shadow: 0 4px 12px rgba(18, 60, 86, 0.1);
+    }
+
+    .tab-pill-count {
+      background: rgba(255, 107, 107, 0.15);
+      color: var(--coral-dark);
+      font-size: 0.76rem;
+      padding: 0.1rem 0.48rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .db-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--turquoise-dark);
+      background: rgba(18, 168, 157, 0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+    }
+
+    .db-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint-ok);
+      box-shadow: 0 0 0 3px rgba(30, 168, 102, 0.22);
+    }
+
+    /* Main Container */
+    .app-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 5rem;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeInPanel 0.32s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeInPanel {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Banner (Fundo do Mar) */
+    .hero-card {
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 252, 255, 0.92) 100%);
+      border: 2px solid #fff;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-float);
+      padding: 2.5rem 2rem 2.2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-aquatic-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .aquatic-creature {
+      animation: swimWave 4.5s ease-in-out infinite;
+    }
+    .aquatic-creature.delay-1 { animation-delay: -1.5s; }
+    .aquatic-creature.delay-2 { animation-delay: -3s; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: linear-gradient(90deg, rgba(18, 168, 157, 0.14), rgba(155, 114, 207, 0.16));
+      color: var(--turquoise-dark);
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.4rem 1.05rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      margin: 0 0 0.65rem;
+      color: var(--ink-deep);
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--coral), #ff8e53);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      max-width: 650px;
+      margin: 0 auto 1.65rem;
+      font-size: 1.06rem;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      font-weight: 600;
+    }
+
+    /* Countdown */
+    .countdown-row {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.85rem;
+    }
+
+    .count-box {
+      background: #fff;
+      border: 1px solid rgba(18, 168, 157, 0.2);
+      border-radius: var(--radius-md);
+      min-width: 76px;
+      padding: 0.65rem 0.85rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .count-num {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--coral-dark);
+      line-height: 1.1;
+    }
+
+    .count-label {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      font-weight: 700;
+    }
+
+    /* Event Info Grid */
+    .event-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      text-align: left;
+      margin-top: 0.5rem;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(18, 60, 86, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.65rem;
+    }
+
+    .info-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(18, 168, 157, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .info-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin: 0 0 0.2rem;
+      color: var(--ink-deep);
+    }
+
+    .info-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .info-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.52rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(18, 168, 157, 0.12);
+      color: var(--turquoise-dark);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .info-link-btn:hover {
+      background: rgba(18, 168, 157, 0.22);
+      transform: translateY(-1px);
+    }
+
+    /* Already Registered Banner */
+    .registered-banner {
+      background: linear-gradient(135deg, #e7fbf3 0%, #d5f6ea 100%);
+      border: 2px solid #7fe0b8;
+      border-radius: var(--radius-lg);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .registered-banner-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: #0e6942;
+      margin-bottom: 0.2rem;
+    }
+
+    .registered-banner-text span {
+      font-size: 0.9rem;
+      color: #1c7c54;
+      font-weight: 600;
+    }
+
+    /* Home Two-Column Layout: Form + Recent Messages */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .panel-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-float);
+      padding: 2rem;
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      margin: 0 0 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .panel-subtitle {
+      margin: 0 0 1.4rem;
+      color: var(--ink-muted);
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    /* RSVP Form */
+    .form-group {
+      margin-bottom: 1.15rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.45rem;
+      color: var(--ink-deep);
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid rgba(18, 60, 86, 0.16);
+      background: #fff;
+      font-family: var(--font-body);
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--ink-deep);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--turquoise);
+      box-shadow: 0 0 0 3px rgba(18, 168, 157, 0.16);
+    }
+
+    .status-radio-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .status-choice {
+      position: relative;
+    }
+
+    .status-choice input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .status-choice label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 0.9rem;
+      border-radius: var(--radius-md);
+      border: 2px solid rgba(18, 60, 86, 0.14);
+      background: #fff;
+      font-family: var(--font-display);
+      font-size: 0.94rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .status-choice input:checked + label.yes-label {
+      border-color: var(--turquoise);
+      background: rgba(18, 168, 157, 0.12);
+      color: var(--turquoise-dark);
+    }
+
+    .status-choice input:checked + label.no-label {
+      border-color: var(--coral);
+      background: rgba(255, 107, 107, 0.12);
+      color: var(--coral-dark);
+    }
+
+    .counters-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    .stepper-box {
+      background: #f7fcff;
+      border: 1.5px solid rgba(18, 60, 86, 0.12);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stepper-info strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+    }
+
+    .stepper-info span {
+      font-size: 0.76rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+    }
+
+    .stepper-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .step-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(18, 60, 86, 0.12);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink-deep);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .step-btn:hover {
+      background: var(--turquoise);
+      color: #fff;
+      transform: scale(1.06);
+    }
+
+    .step-val {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      min-width: 22px;
+      text-align: center;
+    }
+
+    .btn-primary {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 0.95rem 1.5rem;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, var(--coral), #ff8a5c);
+      box-shadow: 0 10px 24px rgba(255, 107, 107, 0.35);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(255, 107, 107, 0.45);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .btn-secondary {
+      border: 1.5px solid rgba(18, 60, 86, 0.18);
+      background: #fff;
+      color: var(--ink-deep);
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--turquoise);
+      color: var(--turquoise-dark);
+    }
+
+    /* Mural de Recados */
+    .messages-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 0.25rem;
+    }
+
+    .message-bubble {
+      background: #fff;
+      border: 1px solid rgba(18, 168, 157, 0.18);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .message-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .message-author {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--ink-deep);
+    }
+
+    .message-tag {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(18, 168, 157, 0.12);
+      color: var(--turquoise-dark);
+    }
+
+    .message-text {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      line-height: 1.45;
+    }
+
+    /* TAB 2: LISTA DE CONFIRMADOS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 2px solid #fff;
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.coral { background: rgba(255, 107, 107, 0.15); }
+    .stat-icon.teal { background: rgba(18, 168, 157, 0.15); }
+    .stat-icon.gold { background: rgba(245, 166, 35, 0.18); }
+    .stat-icon.lilac { background: rgba(155, 114, 207, 0.16); }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink-deep);
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      font-weight: 700;
+      margin-top: 0.2rem;
+    }
+
+    .toolbar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border-radius: 999px;
+      border: 1.5px solid rgba(18, 60, 86, 0.16);
+      background: #fff;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.95rem;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      border: 1.5px solid rgba(18, 60, 86, 0.14);
+      background: #fff;
+      color: var(--ink-muted);
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-pill.active {
+      background: var(--turquoise);
+      border-color: var(--turquoise);
+      color: #fff;
+    }
+
+    .guest-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .guest-card {
+      background: #fff;
+      border: 1.5px solid rgba(18, 60, 86, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1.15rem 1.25rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .guest-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .guest-identity {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .guest-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .guest-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .guest-time {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+    }
+
+    .status-badge {
+      font-family: var(--font-display);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .status-badge.confirmado {
+      background: rgba(30, 168, 102, 0.14);
+      color: #137a47;
+    }
+
+    .status-badge.nao_vou {
+      background: rgba(255, 107, 107, 0.14);
+      color: var(--coral-dark);
+    }
+
+    .guest-counts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--ink-deep);
+    }
+
+    .count-chip {
+      background: #f2f9fc;
+      padding: 0.22rem 0.65rem;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 60, 86, 0.08);
+    }
+
+    /* TAB 3: SUGESTÃO DE PRESENTES */
+    .sizes-banner {
+      background: linear-gradient(135deg, #fff9ec 0%, #fff1d6 100%);
+      border: 2px solid #ffe0a3;
+      border-radius: var(--radius-xl);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.75rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .sizes-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .sizes-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin: 0;
+      color: #7c4d00;
+    }
+
+    .sizes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .size-box {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      border: 1px solid rgba(245, 166, 35, 0.28);
+    }
+
+    .size-emoji {
+      font-size: 1.8rem;
+    }
+
+    .size-box span {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8c6218;
+      font-weight: 700;
+    }
+
+    .size-box strong {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--ink-deep);
+    }
+
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .gift-card {
+      background: #fff;
+      border: 2px solid rgba(18, 60, 86, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .gift-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(18, 168, 157, 0.35);
+    }
+
+    .gift-card.reserved {
+      background: #f8fbfd;
+      border-color: rgba(30, 168, 102, 0.35);
+    }
+
+    .gift-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .gift-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background: #f0fbff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.65rem;
+    }
+
+    .gift-cat-badge {
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(18, 168, 157, 0.12);
+      color: var(--turquoise-dark);
+    }
+
+    .gift-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin: 0.65rem 0 0.35rem;
+      color: var(--ink-deep);
+    }
+
+    .gift-desc {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .store-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .store-chip {
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.32rem 0.68rem;
+      border-radius: 8px;
+      background: #f3f8fb;
+      color: var(--ink-deep);
+      border: 1px solid rgba(18, 60, 86, 0.12);
+      transition: all 0.18s ease;
+    }
+
+    .store-chip:hover {
+      background: var(--ink-deep);
+      color: #fff;
+    }
+
+    .gift-footer {
+      border-top: 1px solid rgba(18, 60, 86, 0.08);
+      padding-top: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .btn-reserve {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 0.68rem 1rem;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: var(--turquoise);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-reserve:hover {
+      background: var(--turquoise-dark);
+      transform: translateY(-1px);
+    }
+
+    .reserved-tag {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: rgba(30, 168, 102, 0.12);
+      color: #116b3e;
+      padding: 0.55rem 0.85rem;
+      border-radius: 12px;
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    .btn-unreserve {
+      border: none;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--coral-dark);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(18, 60, 86, 0.55);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      max-width: 480px;
+      width: 100%;
+      padding: 1.85rem;
+      box-shadow: 0 24px 60px rgba(18, 60, 86, 0.25);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: #f0f6fa;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translate(-50%, 24px);
+      z-index: 120;
+      background: var(--ink-deep);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(18, 60, 86, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Footer */
+    .ocean-footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      color: var(--ink-muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .event-info-grid,
+      .home-grid,
+      .gifts-grid,
+      .sizes-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .guest-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        justify-content: center;
+      }
+      .nav-tabs {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .tab-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 0.55rem 0.5rem;
+        font-size: 0.82rem;
+      }
+      .status-radio-row,
+      .counters-row,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-card,
+      .panel-card {
+        padding: 1.45rem 1.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Underwater Bubbles Canvas -->
+  <canvas id="bubbles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Floating Aquatic SVG Decorations -->
+  <div class="sea-decor d1" aria-hidden="true">
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="26" r="16" fill="#FF8A9E" fill-opacity="0.85"/>
+      <circle cx="26" cy="24" r="2.5" fill="#123C56"/>
+      <circle cx="38" cy="24" r="2.5" fill="#123C56"/>
+      <path d="M28 30C30 32 34 32 36 30" stroke="#123C56" stroke-width="2" stroke-linecap="round"/>
+      <path d="M18 38C15 46 20 52 24 46M26 40C25 49 29 54 32 47M36 40C37 49 41 53 43 46M44 38C48 46 44 52 40 46" stroke="#FF8A9E" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="sea-decor d2" aria-hidden="true">
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+      <path d="M30 8L35 22L50 24L39 34L42 49L30 41L18 49L21 34L10 24L25 22L30 8Z" fill="#FFD166" stroke="#F5A623" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="26" cy="28" r="2" fill="#123C56"/>
+      <circle cx="34" cy="28" r="2" fill="#123C56"/>
+    </svg>
+  </div>
+  <div class="sea-decor d3" aria-hidden="true">
+    <svg width="68" height="52" viewBox="0 0 68 52" fill="none">
+      <ellipse cx="32" cy="26" rx="18" ry="13" fill="#2EC4B6"/>
+      <circle cx="52" cy="22" r="7" fill="#56E39F"/>
+      <circle cx="54" cy="20" r="1.8" fill="#123C56"/>
+      <path d="M22 15C26 12 36 12 40 15M20 26H44M22 36C27 39 35 39 40 36" stroke="#128277" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="sea-decor d4" aria-hidden="true">
+    <svg width="58" height="58" viewBox="0 0 58 58" fill="none">
+      <path d="M29 12C17 12 10 23 14 36C18 43 24 46 29 46C34 46 40 43 44 36C48 23 41 12 29 12Z" fill="#C8B6FF"/>
+      <circle cx="29" cy="34" r="6" fill="#FFF9FB"/>
+    </svg>
+  </div>
+
+  <!-- Top Sticky Header -->
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="#convite" class="brand-logo" id="brand-link">
+        <span class="brand-badge">🐚</span>
+        <span id="nav-title-text">Laura · 1 Aninho</span>
+      </a>
+
+      <nav class="nav-tabs" role="tablist" aria-label="Seções do aniversário da Laura">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="convite">
+          🐙 Convite &amp; Presença
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="confirmados">
+          🐠 Confirmados <span class="tab-pill-count" id="nav-confirmed-count">0</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="presentes">
+          🎁 Sugestão de Presentes
+        </button>
+      </nav>
+
+      <div class="db-status" id="db-status-pill" title="Sincronizado em tempo real com o banco de dados">
+        <span class="db-dot" id="db-dot"></span>
+        <span id="db-status-text">Banco Conectado</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <!-- ====================================================================
+         ABA 1: CONVITE & CONFIRMAÇÃO DE PRESENÇA (HOME)
+         ==================================================================== -->
+    <section id="tab-convite" class="tab-panel active" role="tabpanel">
+      <div class="hero-card">
+        <div class="hero-aquatic-top" aria-hidden="true">
+          <span class="aquatic-creature" style="font-size: 2.3rem;">🐙</span>
+          <span class="aquatic-creature delay-1" style="font-size: 2.7rem;">🧜‍♀️</span>
+          <span class="aquatic-creature delay-2" style="font-size: 2.3rem;">🐢</span>
+        </div>
+
+        <div class="hero-eyebrow">
+          <span>🫧 Fundo do Mar Encantado</span>
+          <span>·</span>
+          <span id="hero-age-badge">1º Aniversário</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span id="hero-child-name">Laura</span> faz 1 Aninho!
+        </h1>
+
+        <p class="hero-subtitle" id="hero-subtitle">
+          Prepare o fôlego para mergulhar em uma tarde cheia de alegria, bolhas de sabão e muito amor para comemorar o primeiro aninho da nossa pequena sereia!
+        </p>
+
+        <!-- Live Countdown -->
+        <div class="countdown-row" id="countdown-row" aria-label="Contagem regressiva para a festa">
+          <div class="count-box">
+            <span class="count-num" id="cd-days">00</span>
+            <span class="count-label">Dias</span>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="cd-hours">00</span>
+            <span class="count-label">Horas</span>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="cd-mins">00</span>
+            <span class="count-label">Min</span>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="cd-secs">00</span>
+            <span class="count-label">Seg</span>
+          </div>
+        </div>
+
+        <!-- Event Details Cards -->
+        <div class="event-info-grid">
+          <article class="info-card">
+            <div class="info-card-top">
+              <div class="info-icon">📅</div>
+              <div>
+                <h3>Quando</h3>
+                <p id="event-date-display">Sábado, 12 de Dezembro de 2026</p>
+              </div>
+            </div>
+            <button type="button" class="info-link-btn" id="btn-add-calendar">
+              🗓️ Adicionar à Agenda
+            </button>
+          </article>
+
+          <article class="info-card">
+            <div class="info-card-top">
+              <div class="info-icon">⏰</div>
+              <div>
+                <h3>Horário</h3>
+                <p id="event-time-display">Das 15h00 às 19h00</p>
+              </div>
+            </div>
+            <button type="button" class="info-link-btn" id="btn-scroll-rsvp">
+              ✨ Confirmar até <span id="event-deadline-display">05 de Dezembro</span>
+            </button>
+          </article>
+
+          <article class="info-card">
+            <div class="info-card-top">
+              <div class="info-icon">📍</div>
+              <div>
+                <h3 id="event-loc-name">Espaço Festa &amp; Magia — Salão Atlântida</h3>
+                <p id="event-loc-address">Av. das Américas, 1500 — Salão Principal</p>
+              </div>
+            </div>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Espaco+Festa+Av+das+Americas+1500"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="info-link-btn"
+              id="btn-open-map"
+            >
+              🗺️ Ver Local no Mapa
+            </a>
+          </article>
+        </div>
+      </div>
+
+      <!-- Banner shown when guest already registered on this device -->
+      <div class="registered-banner" id="already-registered-banner" hidden>
+        <div class="registered-banner-text">
+          <strong id="already-reg-title">🎉 Sua presença já está registrada no banco de dados!</strong>
+          <span id="already-reg-details">Se precisar atualizar o número de acompanhantes ou seu recado, basta enviar o formulário novamente com o mesmo nome.</span>
+        </div>
+        <button type="button" class="btn-secondary" id="btn-prefill-my-rsvp">
+          ✏️ Editar Minha Confirmação
+        </button>
+      </div>
+
+      <div class="home-grid" id="rsvp-section">
+        <!-- RSVP Form -->
+        <div class="panel-card">
+          <h2 class="panel-title">🐚 Confirme sua Presença</h2>
+          <p class="panel-subtitle">
+            Os dados são salvos em tempo real no banco de dados da festa para organizarmos tudo com carinho.
+          </p>
+
+          <form id="rsvp-form">
+            <div class="form-group">
+              <label class="form-label" for="rsvp-name">Seu nome completo (ou nome da família) *</label>
+              <input
+                type="text"
+                id="rsvp-name"
+                class="form-input"
+                placeholder="Ex.: Mariana, Pedro e Léo"
+                required
+                maxlength="90"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Vocês poderão ir? *</label>
+              <div class="status-radio-row">
+                <div class="status-choice">
+                  <input type="radio" name="rsvp-status" id="status-yes" value="confirmado" checked />
+                  <label for="status-yes" class="yes-label">🐠 Sim, vamos ir!</label>
+                </div>
+                <div class="status-choice">
+                  <input type="radio" name="rsvp-status" id="status-no" value="nao_vou" />
+                  <label for="status-no" class="no-label">💙 Não poderemos ir</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" id="companions-group">
+              <label class="form-label">Quantas pessoas vão? (Incluindo você)</label>
+              <div class="counters-row">
+                <div class="stepper-box">
+                  <div class="stepper-info">
+                    <strong>Adultos</strong>
+                    <span>13 anos ou mais</span>
+                  </div>
+                  <div class="stepper-controls">
+                    <button type="button" class="step-btn" data-step="adults" data-delta="-1" aria-label="Diminuir adultos">−</button>
+                    <span class="step-val" id="val-adults">1</span>
+                    <button type="button" class="step-btn" data-step="adults" data-delta="1" aria-label="Aumentar adultos">+</button>
+                  </div>
+                </div>
+
+                <div class="stepper-box">
+                  <div class="stepper-info">
+                    <strong>Crianças</strong>
+                    <span>Até 12 anos</span>
+                  </div>
+                  <div class="stepper-controls">
+                    <button type="button" class="step-btn" data-step="children" data-delta="-1" aria-label="Diminuir crianças">−</button>
+                    <span class="step-val" id="val-children">0</span>
+                    <button type="button" class="step-btn" data-step="children" data-delta="1" aria-label="Aumentar crianças">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" id="children-ages-group" hidden>
+              <label class="form-label" for="rsvp-kids-notes">Nome e idade das crianças (opcional)</label>
+              <input
+                type="text"
+                id="rsvp-kids-notes"
+                class="form-input"
+                placeholder="Ex.: Léo (4 anos), Sofia (2 anos)"
+                maxlength="120"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="rsvp-phone">WhatsApp / Telefone (opcional)</label>
+              <input
+                type="tel"
+                id="rsvp-phone"
+                class="form-input"
+                placeholder="Ex.: (11) 99999-9999"
+                maxlength="30"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="rsvp-message">Deixe um recado especial para a Laura 💕</label>
+              <textarea
+                id="rsvp-message"
+                class="form-textarea"
+                rows="3"
+                placeholder="Escreva uma mensagem carinhosa para a cápsula do tempo de 1 aninho da Laura..."
+                maxlength="280"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" id="btn-submit-rsvp">
+              🌊 Salvar Confirmação de Presença
+            </button>
+          </form>
+        </div>
+
+        <!-- Mural de Recados & Resumo Rápido -->
+        <div class="panel-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.35rem;">
+            <h2 class="panel-title" style="margin: 0;">💌 Mural da Laura</h2>
+            <button type="button" class="btn-secondary" id="btn-go-gifts-cta">
+              🎁 Ver Presentes
+            </button>
+          </div>
+          <p class="panel-subtitle">
+            Recados deixados pelos amigos e familiares que já se cadastraram:
+          </p>
+
+          <div class="messages-feed" id="messages-feed">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ABA 2: LISTA DE CONFIRMADOS (PAINEL EM TEMPO REAL)
+         ==================================================================== -->
+    <section id="tab-confirmados" class="tab-panel" role="tabpanel">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon coral">🎉</div>
+          <div>
+            <div class="stat-num" id="stat-total-people">0</div>
+            <div class="stat-label">Total de Pessoas</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon teal">🧑</div>
+          <div>
+            <div class="stat-num" id="stat-total-adults">0</div>
+            <div class="stat-label">Adultos Confirmados</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon gold">👧</div>
+          <div>
+            <div class="stat-num" id="stat-total-children">0</div>
+            <div class="stat-label">Crianças Confirmadas</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon lilac">📋</div>
+          <div>
+            <div class="stat-num" id="stat-total-families">0</div>
+            <div class="stat-label">Cadastros Recebidos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <div class="toolbar-row">
+          <div>
+            <h2 class="panel-title" style="margin-bottom: 0.2rem;">🐠 Quem Já Se Cadastrou</h2>
+            <p class="panel-subtitle" style="margin-bottom: 0;">
+              Lista sincronizada automaticamente com o banco de dados da festa.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn-secondary" id="btn-refresh-list">
+              🔄 Atualizar
+            </button>
+            <button type="button" class="btn-secondary" id="btn-copy-whatsapp-summary">
+              📲 Copiar p/ WhatsApp
+            </button>
+            <button type="button" class="btn-secondary" id="btn-export-csv">
+              📥 Baixar CSV
+            </button>
+          </div>
+        </div>
+
+        <div class="toolbar-row">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input
+              type="search"
+              id="guest-search-input"
+              placeholder="Buscar convidado por nome ou recado..."
+              aria-label="Buscar convidado por nome"
+            />
+          </div>
+
+          <div class="filter-pills" id="guest-filter-pills">
+            <button type="button" class="filter-pill active" data-filter="all">Todos</button>
+            <button type="button" class="filter-pill" data-filter="confirmado">Confirmados (Vão)</button>
+            <button type="button" class="filter-pill" data-filter="com_criancas">Com Crianças</button>
+            <button type="button" class="filter-pill" data-filter="nao_vou">Não Poderão Ir</button>
+          </div>
+        </div>
+
+        <div class="guest-list" id="guest-list-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ABA 3: SUGESTÃO DE PRESENTES (GUIA DE TAMANHOS + RESERVA NO BANCO)
+         ==================================================================== -->
+    <section id="tab-presentes" class="tab-panel" role="tabpanel">
+      <div class="sizes-banner">
+        <div class="sizes-header">
+          <div>
+            <h3>🎀 Guia Rápido de Tamanhos da Laura (1 Ano)</h3>
+            <p style="margin: 0.25rem 0 0; font-size: 0.92rem; color: #7c4d00; font-weight: 600;">
+              Sua presença é o nosso maior presente! Mas se quiser mimar a Laura, confira as medidas atuais dela e reserve abaixo para evitar itens repetidos:
+            </p>
+          </div>
+        </div>
+
+        <div class="sizes-grid">
+          <div class="size-box">
+            <span class="size-emoji">👗</span>
+            <div>
+              <span>Roupas</span>
+              <strong id="size-clothes-display">1 a 2 anos (18–24 meses)</strong>
+            </div>
+          </div>
+
+          <div class="size-box">
+            <span class="size-emoji">👟</span>
+            <div>
+              <span>Calçados</span>
+              <strong id="size-shoes-display">Tamanho 19 / 20</strong>
+            </div>
+          </div>
+
+          <div class="size-box">
+            <span class="size-emoji">🧷</span>
+            <div>
+              <span>Fraldas</span>
+              <strong id="size-diapers-display">G ou XG (Pampers / Huggies)</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <div class="toolbar-row">
+          <div>
+            <h2 class="panel-title" style="margin-bottom: 0.2rem;">🎁 Lista de Sugestões para 1 Aninho</h2>
+            <p class="panel-subtitle" style="margin-bottom: 0;">
+              Clique nas lojas para pesquisar ideias ou clique em <strong>Reservar Presente</strong> para avisar na lista que você já escolheu aquele item!
+            </p>
+          </div>
+
+          <div class="filter-pills" id="gift-filter-pills">
+            <button type="button" class="filter-pill active" data-gfilter="all">Todos</button>
+            <button type="button" class="filter-pill" data-gfilter="disponivel">Disponíveis</button>
+            <button type="button" class="filter-pill" data-gfilter="brinquedos">Brinquedos 1 Ano</button>
+            <button type="button" class="filter-pill" data-gfilter="roupas">Roupas &amp; Calçados</button>
+            <button type="button" class="filter-pill" data-gfilter="passeio">Passeio &amp; Banho</button>
+            <button type="button" class="filter-pill" data-gfilter="reservado">Já Reservados</button>
+          </div>
+        </div>
+
+        <div class="gifts-grid" id="gifts-grid-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal: Reservar Presente -->
+  <div class="modal-backdrop" id="reserve-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-labelledby="reserve-modal-title">
+      <button type="button" class="modal-close" id="close-reserve-modal" aria-label="Fechar">✕</button>
+      <h3 class="panel-title" id="reserve-modal-title">🎁 Reservar Presente</h3>
+      <p class="panel-subtitle" id="reserve-modal-item-name">Item selecionado</p>
+
+      <form id="reserve-gift-form">
+        <input type="hidden" id="reserve-gift-id" />
+        <div class="form-group">
+          <label class="form-label" for="reserve-giver-name">Seu nome (para marcar como reservado) *</label>
+          <input
+            type="text"
+            id="reserve-giver-name"
+            class="form-input"
+            placeholder="Ex.: Tia Fernanda e Tio Bruno"
+            required
+            maxlength="80"
+          />
+        </div>
+        <button type="submit" class="btn-primary" id="btn-confirm-reserve">
+          ✨ Confirmar Reserva no Banco
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Editar Dados do Evento (Organizadores) -->
+  <div class="modal-backdrop" id="config-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-labelledby="config-modal-title">
+      <button type="button" class="modal-close" id="close-config-modal" aria-label="Fechar">✕</button>
+      <h3 class="panel-title" id="config-modal-title">⚙️ Ajustar Dados da Festa</h3>
+      <p class="panel-subtitle">
+        Altere data, horário, endereço ou tamanhos da Laura. As alterações ficam salvas no banco de dados para todos os visitantes!
+      </p>
+
+      <form id="event-config-form">
+        <div class="form-group">
+          <label class="form-label" for="cfg-date-display">Data por extenso</label>
+          <input type="text" id="cfg-date-display" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cfg-time-display">Horário da festa</label>
+          <input type="text" id="cfg-time-display" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cfg-loc-name">Nome do Local / Buffet</label>
+          <input type="text" id="cfg-loc-name" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cfg-loc-addr">Endereço completo</label>
+          <input type="text" id="cfg-loc-addr" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cfg-clothes">Tamanho de Roupas</label>
+          <input type="text" id="cfg-clothes" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cfg-shoes">Tamanho de Calçados</label>
+          <input type="text" id="cfg-shoes" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cfg-diapers">Tamanho de Fraldas</label>
+          <input type="text" id="cfg-diapers" class="form-input" required />
+        </div>
+        <button type="submit" class="btn-primary">💾 Salvar Alterações no Banco</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="ocean-footer">
+    <p>🐚 Feito com amor para o 1º Aniversário da Laura · Fundo do Mar Encantado 🐙</p>
+    <p style="margin-top: 0.5rem;">
+      <button type="button" class="btn-secondary" id="btn-open-config" style="font-size: 0.78rem; padding: 0.38rem 0.85rem;">
+        ⚙️ Ajustar Data / Local / Tamanhos
+      </button>
+    </p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const CFG = window.LAURA_CONFIG || {
+        SUPABASE_URL: "https://kgllkqyfoftzhxnggiga.supabase.co",
+        SUPABASE_ANON_KEY:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnbGxrcXlmb2Z0emh4bmdnaWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MjEzOTQsImV4cCI6MjA5ODA5NzM5NH0.z90eye-xP7Z4G_fRKQDaPo1yDtiQ6fH_DMwJmbI3Yt4",
+        RPC_READ_KEY: "sophia27",
+        NAMESPACE: "laura1",
+        DEFAULT_EVENT: {
+          childName: "Laura",
+          ageLabel: "1 Aninho",
+          themeTitle: "Fundo do Mar Encantado",
+          subtitle:
+            "Prepare o fôlego para mergulhar em uma tarde cheia de alegria, bolhas de sabão e muito amor para comemorar o primeiro aninho da nossa pequena sereia!",
+          dateDisplay: "Sábado, 12 de Dezembro de 2026",
+          dateISO: "2026-12-12T15:00:00-03:00",
+          timeDisplay: "Das 15h00 às 19h00",
+          locationName: "Espaço Festa & Magia — Salão Atlântida",
+          locationAddress: "Av. das Américas, 1500 — Salão Principal (Estacionamento no local)",
+          mapQuery: "Espaço Festa Av. das Américas 1500",
+          rsvpDeadline: "05 de Dezembro",
+          sizes: {
+            clothes: "1 a 2 anos (18–24 meses)",
+            shoes: "19 / 20",
+            diapers: "G ou XG (Pampers Confort Sec / Huggies Supreme Care)"
+          }
+        }
+      };
+
+      const STORAGE_KEYS = {
+        RSVPS: "laura1_rsvps_cache_v1",
+        GIFTS: "laura1_gifts_cache_v1",
+        MY_RSVP: "laura1_my_rsvp_v1",
+        MY_GIFTS: "laura1_my_gifts_v1",
+        EVENT_CFG: "laura1_event_cfg_v1"
+      };
+
+      // Curated Gifts for 1-Year-Old Laura
+      const GIFT_CATALOG = [
+        {
+          id: "cubo-atividades-montessori",
+          icon: "🧩",
+          category: "brinquedos",
+          categoryLabel: "Brinquedo Educativo",
+          title: "Cubo de Atividades Sensorial / Montessori (Madeira)",
+          desc: "Ideal para estimular a coordenação motora fina, encaixes, engrenagens e descoberta de cores aos 12 meses.",
+          searchQuery: "cubo atividades educativo madeira bebe 1 ano"
+        },
+        {
+          id: "andador-empurrar-madeira",
+          icon: "🛒",
+          category: "brinquedos",
+          categoryLabel: "Primeiros Passos",
+          title: "Andador de Empurrar de Atividades (Primeiros Passos)",
+          desc: "Apoio firme e seguro para a fase de dar os primeiros passinhos com painel frontal de brinquedos.",
+          searchQuery: "andador de empurrar atividades bebe 1 ano"
+        },
+        {
+          id: "mesa-atividades-musical",
+          icon: "🎹",
+          category: "brinquedos",
+          categoryLabel: "Musical & Sons",
+          title: "Mesinha de Atividades Musical Bilíngue ou Xilofone Infantil",
+          desc: "A Laura adora música, botões sonoros e batucar! Estimula o ritmo e a curiosidade auditiva.",
+          searchQuery: "mesa de atividades musical bebe 1 ano"
+        },
+        {
+          id: "blocos-encaixe-empilhar",
+          icon: "🏗️",
+          category: "brinquedos",
+          categoryLabel: "Montar & Empilhar",
+          title: "Conjunto de Blocos Grandes de Montar / Copinhos de Empilhar",
+          desc: "Peças grandes e macias ou torres de empilhar no tema marinho para soltar a imaginação.",
+          searchQuery: "blocos de montar grandes bebe 1 ano mega bloks"
+        },
+        {
+          id: "vestido-conjunto-verao",
+          icon: "👗",
+          category: "roupas",
+          categoryLabel: "Roupas (1 a 2 anos)",
+          title: "Vestidinho Fresquinho ou Conjunto de Passeio (Tam. 1 a 2 anos)",
+          desc: "Roupas confortáveis de algodão para brincar bastante (tamanho 18–24 meses ou 2 anos).",
+          searchQuery: "vestido conjunto infantil menina 1 a 2 anos algodao"
+        },
+        {
+          id: "conjunto-moda-praia-uv",
+          icon: "🏖️",
+          category: "roupas",
+          categoryLabel: "Moda Praia UV50+",
+          title: "Conjunto Praia / Piscina com Proteção Solar UV50+ (Tam. 2 anos)",
+          desc: "Maiô ou blusinha UV com chapéu para os dias de sol e mar da nossa pequena sereia!",
+          searchQuery: "conjunto praia protecao uv menina 2 anos"
+        },
+        {
+          id: "sandalia-tenis-19-20",
+          icon: "👟",
+          category: "roupas",
+          categoryLabel: "Calçados (Tam. 19/20)",
+          title: "Sandália Anatômica ou Tênis Flexível (Tamanho 19 ou 20)",
+          desc: "Calçado macio, antiderrapante e fácil de calçar para acompanhar os primeiros passos.",
+          searchQuery: "sandalia tenis infantil menina tamanho 19 20 anatomico"
+        },
+        {
+          id: "triciclo-passeio-empurrador",
+          icon: "🚲",
+          category: "passeio",
+          categoryLabel: "Passeio ao Ar Livre",
+          title: "Triciclo Infantil de Passeio com Haste Direcionável",
+          desc: "Para passeios deliciosos na praça e no parque com proteção lateral e apoio de pés.",
+          searchQuery: "triciclo infantil passeio com empurrador bebe 1 ano"
+        },
+        {
+          id: "brinquedos-banho-fundo-mar",
+          icon: "🐳",
+          category: "passeio",
+          categoryLabel: "Hora do Banho",
+          title: "Kit Brinquedos de Banho Fundo do Mar & Livros Impermeáveis",
+          desc: "Baleia que solta esguicho/bolhas, bichinhos aquáticos sem furo (anti-mofo) e livrinhos de banho.",
+          searchQuery: "brinquedos de banho bebe fundo do mar"
+        },
+        {
+          id: "livros-interativos-cartonados",
+          icon: "📚",
+          category: "brinquedos",
+          categoryLabel: "Leitura & Texturas",
+          title: "Kit Livros Cartonados com Abas, Texturas ou Sons de Animais",
+          desc: "Páginas grossas e resistentes para mãos pequenas explorarem histórias antes de dormir.",
+          searchQuery: "livro infantil cartonado texturas abas 1 ano"
+        },
+        {
+          id: "barraca-toca-bolinhas",
+          icon: "⛺",
+          category: "passeio",
+          categoryLabel: "Brincadeira em Casa",
+          title: "Toca / Cabaninha Infantil ou Piscina de Bolinhas",
+          desc: "Um cantinho mágico de leitura e brincadeira para gastar energia com segurança.",
+          searchQuery: "toca barraca infantil piscina de bolinhas menina"
+        },
+        {
+          id: "kit-fraldas-g-xg",
+          icon: "🧷",
+          category: "passeio",
+          categoryLabel: "Fraldas & Cuidados",
+          title: "Pacote Mega de Fraldas (Tam. G ou XG) + Lenços Umedecidos",
+          desc: "Presente super útil que os papais amam! Sugestão: Pampers Confort Sec ou Huggies Supreme Care.",
+          searchQuery: "fralda pampers confort sec tamanho G XG"
+        }
+      ];
+
+      const SEA_AVATARS = ["🐙", "🐢", "🐬", "🐠", "🦀", "🐳", "🐚", "⭐", "🧜‍♀️", "🦭"];
+
+      // State
+      let eventConfig = loadLocal(STORAGE_KEYS.EVENT_CFG, CFG.DEFAULT_EVENT);
+      let rsvps = loadLocal(STORAGE_KEYS.RSVPS, []);
+      let giftsReserved = loadLocal(STORAGE_KEYS.GIFTS, {});
+      let myRsvp = loadLocal(STORAGE_KEYS.MY_RSVP, null);
+      let myGifts = loadLocal(STORAGE_KEYS.MY_GIFTS, {});
+
+      let currentGuestFilter = "all";
+      let currentGiftFilter = "all";
+      let guestSearchTerm = "";
+      let adultsCount = 1;
+      let childrenCount = 0;
+
+      function loadLocal(key, fallback) {
+        try {
+          const raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch {
+          return fallback;
+        }
+      }
+
+      function saveLocal(key, val) {
+        try {
+          localStorage.setItem(key, JSON.stringify(val));
+        } catch {
+          // ignore storage quota errors
+        }
+      }
+
+      function slugify(str) {
+        return String(str || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          .slice(0, 48);
+      }
+
+      function escapeHTML(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function showToast(msg) {
+        const el = document.getElementById("toast");
+        if (!el) return;
+        el.textContent = msg;
+        el.classList.add("visible");
+        clearTimeout(window.__lauraToastTimer);
+        window.__lauraToastTimer = setTimeout(() => {
+          el.classList.remove("visible");
+        }, 3200);
+      }
+
+      // ─────────────────────────────────────────────────────────────────────
+      // DATABASE ENGINE (Supabase RPC Direct + /api/state fallback + Local)
+      // ─────────────────────────────────────────────────────────────────────
+      async function callSupabaseRpc(fnName, params) {
+        const res = await fetch(`${CFG.SUPABASE_URL}/rest/v1/rpc/${fnName}`, {
+          method: "POST",
+          headers: {
+            apikey: CFG.SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${CFG.SUPABASE_ANON_KEY}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(params)
+        });
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+        const text = await res.text();
+        return text ? JSON.parse(text) : null;
+      }
+
+      function setDbStatus(online, text) {
+        const dot = document.getElementById("db-dot");
+        const label = document.getElementById("db-status-text");
+        if (dot) {
+          dot.style.background = online ? "#1ea866" : "#f5a623";
+        }
+        if (label) {
+          label.textContent = text || (online ? "Banco Sincronizado" : "Modo Local");
+        }
+      }
+
+      async function fetchAllFromDatabase() {
+        try {
+          const rows = await callSupabaseRpc("get_rsvps", { pw: CFG.RPC_READ_KEY });
+          if (Array.isArray(rows)) {
+            const loadedRsvps = [];
+            const loadedGifts = {};
+
+            for (const r of rows) {
+              if (!r || typeof r.slug !== "string") continue;
+              if (r.slug.startsWith("laura1:rsvp:")) {
+                try {
+                  const data = JSON.parse(r.name);
+                  loadedRsvps.push({
+                    ...data,
+                    slug: r.slug,
+                    updatedAt: r.updated_at || data.updatedAt || new Date().toISOString()
+                  });
+                } catch {
+                  // skip invalid JSON
+                }
+              } else if (r.slug.startsWith("laura1:gift:")) {
+                try {
+                  const data = JSON.parse(r.name);
+                  if (r.status === "sim" && data && data.giftId && data.reservedBy) {
+                    loadedGifts[data.giftId] = {
+                      giftId: data.giftId,
+                      reservedBy: data.reservedBy,
+                      updatedAt: r.updated_at || data.updatedAt
+                    };
+                  }
+                } catch {
+                  // skip
+                }
+              } else if (r.slug === "laura1:config") {
+                try {
+                  const cfgData = JSON.parse(r.name);
+                  if (cfgData && cfgData.dateDisplay) {
+                    eventConfig = { ...CFG.DEFAULT_EVENT, ...cfgData };
+                    saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
+                  }
+                } catch {
+                  // skip
+                }
+              }
+            }
+
+            rsvps = loadedRsvps;
+            giftsReserved = loadedGifts;
+            saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+            saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
+            setDbStatus(true, "Banco Conectado");
+            renderAll();
+            return true;
+          }
+        } catch (err) {
+          // Try serverless endpoint /api/state if direct call had network restriction
+          try {
+            const apiRes = await fetch("/api/state");
+            if (apiRes.ok) {
+              const json = await apiRes.json();
+              if (json && json.ok) {
+                rsvps = json.rsvps || [];
+                giftsReserved = json.gifts || {};
+                if (json.eventConfig) {
+                  eventConfig = { ...CFG.DEFAULT_EVENT, ...json.eventConfig };
+                  saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
+                }
+                saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+                saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
+                setDbStatus(true, "Banco Conectado");
+                renderAll();
+                return true;
+              }
+            }
+          } catch {
+            // Offline or preview fallback
+          }
+          setDbStatus(false, "Cache Local Ativo");
+        }
+        renderAll();
+        return false;
+      }
+
+      async function saveRecordToDatabase(slug, payloadObj, statusSimNao) {
+        const serialized = JSON.stringify(payloadObj);
+        try {
+          await callSupabaseRpc("confirmar", {
+            p_slug: slug,
+            p_name: serialized,
+            p_status: statusSimNao
+          });
+          setDbStatus(true, "Salvo no Banco ✓");
+          return true;
+        } catch {
+          try {
+            const res = await fetch("/api/state", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                slug,
+                payload: payloadObj,
+                status: statusSimNao
+              })
+            });
+            if (res.ok) {
+              setDbStatus(true, "Salvo no Banco ✓");
+              return true;
+            }
+          } catch {
+            // fallback to localStorage
+          }
+          setDbStatus(false, "Salvo Localmente");
+          return false;
+        }
+      }
+
+      // ─────────────────────────────────────────────────────────────────────
+      // RENDERING
+      // ─────────────────────────────────────────────────────────────────────
+      function renderEventDetails() {
+        document.getElementById("hero-child-name").textContent = eventConfig.childName || "Laura";
+        document.getElementById("hero-subtitle").textContent = eventConfig.subtitle || CFG.DEFAULT_EVENT.subtitle;
+        document.getElementById("event-date-display").textContent = eventConfig.dateDisplay;
+        document.getElementById("event-time-display").textContent = eventConfig.timeDisplay;
+        document.getElementById("event-deadline-display").textContent = eventConfig.rsvpDeadline || "05 de Dezembro";
+        document.getElementById("event-loc-name").textContent = eventConfig.locationName;
+        document.getElementById("event-loc-address").textContent = eventConfig.locationAddress;
+
+        const mapBtn = document.getElementById("btn-open-map");
+        if (mapBtn) {
+          const q = encodeURIComponent(`${eventConfig.locationName} ${eventConfig.locationAddress}`);
+          mapBtn.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+        }
+
+        if (eventConfig.sizes) {
+          document.getElementById("size-clothes-display").textContent = eventConfig.sizes.clothes;
+          document.getElementById("size-shoes-display").textContent = eventConfig.sizes.shoes;
+          document.getElementById("size-diapers-display").textContent = eventConfig.sizes.diapers;
+        }
+      }
+
+      function renderAlreadyRegisteredBanner() {
+        const banner = document.getElementById("already-registered-banner");
+        if (!banner) return;
+
+        // Also check if myRsvp matches a record in rsvps
+        if (myRsvp && myRsvp.name) {
+          const match = rsvps.find((r) => r.slug === myRsvp.slug) || myRsvp;
+          banner.hidden = false;
+          const isGoing = match.status === "confirmado";
+          document.getElementById("already-reg-title").textContent = isGoing
+            ? `🎉 Olá, ${match.name}! Sua presença já está confirmada na lista da Laura!`
+            : `💙 Olá, ${match.name}! Recebemos seu aviso de que não poderá comparecer.`;
+          document.getElementById("already-reg-details").textContent = isGoing
+            ? `Cadastrado no banco: ${match.adults || 1} adulto(s) e ${match.children || 0} criança(s). Precisa alterar? Clique ao lado para editar.`
+            : `Caso seus planos mudem, você pode atualizar sua resposta a qualquer momento.`;
+        } else {
+          banner.hidden = true;
+        }
+      }
+
+      function renderStatsAndGuests() {
+        const confirmedList = rsvps.filter((r) => r.status === "confirmado");
+        const totalAdults = confirmedList.reduce((acc, r) => acc + Math.max(Number(r.adults) || 0, 0), 0);
+        const totalChildren = confirmedList.reduce((acc, r) => acc + Math.max(Number(r.children) || 0, 0), 0);
+        const totalPeople = totalAdults + totalChildren;
+
+        document.getElementById("nav-confirmed-count").textContent = String(totalPeople);
+        document.getElementById("stat-total-people").textContent = String(totalPeople);
+        document.getElementById("stat-total-adults").textContent = String(totalAdults);
+        document.getElementById("stat-total-children").textContent = String(totalChildren);
+        document.getElementById("stat-total-families").textContent = String(rsvps.length);
+
+        // Render Mural of Messages on Home tab
+        const messagesFeed = document.getElementById("messages-feed");
+        const withMessages = rsvps.filter((r) => r.message && String(r.message).trim().length > 0);
+        if (messagesFeed) {
+          if (withMessages.length === 0) {
+            messagesFeed.innerHTML = `
+              <div class="message-bubble">
+                <div class="message-head">
+                  <span class="message-author">🐚 Família da Laura</span>
+                  <span class="message-tag">Anfitriões</span>
+                </div>
+                <p class="message-text">"Estamos preparando cada detalhe do Fundo do Mar com muito carinho! Deixe seu recado ao confirmar presença para guardarmos de recordação para a Laura."</p>
+              </div>
+            `;
+          } else {
+            messagesFeed.innerHTML = withMessages
+              .map((r, idx) => {
+                const avatar = SEA_AVATARS[idx % SEA_AVATARS.length];
+                const totalFam = (Number(r.adults) || 0) + (Number(r.children) || 0);
+                return `
+                  <article class="message-bubble">
+                    <div class="message-head">
+                      <span class="message-author">${avatar} ${escapeHTML(r.name)}</span>
+                      <span class="message-tag">${
+                        r.status === "confirmado" ? `${totalFam} confirmado(s)` : "Enviou carinho"
+                      }</span>
+                    </div>
+                    <p class="message-text">"${escapeHTML(r.message)}"</p>
+                  </article>
+                `;
+              })
+              .join("");
+          }
+        }
+
+        // Filter & Search Guest List on Tab 2
+        const guestContainer = document.getElementById("guest-list-container");
+        if (!guestContainer) return;
+
+        const filtered = rsvps.filter((r) => {
+          if (currentGuestFilter === "confirmado" && r.status !== "confirmado") return false;
+          if (currentGuestFilter === "nao_vou" && r.status !== "nao_vou") return false;
+          if (currentGuestFilter === "com_criancas" && (r.status !== "confirmado" || !(Number(r.children) > 0))) {
+            return false;
+          }
+          if (guestSearchTerm) {
+            const hay = `${r.name || ""} ${r.message || ""} ${r.kidsNotes || ""}`.toLowerCase();
+            if (!hay.includes(guestSearchTerm.toLowerCase())) return false;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          guestContainer.innerHTML = `
+            <div class="guest-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+              <p style="margin: 0; font-size: 1.02rem; color: var(--ink-muted); font-weight: 600;">
+                🐚 Nenhum cadastro encontrado para este filtro. Seja o primeiro a confirmar presença na aba Convite!
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        guestContainer.innerHTML = filtered
+          .map((r, idx) => {
+            const avatar = SEA_AVATARS[idx % SEA_AVATARS.length];
+            const isGoing = r.status === "confirmado";
+            const dateStr = r.updatedAt
+              ? new Date(r.updatedAt).toLocaleDateString("pt-BR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit"
+                })
+              : "Recente";
+
+            return `
+              <article class="guest-card">
+                <div class="guest-card-top">
+                  <div class="guest-identity">
+                    <div class="guest-avatar">${avatar}</div>
+                    <div>
+                      <h3 class="guest-name">${escapeHTML(r.name)}</h3>
+                      <span class="guest-time">Registrado em ${escapeHTML(dateStr)}</span>
+                    </div>
+                  </div>
+                  <span class="status-badge ${isGoing ? "confirmado" : "nao_vou"}">
+                    ${isGoing ? "✓ Confirmado" : "Não poderá ir"}
+                  </span>
+                </div>
+
+                ${
+                  isGoing
+                    ? `
+                  <div class="guest-counts">
+                    <span class="count-chip">🧑 ${Number(r.adults) || 1} adulto(s)</span>
+                    <span class="count-chip">👧 ${Number(r.children) || 0} criança(s)</span>
+                    ${r.kidsNotes ? `<span class="count-chip">🎈 ${escapeHTML(r.kidsNotes)}</span>` : ""}
+                  </div>
+                `
+                    : ""
+                }
+
+                ${
+                  r.message
+                    ? `<p class="message-text" style="margin-top: 0.25rem;">💬 "${escapeHTML(r.message)}"</p>`
+                    : ""
+                }
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderGifts() {
+        const container = document.getElementById("gifts-grid-container");
+        if (!container) return;
+
+        const filtered = GIFT_CATALOG.filter((item) => {
+          const isReserved = Boolean(giftsReserved[item.id]);
+          if (currentGiftFilter === "disponivel") return !isReserved;
+          if (currentGiftFilter === "reservado") return isReserved;
+          if (currentGiftFilter !== "all" && item.category !== currentGiftFilter) return false;
+          return true;
+        });
+
+        container.innerHTML = filtered
+          .map((item) => {
+            const reservation = giftsReserved[item.id];
+            const isReserved = Boolean(reservation);
+            const qEncoded = encodeURIComponent(item.searchQuery);
+            const amazonUrl = `https://www.amazon.com.br/s?k=${qEncoded}`;
+            const mlUrl = `https://lista.mercadolivre.com.br/${item.searchQuery.replace(/\s+/g, "-")}`;
+            const rihappyUrl = `https://www.rihappy.com.br/${qEncoded}?_q=${qEncoded}&map=ft`;
+
+            return `
+              <article class="gift-card ${isReserved ? "reserved" : ""}">
+                <div>
+                  <div class="gift-top">
+                    <div class="gift-icon">${item.icon}</div>
+                    <span class="gift-cat-badge">${escapeHTML(item.categoryLabel)}</span>
+                  </div>
+                  <h3 class="gift-title">${escapeHTML(item.title)}</h3>
+                  <p class="gift-desc">${escapeHTML(item.desc)}</p>
+
+                  <div class="store-links" aria-label="Links para pesquisar o presente nas lojas">
+                    <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="store-chip">
+                      🛒 Amazon
+                    </a>
+                    <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="store-chip">
+                      🤝 Mercado Livre
+                    </a>
+                    <a href="${rihappyUrl}" target="_blank" rel="noopener noreferrer" class="store-chip">
+                      🧸 Ri Happy
+                    </a>
+                  </div>
+                </div>
+
+                <div class="gift-footer">
+                  ${
+                    isReserved
+                      ? `
+                    <div class="reserved-tag">
+                      <span>🎁 Reservado por <strong>${escapeHTML(reservation.reservedBy)}</strong></span>
+                      <button type="button" class="btn-unreserve" data-unreserve="${item.id}" title="Liberar presente caso tenha reservado por engano">
+                        Liberar
+                      </button>
+                    </div>
+                  `
+                      : `
+                    <button type="button" class="btn-reserve" data-reserve="${item.id}" data-title="${escapeHTML(item.title)}">
+                      🎁 Reservar este Presente
+                    </button>
+                  `
+                  }
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderAll() {
+        renderEventDetails();
+        renderAlreadyRegisteredBanner();
+        renderStatsAndGuests();
+        renderGifts();
+      }
+
+      // ─────────────────────────────────────────────────────────────────────
+      // INTERACTIONS & EVENT HANDLERS
+      // ─────────────────────────────────────────────────────────────────────
+      function switchTab(tabId) {
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          const active = btn.dataset.tab === tabId;
+          btn.classList.toggle("active", active);
+          btn.setAttribute("aria-selected", String(active));
+        });
+        document.querySelectorAll(".tab-panel").forEach((panel) => {
+          panel.classList.toggle("active", panel.id === `tab-${tabId}`);
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+      });
+
+      document.getElementById("btn-go-gifts-cta")?.addEventListener("click", () => {
+        switchTab("presentes");
+      });
+
+      document.getElementById("btn-scroll-rsvp")?.addEventListener("click", () => {
+        document.getElementById("rsvp-section")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("rsvp-name")?.focus();
+      });
+
+      // Stepper Controls (+ / - for Adults & Children)
+      function updateSteppersUI() {
+        document.getElementById("val-adults").textContent = String(adultsCount);
+        document.getElementById("val-children").textContent = String(childrenCount);
+        const kidsGroup = document.getElementById("children-ages-group");
+        if (kidsGroup) {
+          kidsGroup.hidden = childrenCount === 0;
+        }
+      }
+
+      document.querySelectorAll(".step-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.step;
+          const delta = Number(btn.dataset.delta) || 0;
+          if (target === "adults") {
+            adultsCount = Math.min(Math.max(adultsCount + delta, 1), 15);
+          } else if (target === "children") {
+            childrenCount = Math.min(Math.max(childrenCount + delta, 0), 15);
+          }
+          updateSteppersUI();
+        });
+      });
+
+      // Toggle companions visibility if "Não poderemos ir" is selected
+      document.querySelectorAll('input[name="rsvp-status"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          const isGoing = document.getElementById("status-yes").checked;
+          document.getElementById("companions-group").style.display = isGoing ? "block" : "none";
+          if (!isGoing) {
+            document.getElementById("children-ages-group").hidden = true;
+          } else {
+            updateSteppersUI();
+          }
+        });
+      });
+
+      // Prefill form when editing existing RSVP
+      document.getElementById("btn-prefill-my-rsvp")?.addEventListener("click", () => {
+        if (!myRsvp) return;
+        const match = rsvps.find((r) => r.slug === myRsvp.slug) || myRsvp;
+        document.getElementById("rsvp-name").value = match.name || "";
+        document.getElementById("rsvp-phone").value = match.phone || "";
+        document.getElementById("rsvp-message").value = match.message || "";
+        document.getElementById("rsvp-kids-notes").value = match.kidsNotes || "";
+        if (match.status === "nao_vou") {
+          document.getElementById("status-no").checked = true;
+          document.getElementById("companions-group").style.display = "none";
+        } else {
+          document.getElementById("status-yes").checked = true;
+          document.getElementById("companions-group").style.display = "block";
+          adultsCount = Number(match.adults) || 1;
+          childrenCount = Number(match.children) || 0;
+          updateSteppersUI();
+        }
+        document.getElementById("rsvp-section")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("rsvp-name")?.focus();
+      });
+
+      // Submit RSVP Form
+      document.getElementById("rsvp-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nameInput = document.getElementById("rsvp-name");
+        const name = nameInput.value.trim();
+        if (!name) return;
+
+        const isGoing = document.getElementById("status-yes").checked;
+        const status = isGoing ? "confirmado" : "nao_vou";
+        const phone = document.getElementById("rsvp-phone").value.trim();
+        const message = document.getElementById("rsvp-message").value.trim();
+        const kidsNotes = document.getElementById("rsvp-kids-notes").value.trim();
+
+        const slug = `laura1:rsvp:${slugify(name)}`;
+        const record = {
+          slug,
+          name,
+          status,
+          adults: isGoing ? adultsCount : 0,
+          children: isGoing ? childrenCount : 0,
+          kidsNotes: isGoing && childrenCount > 0 ? kidsNotes : "",
+          phone,
+          message,
+          updatedAt: new Date().toISOString()
+        };
+
+        const submitBtn = document.getElementById("btn-submit-rsvp");
+        const prevText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Salvando no banco de dados...";
+
+        // Optimistic update
+        const existingIdx = rsvps.findIndex((r) => r.slug === slug);
+        if (existingIdx >= 0) {
+          rsvps[existingIdx] = record;
+        } else {
+          rsvps.unshift(record);
+        }
+        myRsvp = record;
+        saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+        saveLocal(STORAGE_KEYS.MY_RSVP, myRsvp);
+        renderAll();
+
+        await saveRecordToDatabase(slug, record, isGoing ? "sim" : "nao");
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = prevText;
+        showToast(
+          isGoing
+            ? `🎉 Presença de ${name} confirmada e salva no banco!`
+            : `💙 Obrigado por avisar, ${name}!`
+        );
+      });
+
+      // Guest Search & Filters
+      document.getElementById("guest-search-input")?.addEventListener("input", (e) => {
+        guestSearchTerm = e.target.value || "";
+        renderStatsAndGuests();
+      });
+
+      document.querySelectorAll("#guest-filter-pills .filter-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          document.querySelectorAll("#guest-filter-pills .filter-pill").forEach((p) => p.classList.remove("active"));
+          pill.classList.add("active");
+          currentGuestFilter = pill.dataset.filter;
+          renderStatsAndGuests();
+        });
+      });
+
+      document.getElementById("btn-refresh-list")?.addEventListener("click", async () => {
+        showToast("🔄 Sincronizando lista com o banco de dados...");
+        await fetchAllFromDatabase();
+      });
+
+      document.getElementById("btn-copy-whatsapp-summary")?.addEventListener("click", async () => {
+        const confirmed = rsvps.filter((r) => r.status === "confirmado");
+        const totalA = confirmed.reduce((s, r) => s + (Number(r.adults) || 0), 0);
+        const totalC = confirmed.reduce((s, r) => s + (Number(r.children) || 0), 0);
+        const lines = [
+          `🐚 *Lista de Confirmados — 1º Aniversário da Laura*`,
+          `Total: *${totalA + totalC} pessoas* (${totalA} adultos e ${totalC} crianças)`,
+          ``
+        ];
+        confirmed.forEach((r, i) => {
+          lines.push(`${i + 1}. *${r.name}* — ${r.adults} ad / ${r.children} cr`);
+        });
+        try {
+          await navigator.clipboard.writeText(lines.join("\n"));
+          showToast("📲 Resumo copiado para colar no WhatsApp!");
+        } catch {
+          showToast("Não foi possível copiar automaticamente.");
+        }
+      });
+
+      document.getElementById("btn-export-csv")?.addEventListener("click", () => {
+        const header = ["Nome", "Status", "Adultos", "Criancas", "Detalhes Criancas", "Telefone", "Recado", "Data"];
+        const rows = rsvps.map((r) => [
+          r.name,
+          r.status,
+          r.adults,
+          r.children,
+          r.kidsNotes || "",
+          r.phone || "",
+          r.message || "",
+          r.updatedAt || ""
+        ]);
+        const csv = [header, ...rows]
+          .map((row) => row.map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`).join(","))
+          .join("\n");
+        const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "confirmados-aniversario-laura.csv";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showToast("📥 Planilha CSV baixada!");
+      });
+
+      // Gift Filters & Reservation Modal
+      document.querySelectorAll("#gift-filter-pills .filter-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          document.querySelectorAll("#gift-filter-pills .filter-pill").forEach((p) => p.classList.remove("active"));
+          pill.classList.add("active");
+          currentGiftFilter = pill.dataset.gfilter;
+          renderGifts();
+        });
+      });
+
+      const reserveModal = document.getElementById("reserve-modal");
+      document.getElementById("gifts-grid-container")?.addEventListener("click", async (e) => {
+        const reserveBtn = e.target.closest("[data-reserve]");
+        if (reserveBtn) {
+          const giftId = reserveBtn.dataset.reserve;
+          const title = reserveBtn.dataset.title;
+          document.getElementById("reserve-gift-id").value = giftId;
+          document.getElementById("reserve-modal-item-name").textContent = title;
+          if (myRsvp && myRsvp.name && !document.getElementById("reserve-giver-name").value) {
+            document.getElementById("reserve-giver-name").value = myRsvp.name;
+          }
+          reserveModal.classList.add("open");
+          reserveModal.setAttribute("aria-hidden", "false");
+          document.getElementById("reserve-giver-name").focus();
+          return;
+        }
+
+        const unreserveBtn = e.target.closest("[data-unreserve]");
+        if (unreserveBtn) {
+          const giftId = unreserveBtn.dataset.unreserve;
+          delete giftsReserved[giftId];
+          delete myGifts[giftId];
+          saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
+          saveLocal(STORAGE_KEYS.MY_GIFTS, myGifts);
+          renderGifts();
+          await saveRecordToDatabase(`laura1:gift:${giftId}`, { giftId, reservedBy: "" }, "nao");
+          showToast("Presente liberado novamente na lista!");
+        }
+      });
+
+      document.getElementById("close-reserve-modal")?.addEventListener("click", () => {
+        reserveModal.classList.remove("open");
+        reserveModal.setAttribute("aria-hidden", "true");
+      });
+
+      document.getElementById("reserve-gift-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const giftId = document.getElementById("reserve-gift-id").value;
+        const giverName = document.getElementById("reserve-giver-name").value.trim();
+        if (!giftId || !giverName) return;
+
+        const btn = document.getElementById("btn-confirm-reserve");
+        btn.disabled = true;
+        btn.textContent = "Reservando no banco...";
+
+        const entry = {
+          giftId,
+          reservedBy: giverName,
+          updatedAt: new Date().toISOString()
+        };
+
+        giftsReserved[giftId] = entry;
+        myGifts[giftId] = entry;
+        saveLocal(STORAGE_KEYS.GIFTS, giftsReserved);
+        saveLocal(STORAGE_KEYS.MY_GIFTS, myGifts);
+        renderGifts();
+
+        await saveRecordToDatabase(`laura1:gift:${giftId}`, entry, "sim");
+
+        btn.disabled = false;
+        btn.textContent = "✨ Confirmar Reserva no Banco";
+        reserveModal.classList.remove("open");
+        reserveModal.setAttribute("aria-hidden", "true");
+        showToast(`🎁 Presente reservado por ${giverName}! Muito obrigado!`);
+      });
+
+      // Add to Google Calendar
+      document.getElementById("btn-add-calendar")?.addEventListener("click", () => {
+        const text = encodeURIComponent("1º Aniversário da Laura 🐚🐙 (Fundo do Mar)");
+        const location = encodeURIComponent(`${eventConfig.locationName} - ${eventConfig.locationAddress}`);
+        const details = encodeURIComponent(
+          "Venha comemorar o 1º aninho da Laura no tema Fundo do Mar! Confirme presença em https://aniversariolaura.vercel.app"
+        );
+        const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=20261212T150000/20261212T190000&details=${details}&location=${location}&ctz=America/Sao_Paulo`;
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+
+      // Event Configuration Modal (Parents / Organizers)
+      const configModal = document.getElementById("config-modal");
+      document.getElementById("btn-open-config")?.addEventListener("click", () => {
+        document.getElementById("cfg-date-display").value = eventConfig.dateDisplay || "";
+        document.getElementById("cfg-time-display").value = eventConfig.timeDisplay || "";
+        document.getElementById("cfg-loc-name").value = eventConfig.locationName || "";
+        document.getElementById("cfg-loc-addr").value = eventConfig.locationAddress || "";
+        document.getElementById("cfg-clothes").value = eventConfig.sizes?.clothes || "";
+        document.getElementById("cfg-shoes").value = eventConfig.sizes?.shoes || "";
+        document.getElementById("cfg-diapers").value = eventConfig.sizes?.diapers || "";
+        configModal.classList.add("open");
+        configModal.setAttribute("aria-hidden", "false");
+      });
+
+      document.getElementById("close-config-modal")?.addEventListener("click", () => {
+        configModal.classList.remove("open");
+        configModal.setAttribute("aria-hidden", "true");
+      });
+
+      document.getElementById("event-config-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        eventConfig = {
+          ...eventConfig,
+          dateDisplay: document.getElementById("cfg-date-display").value.trim(),
+          timeDisplay: document.getElementById("cfg-time-display").value.trim(),
+          locationName: document.getElementById("cfg-loc-name").value.trim(),
+          locationAddress: document.getElementById("cfg-loc-addr").value.trim(),
+          sizes: {
+            clothes: document.getElementById("cfg-clothes").value.trim(),
+            shoes: document.getElementById("cfg-shoes").value.trim(),
+            diapers: document.getElementById("cfg-diapers").value.trim()
+          }
+        };
+        saveLocal(STORAGE_KEYS.EVENT_CFG, eventConfig);
+        renderEventDetails();
+        await saveRecordToDatabase("laura1:config", eventConfig, "sim");
+        configModal.classList.remove("open");
+        configModal.setAttribute("aria-hidden", "true");
+        showToast("⚙️ Dados da festa atualizados e salvos no banco!");
+      });
+
+      // Live Countdown Timer
+      function updateCountdown() {
+        const target = new Date(eventConfig.dateISO || "2026-12-12T15:00:00-03:00").getTime();
+        const now = Date.now();
+        const diff = Math.max(target - now, 0);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("cd-days").textContent = String(days).padStart(2, "0");
+        document.getElementById("cd-hours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("cd-mins").textContent = String(mins).padStart(2, "0");
+        document.getElementById("cd-secs").textContent = String(secs).padStart(2, "0");
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Animated Underwater Bubbles on Canvas
+      function initBubblesCanvas() {
+        const canvas = document.getElementById("bubbles-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        let w = (canvas.width = window.innerWidth);
+        let h = (canvas.height = window.innerHeight);
+
+        window.addEventListener("resize", () => {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        });
+
+        const bubbles = Array.from({ length: 28 }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: 3 + Math.random() * 11,
+          speed: 0.35 + Math.random() * 0.85,
+          wobble: Math.random() * Math.PI * 2
+        }));
+
+        function draw() {
+          ctx.clearRect(0, 0, w, h);
+          for (const b of bubbles) {
+            b.y -= b.speed;
+            b.wobble += 0.02;
+            const bx = b.x + Math.sin(b.wobble) * 12;
+            if (b.y < -20) {
+              b.y = h + 20;
+              b.x = Math.random() * w;
+            }
+            ctx.beginPath();
+            ctx.arc(bx, b.y, b.r, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
+            ctx.fill();
+            ctx.strokeStyle = "rgba(18, 168, 157, 0.22)";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }
+
+      // Initialize
+      initBubblesCanvas();
+      renderAll();
+      fetchAllFromDatabase();
+    })();
+  </script>
+</body>
+</html>
