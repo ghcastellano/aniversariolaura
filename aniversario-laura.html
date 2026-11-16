@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Laura faz 1 Aninho! 🐚🧜‍♀️ — Convite &amp; Confirmação de Presença</title>
+  <title>Laurinha faz 1 Aninho! 🐚🧜‍♀️ — Confirmação de Presença</title>
   <meta
     name="description"
-    content="Venha mergulhar no Fundo do Mar para comemorar o 1º aninho da Laura! Assista ao convite, veja as sugestões de presentes e confirme sua presença."
+    content="Venha mergulhar no Fundo do Mar para comemorar o 1º aninho da Laurinha! Confirme sua presença e deixe um recado especial."
   />
-  <meta property="og:title" content="Laura faz 1 Aninho! 🐚🧜‍♀️ — Fundo do Mar" />
+  <meta property="og:title" content="Laurinha faz 1 Aninho! 🐚🧜‍♀️ — Fundo do Mar" />
   <meta
     property="og:description"
-    content="Confirme sua presença e acompanhantes para o 1º aniversário da Laura!"
+    content="Confirme sua presença e acompanhantes para o 1º aniversário da Laurinha!"
   />
   <meta property="og:type" content="website" />
 
@@ -40,7 +40,6 @@
       --sand-gold: #f5a623;
       --lilac-sea: #9b72cf;
       --mint-ok: #1ea866;
-      --pearl-cream: #fffaf3;
       --radius-xl: 28px;
       --radius-lg: 20px;
       --radius-md: 14px;
@@ -81,183 +80,13 @@
       z-index: 0;
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       WELCOME CURTAIN & VIDEO CINEMA INTRO OVERLAY
-       ═══════════════════════════════════════════════════════════════════════ */
-    .intro-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: radial-gradient(circle at 50% 25%, #e6f9ff 0%, #bee9fa 55%, #8fd5f0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25rem;
-      overflow-y: auto;
-      transition: opacity 0.55s ease, visibility 0.55s ease;
-    }
-
-    .intro-overlay.hidden-overlay {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .intro-card {
-      width: 100%;
-      max-width: 460px;
-      background: rgba(255, 255, 255, 0.94);
-      border: 2px solid #fff;
-      border-radius: var(--radius-xl);
-      box-shadow: 0 24px 60px rgba(18, 60, 86, 0.18);
-      padding: 1.75rem 1.5rem;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .intro-mermaid-frame {
-      width: 190px;
-      max-width: 60vw;
-      aspect-ratio: 3 / 4;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 4px solid #fff;
-      box-shadow: 0 14px 32px rgba(18, 168, 157, 0.22);
-      background: #eaf8ff;
-      animation: floatGentle 5.5s ease-in-out infinite;
-    }
-
-    .intro-mermaid-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .intro-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(20, 169, 157, 0.12);
-      color: var(--turquoise-dark);
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.35rem 0.95rem;
-      border-radius: 999px;
-    }
-
-    .intro-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.7rem, 5vw, 2.2rem);
-      margin: 0;
-      color: var(--ink-deep);
-      line-height: 1.15;
-    }
-
-    .intro-title span {
-      color: var(--coral-dark);
-    }
-
-    .intro-desc {
-      margin: 0;
-      font-size: 0.95rem;
-      color: var(--ink-muted);
-      font-weight: 600;
-      line-height: 1.5;
-    }
-
-    .intro-actions {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      margin-top: 0.25rem;
-    }
-
-    .btn-ghost-link {
-      background: transparent;
-      border: none;
-      color: var(--ink-muted);
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 0.55rem 1rem;
-      cursor: pointer;
-      border-radius: 999px;
-      transition: color 0.2s ease, background 0.2s ease;
-    }
-
-    .btn-ghost-link:hover {
-      color: var(--ink-deep);
-      background: rgba(18, 60, 86, 0.06);
-    }
-
-    /* Video Cinema Stage */
-    .video-stage {
-      width: 100%;
-      max-width: 440px;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.9rem;
-    }
-
-    .video-stage.active {
-      display: flex;
-    }
-
-    .video-frame {
-      width: auto;
-      max-width: 100%;
-      height: min(68vh, 640px);
-      aspect-ratio: 9 / 16;
-      border-radius: 26px;
-      overflow: hidden;
-      border: 4px solid #fff;
-      box-shadow: 0 24px 60px rgba(18, 60, 86, 0.28);
-      background: #0b2c40;
-      position: relative;
-    }
-
-    .video-frame video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .video-controls-bar {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-    }
-
-    .video-controls-bar .btn-primary {
-      width: auto;
-      flex: 1 1 200px;
-      padding: 0.85rem 1.25rem;
-      font-size: 0.96rem;
-    }
-
-    .video-controls-bar .btn-secondary {
-      min-height: 46px;
-      padding: 0.65rem 1rem;
-    }
-
     @keyframes floatGentle {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
     }
 
     /* ═══════════════════════════════════════════════════════════════════════
-       TOP STICKY NAVIGATION BAR (NO OVERLAPS ON MOBILE / TABLET / DESKTOP)
+       TOP STICKY NAVIGATION BAR
        ═══════════════════════════════════════════════════════════════════════ */
     .top-header {
       position: sticky;
@@ -277,24 +106,22 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.75rem;
-      flex-wrap: wrap;
     }
 
     .brand-logo {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.65rem;
       text-decoration: none;
       color: var(--ink-deep);
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      flex-shrink: 0;
     }
 
     .brand-avatar {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid var(--coral);
@@ -311,27 +138,20 @@
       display: block;
     }
 
-    .header-right-tools {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
-
     .music-toggle-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.38rem;
       border: 1.5px solid rgba(20, 169, 157, 0.28);
       background: rgba(20, 169, 157, 0.1);
       color: var(--turquoise-dark);
       font-family: var(--font-display);
-      font-size: 0.82rem;
+      font-size: 0.86rem;
       font-weight: 600;
-      padding: 0.42rem 0.8rem;
+      padding: 0.48rem 0.95rem;
       border-radius: 999px;
       cursor: pointer;
-      min-height: 36px;
+      min-height: 38px;
       transition: all 0.2s ease;
     }
 
@@ -346,75 +166,6 @@
       box-shadow: 0 4px 12px rgba(20, 169, 157, 0.3);
     }
 
-    .db-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.38rem;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--turquoise-dark);
-      background: rgba(20, 169, 157, 0.1);
-      padding: 0.38rem 0.72rem;
-      border-radius: 999px;
-      min-height: 36px;
-    }
-
-    .db-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--mint-ok);
-      box-shadow: 0 0 0 3px rgba(30, 168, 102, 0.22);
-      flex-shrink: 0;
-    }
-
-    .nav-tabs {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: rgba(18, 60, 86, 0.06);
-      padding: 0.28rem;
-      border-radius: 999px;
-    }
-
-    .tab-btn {
-      border: none;
-      background: transparent;
-      color: var(--ink-muted);
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 0.52rem 1rem;
-      border-radius: 999px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.38rem;
-      min-height: 38px;
-      white-space: nowrap;
-      transition: all 0.22s ease;
-    }
-
-    .tab-btn:hover {
-      color: var(--ink-deep);
-    }
-
-    .tab-btn.active {
-      background: #fff;
-      color: var(--coral-dark);
-      box-shadow: 0 4px 12px rgba(18, 60, 86, 0.1);
-    }
-
-    .tab-pill-count {
-      background: rgba(242, 107, 122, 0.15);
-      color: var(--coral-dark);
-      font-size: 0.74rem;
-      padding: 0.08rem 0.46rem;
-      border-radius: 999px;
-      font-weight: 700;
-    }
-
     /* Main Container */
     .app-container {
       position: relative;
@@ -422,20 +173,6 @@
       max-width: 1120px;
       margin: 0 auto;
       padding: 1.5rem 1.25rem 4.5rem;
-    }
-
-    .tab-panel {
-      display: none;
-      animation: fadeInPanel 0.35s ease;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    @keyframes fadeInPanel {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Scroll-triggered reveal */
@@ -590,8 +327,8 @@
 
     .hero-cta-row .btn-primary {
       width: auto;
-      padding: 0.88rem 1.5rem;
-      font-size: 0.98rem;
+      padding: 0.88rem 1.65rem;
+      font-size: 1rem;
     }
 
     /* Event Info Grid */
@@ -988,309 +725,6 @@
       word-break: break-word;
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       TAB 2: SUGESTÕES DE PRESENTES (FIEL À IMAGEM)
-       ═══════════════════════════════════════════════════════════════════════ */
-    .gifts-showcase-grid {
-      display: grid;
-      grid-template-columns: minmax(260px, 380px) minmax(0, 1fr);
-      gap: 1.75rem;
-      align-items: center;
-    }
-
-    .gifts-art-frame {
-      width: 100%;
-      max-width: 380px;
-      margin: 0 auto;
-      border-radius: 26px;
-      overflow: hidden;
-      border: 5px solid #fff;
-      box-shadow: 0 20px 48px rgba(18, 60, 86, 0.15);
-      background: #eaf8ff;
-    }
-
-    .gifts-art-frame img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .gifts-details-col {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      min-width: 0;
-    }
-
-    .gift-items-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      margin: 0.25rem 0;
-    }
-
-    .gift-item-card {
-      background: var(--pearl-cream);
-      border: 2px solid #f2dfc4;
-      border-radius: var(--radius-lg);
-      padding: 1.05rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .gift-star-badge {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: rgba(242, 107, 122, 0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.45rem;
-      flex-shrink: 0;
-    }
-
-    .gift-item-title {
-      font-family: var(--font-display);
-      font-size: 1.12rem;
-      font-weight: 700;
-      color: var(--ink-deep);
-      margin: 0;
-    }
-
-    .gift-shell-note {
-      background: linear-gradient(135deg, #fff1f3 0%, #ffe6ea 100%);
-      border: 2px solid #f9c8d0;
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.4rem;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .gift-shell-note p {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: 1.08rem;
-      color: var(--ink-deep);
-      line-height: 1.45;
-    }
-
-    .gift-shell-note span {
-      display: block;
-      margin-top: 0.35rem;
-      color: var(--coral-dark);
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════════════
-       TAB 3: LISTA DE CONFIRMADOS
-       ═══════════════════════════════════════════════════════════════════════ */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 2px solid #fff;
-      border-radius: var(--radius-lg);
-      padding: 1.15rem;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
-
-    .stat-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .stat-icon.coral { background: rgba(242, 107, 122, 0.15); }
-    .stat-icon.teal { background: rgba(20, 169, 157, 0.15); }
-    .stat-icon.gold { background: rgba(245, 166, 35, 0.18); }
-    .stat-icon.lilac { background: rgba(155, 114, 207, 0.16); }
-
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      font-weight: 700;
-      line-height: 1;
-      color: var(--ink-deep);
-    }
-
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--ink-muted);
-      font-weight: 700;
-      margin-top: 0.2rem;
-    }
-
-    .toolbar-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.2rem;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 220px;
-      position: relative;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 0.75rem 1rem 0.75rem 2.5rem;
-      border-radius: 999px;
-      border: 1.5px solid rgba(18, 60, 86, 0.16);
-      background: #fff;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 0.95rem;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .filter-pills {
-      display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-    }
-
-    .filter-pill {
-      border: 1.5px solid rgba(18, 60, 86, 0.14);
-      background: #fff;
-      color: var(--ink-muted);
-      font-family: var(--font-display);
-      font-size: 0.84rem;
-      font-weight: 600;
-      padding: 0.5rem 0.9rem;
-      border-radius: 999px;
-      cursor: pointer;
-      min-height: 36px;
-      transition: all 0.2s ease;
-    }
-
-    .filter-pill.active {
-      background: var(--turquoise);
-      border-color: var(--turquoise);
-      color: #fff;
-    }
-
-    .guest-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .guest-card {
-      background: #fff;
-      border: 1.5px solid rgba(18, 60, 86, 0.1);
-      border-radius: var(--radius-lg);
-      padding: 1.1rem 1.2rem;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      min-width: 0;
-    }
-
-    .guest-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .guest-identity {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      min-width: 0;
-    }
-
-    .guest-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-
-    .guest-name {
-      font-family: var(--font-display);
-      font-size: 1.04rem;
-      font-weight: 700;
-      margin: 0;
-      word-break: break-word;
-    }
-
-    .guest-time {
-      font-size: 0.75rem;
-      color: var(--ink-muted);
-      font-weight: 600;
-    }
-
-    .status-badge {
-      font-family: var(--font-display);
-      font-size: 0.76rem;
-      font-weight: 700;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      flex-shrink: 0;
-    }
-
-    .status-badge.confirmado {
-      background: rgba(30, 168, 102, 0.14);
-      color: #137a47;
-    }
-
-    .status-badge.nao_vou {
-      background: rgba(242, 107, 122, 0.14);
-      color: var(--coral-dark);
-    }
-
-    .guest-counts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-size: 0.83rem;
-      font-weight: 700;
-      color: var(--ink-deep);
-    }
-
-    .count-chip {
-      background: #f2f9fc;
-      padding: 0.22rem 0.65rem;
-      border-radius: 8px;
-      border: 1px solid rgba(18, 60, 86, 0.08);
-    }
-
     /* Toast */
     .toast {
       position: fixed;
@@ -1334,8 +768,7 @@
     @media (max-width: 960px) {
       .hero-grid,
       .event-info-grid,
-      .home-grid,
-      .gifts-showcase-grid {
+      .home-grid {
         grid-template-columns: 1fr;
       }
       .hero-content {
@@ -1345,36 +778,14 @@
       .hero-cta-row {
         justify-content: center;
       }
-      .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .guest-list {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 640px) {
       .top-header {
         padding: 0.6rem 0.75rem;
       }
-      .header-inner {
-        gap: 0.55rem;
-      }
       .brand-logo {
-        font-size: 1.02rem;
-      }
-      .db-status {
-        display: none;
-      }
-      .nav-tabs {
-        order: 3;
-        width: 100%;
-        justify-content: space-between;
-      }
-      .tab-btn {
-        flex: 1;
-        padding: 0.5rem 0.35rem;
-        font-size: 0.8rem;
+        font-size: 1.05rem;
       }
       .app-container {
         padding: 1rem 0.85rem 4rem;
@@ -1388,115 +799,44 @@
         max-width: 245px;
       }
       .status-radio-row,
-      .counters-row,
-      .stats-grid {
+      .counters-row {
         grid-template-columns: 1fr;
-      }
-      .video-frame {
-        height: min(62vh, 520px);
       }
     }
   </style>
 </head>
 <body>
-  <!-- Background Ocean Music (Extracted from official video) -->
-  <audio id="bg-ocean-audio" src="assets/musica-fundo-do-mar.mp3" loop preload="auto"></audio>
+  <!-- Background Ocean Music -->
+  <audio id="bg-ocean-audio" src="assets/musica-fundo-do-mar.mp3" autoplay loop preload="auto"></audio>
 
   <!-- Animated Underwater Bubbles Canvas -->
   <canvas id="bubbles-canvas" aria-hidden="true"></canvas>
 
-  <!-- ====================================================================
-       WELCOME CURTAIN & VIDEO CINEMA INTRO
-       ==================================================================== -->
-  <div class="intro-overlay" id="intro-overlay" role="dialog" aria-modal="true" aria-label="Convite animado da Laura">
-    <!-- Step 1: 1-Tap Pearl Curtain (unlocks audio + video cleanly on mobile & desktop) -->
-    <div class="intro-card" id="welcome-curtain">
-      <div class="intro-mermaid-frame">
-        <img src="assets/sereia-laura.jpg" alt="Laurinha Sereia — 1 Aninho" />
-      </div>
-      <div class="intro-eyebrow">🫧 Fundo do Mar Encantado</div>
-      <h2 class="intro-title"><span>Laura</span> faz 1 Aninho!</h2>
-      <p class="intro-desc">
-        Preparamos um convite especial com música do fundo do mar para você mergulhar nessa aventura!
-      </p>
-      <div class="intro-actions">
-        <button type="button" class="btn-primary" id="btn-start-experience">
-          🐚 Abrir Convite &amp; Ouvir Música
-        </button>
-        <button type="button" class="btn-ghost-link" id="btn-skip-to-rsvp">
-          Ir direto para Confirmação de Presença →
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 2: Official Invitation Video Player -->
-    <div class="video-stage" id="video-stage">
-      <div class="video-frame">
-        <video
-          id="intro-video"
-          src="assets/convite-laura.mp4"
-          playsinline
-          webkit-playsinline
-          preload="auto"
-        ></video>
-      </div>
-      <div class="video-controls-bar">
-        <button type="button" class="btn-secondary" id="btn-video-mute">
-          🔊 Som Ligado
-        </button>
-        <button type="button" class="btn-primary" id="btn-video-to-rsvp">
-          ✨ Ir para Confirmação de Presença
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- Top Sticky Header -->
   <header class="top-header">
     <div class="header-inner">
-      <a href="#convite" class="brand-logo" id="brand-link">
+      <a href="#top" class="brand-logo" id="brand-link">
         <span class="brand-avatar">
           <img src="assets/sereia-laura.jpg" alt="Laurinha Sereia" />
         </span>
-        <span id="nav-title-text">Laura · 1 Aninho</span>
+        <span id="nav-title-text">Laurinha · 1 Aninho</span>
       </a>
 
-      <nav class="nav-tabs" role="tablist" aria-label="Seções do aniversário da Laura">
-        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="convite">
-          🐚 Convite
-        </button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="presentes">
-          🎁 Presentes
-        </button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="confirmados">
-          🐠 Confirmados <span class="tab-pill-count" id="nav-confirmed-count">0</span>
-        </button>
-      </nav>
-
-      <div class="header-right-tools">
-        <button type="button" class="music-toggle-btn" id="btn-music-toggle" aria-pressed="false" title="Ligar ou desligar música do Fundo do Mar">
-          🔇 Música
-        </button>
-        <div class="db-status" id="db-status-pill" title="Sincronizado em tempo real com o banco de dados">
-          <span class="db-dot" id="db-dot"></span>
-          <span id="db-status-text">Conectado</span>
-        </div>
-      </div>
+      <button type="button" class="music-toggle-btn" id="btn-music-toggle" aria-pressed="false" title="Ligar ou desligar música do Fundo do Mar">
+        🔊 Música
+      </button>
     </div>
   </header>
 
-  <main class="app-container">
-    <!-- ====================================================================
-         ABA 1: CONVITE & CONFIRMAÇÃO DE PRESENÇA (HOME)
-         ==================================================================== -->
-    <section id="tab-convite" class="tab-panel active" role="tabpanel">
+  <main class="app-container" id="top">
+    <section aria-label="Confirmação de Presença — Laurinha faz 1 Aninho">
       <div class="hero-card reveal-on-scroll revealed">
         <div class="hero-grid">
           <div class="hero-mermaid-showcase">
             <div class="hero-mermaid-frame">
               <img src="assets/sereia-laura.jpg" alt="Sereia Laurinha — 1 Aninho" />
             </div>
-            <span class="hero-mermaid-caption">🧜‍♀️ Nossa Pequena Sereia Laura</span>
+            <span class="hero-mermaid-caption">🧜‍♀️ Nossa Pequena Sereia Laurinha</span>
           </div>
 
           <div class="hero-content">
@@ -1507,7 +847,7 @@
             </div>
 
             <h1 class="hero-title">
-              <span id="hero-child-name">Laura</span> faz 1 Aninho!
+              <span id="hero-child-name">Laurinha</span> faz 1 Aninho!
             </h1>
 
             <p class="hero-subtitle" id="hero-subtitle">
@@ -1537,9 +877,6 @@
             <div class="hero-cta-row">
               <button type="button" class="btn-primary" id="btn-hero-confirm">
                 ✨ Confirmar Presença
-              </button>
-              <button type="button" class="btn-secondary" id="btn-replay-video">
-                🎬 Assistir Vídeo Convite
               </button>
             </div>
           </div>
@@ -1597,7 +934,7 @@
       <!-- Banner shown when guest already registered on this device -->
       <div class="registered-banner" id="already-registered-banner" hidden>
         <div class="registered-banner-text">
-          <strong id="already-reg-title">🎉 Sua presença já está registrada no banco de dados!</strong>
+          <strong id="already-reg-title">🎉 Sua presença já está registrada!</strong>
           <span id="already-reg-details">Se precisar atualizar o número de acompanhantes ou seu recado, basta enviar o formulário novamente com o mesmo nome.</span>
         </div>
         <button type="button" class="btn-secondary" id="btn-prefill-my-rsvp">
@@ -1610,7 +947,7 @@
         <div class="panel-card">
           <h2 class="panel-title">🐚 Confirme sua Presença</h2>
           <p class="panel-subtitle">
-            Os dados são salvos em tempo real no banco de dados da festa para organizarmos tudo com carinho.
+            Preencha seus dados abaixo para confirmarmos sua presença e prepararmos tudo com carinho para o 1º aninho da Laurinha.
           </p>
 
           <form id="rsvp-form">
@@ -1692,18 +1029,18 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="rsvp-message">Deixe um recado especial para a Laura 💕</label>
+              <label class="form-label" for="rsvp-message">Deixe um recado especial para a Laurinha 💕</label>
               <textarea
                 id="rsvp-message"
                 class="form-textarea"
                 rows="3"
-                placeholder="Escreva uma mensagem carinhosa para a cápsula do tempo de 1 aninho da Laura..."
+                placeholder="Escreva uma mensagem carinhosa para a cápsula do tempo de 1 aninho da Laurinha..."
                 maxlength="280"
               ></textarea>
             </div>
 
             <button type="submit" class="btn-primary" id="btn-submit-rsvp">
-              🌊 Salvar Confirmação de Presença
+              🌊 Confirmar Minha Presença
             </button>
           </form>
         </div>
@@ -1711,10 +1048,10 @@
         <!-- Mural de Recados -->
         <div class="panel-card" id="mural-card">
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.35rem;">
-            <h2 class="panel-title" style="margin: 0;">💌 Mural da Laura</h2>
+            <h2 class="panel-title" style="margin: 0;">💌 Mural da Laurinha</h2>
           </div>
           <p class="panel-subtitle">
-            Recados deixados pelos amigos e familiares para o 1º aninho da Laura:
+            Recados deixados pelos amigos e familiares para o 1º aninho da Laurinha:
           </p>
 
           <div class="messages-feed" id="messages-feed">
@@ -1723,146 +1060,10 @@
         </div>
       </div>
     </section>
-
-    <!-- ====================================================================
-         ABA 2: SUGESTÕES DE PRESENTES (EXATAMENTE COMO NA IMAGEM)
-         ==================================================================== -->
-    <section id="tab-presentes" class="tab-panel" role="tabpanel">
-      <div class="panel-card">
-        <div class="gifts-showcase-grid">
-          <div class="gifts-art-frame">
-            <img src="assets/laura-presentes.jpg" alt="Sugestões de Presentes para a Laura - 1 aninho" />
-          </div>
-
-          <div class="gifts-details-col">
-            <div>
-              <div class="hero-eyebrow" style="margin-bottom: 0.6rem;">
-                🧜‍♀️ Laura · 1 Aninho
-              </div>
-              <h2 class="panel-title" style="margin-bottom: 0.35rem;">🎁 Sugestões de Presentes</h2>
-              <p class="panel-subtitle" style="margin-bottom: 0.5rem;">
-                Guia de tamanhos e sugestões para ajudar quem quiser presentear a Laurinha:
-              </p>
-            </div>
-
-            <div class="gift-items-list">
-              <div class="gift-item-card">
-                <div class="gift-star-badge">⭐</div>
-                <p class="gift-item-title">Brinquedos interativos</p>
-              </div>
-
-              <div class="gift-item-card">
-                <div class="gift-star-badge">⭐</div>
-                <p class="gift-item-title">Roupas: tamanho 2 a 3 anos</p>
-              </div>
-
-              <div class="gift-item-card">
-                <div class="gift-star-badge">⭐</div>
-                <p class="gift-item-title">Calçado: 22/23</p>
-              </div>
-            </div>
-
-            <div class="gift-shell-note">
-              <p>🐚 O mais importante é escolher com <strong>carinho</strong>!</p>
-              <span>Sua presença já é um presente! 💕</span>
-            </div>
-
-            <button type="button" class="btn-primary" id="btn-gifts-to-rsvp">
-              🐠 Ir para Confirmação de Presença
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         ABA 3: LISTA DE CONFIRMADOS (PAINEL EM TEMPO REAL)
-         ==================================================================== -->
-    <section id="tab-confirmados" class="tab-panel" role="tabpanel">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon coral">🎉</div>
-          <div>
-            <div class="stat-num" id="stat-total-people">0</div>
-            <div class="stat-label">Total de Pessoas</div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon teal">🧑</div>
-          <div>
-            <div class="stat-num" id="stat-total-adults">0</div>
-            <div class="stat-label">Adultos Confirmados</div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon gold">👧</div>
-          <div>
-            <div class="stat-num" id="stat-total-children">0</div>
-            <div class="stat-label">Crianças Confirmadas</div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon lilac">📋</div>
-          <div>
-            <div class="stat-num" id="stat-total-families">0</div>
-            <div class="stat-label">Cadastros Recebidos</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-card">
-        <div class="toolbar-row">
-          <div>
-            <h2 class="panel-title" style="margin-bottom: 0.2rem;">🐠 Quem Já Se Cadastrou</h2>
-            <p class="panel-subtitle" style="margin-bottom: 0;">
-              Lista sincronizada automaticamente com o banco de dados da festa.
-            </p>
-          </div>
-
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button type="button" class="btn-secondary" id="btn-refresh-list">
-              🔄 Atualizar
-            </button>
-            <button type="button" class="btn-secondary" id="btn-copy-whatsapp-summary">
-              📲 Copiar p/ WhatsApp
-            </button>
-            <button type="button" class="btn-secondary" id="btn-export-csv">
-              📥 Baixar CSV
-            </button>
-          </div>
-        </div>
-
-        <div class="toolbar-row">
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input
-              type="search"
-              id="guest-search-input"
-              placeholder="Buscar convidado por nome ou recado..."
-              aria-label="Buscar convidado por nome"
-            />
-          </div>
-
-          <div class="filter-pills" id="guest-filter-pills">
-            <button type="button" class="filter-pill active" data-filter="all">Todos</button>
-            <button type="button" class="filter-pill" data-filter="confirmado">Confirmados (Vão)</button>
-            <button type="button" class="filter-pill" data-filter="com_criancas">Com Crianças</button>
-            <button type="button" class="filter-pill" data-filter="nao_vou">Não Poderão Ir</button>
-          </div>
-        </div>
-
-        <div class="guest-list" id="guest-list-container">
-          <!-- Populated dynamically -->
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="ocean-footer">
-    <p>🐚 Feito com amor para o 1º Aniversário da Laura · Fundo do Mar Encantado 🧜‍♀️</p>
+    <p>🐚 Feito com amor para o 1º Aniversário da Laurinha · Fundo do Mar Encantado 🧜‍♀️</p>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1902,7 +1103,7 @@
       }
 
       const OFFICIAL_EVENT = {
-        childName: "Laura",
+        childName: "Laurinha",
         ageLabel: "1 Aninho",
         themeTitle: "Fundo do Mar Encantado",
         subtitle:
@@ -1918,8 +1119,7 @@
 
       const STORAGE_KEYS = {
         RSVPS: "laura1_rsvps_cache_v3",
-        MY_RSVP: "laura1_my_rsvp_v3",
-        EVENT_CFG: "laura1_event_cfg_v3"
+        MY_RSVP: "laura1_my_rsvp_v3"
       };
 
       try {
@@ -1941,7 +1141,6 @@
       let rsvps = loadLocal(STORAGE_KEYS.RSVPS, [INITIAL_RSVP]).filter(
         (r) => !isDeletedLegacyRecord(r)
       );
-      // Ensure Gustavo e Sophia keeps its loving message if cached with empty message
       rsvps = rsvps.map((r) => {
         if (r && r.slug === INITIAL_RSVP.slug && !String(r.message || "").trim()) {
           return { ...r, message: INITIAL_RSVP.message };
@@ -1960,8 +1159,6 @@
       }
       saveLocal(STORAGE_KEYS.RSVPS, rsvps);
 
-      let currentGuestFilter = "all";
-      let guestSearchTerm = "";
       let adultsCount = 1;
       let childrenCount = 0;
 
@@ -2013,126 +1210,63 @@
       }
 
       // ─────────────────────────────────────────────────────────────────────
-      // VIDEO INTRO & FUNDO DO MAR AUDIO CONTROLLER
+      // BACKGROUND MUSIC AUTOPLAY & TOGGLE CONTROLLER
       // ─────────────────────────────────────────────────────────────────────
-      const introOverlay = document.getElementById("intro-overlay");
-      const welcomeCurtain = document.getElementById("welcome-curtain");
-      const videoStage = document.getElementById("video-stage");
-      const introVideo = document.getElementById("intro-video");
       const bgAudio = document.getElementById("bg-ocean-audio");
       const btnMusicToggle = document.getElementById("btn-music-toggle");
-      const btnVideoMute = document.getElementById("btn-video-mute");
-
-      let musicEnabled = false;
-      let inVideoStage = false;
+      let userMuted = false;
+      let musicPlaying = false;
 
       if (bgAudio) {
         bgAudio.volume = 0.45;
       }
 
       function updateMusicUI() {
-        if (btnMusicToggle) {
-          btnMusicToggle.classList.toggle("playing", musicEnabled);
-          btnMusicToggle.setAttribute("aria-pressed", String(musicEnabled));
-          btnMusicToggle.textContent = musicEnabled ? "🔊 Música" : "🔇 Mudo";
-        }
-        if (btnVideoMute && introVideo) {
-          btnVideoMute.textContent = introVideo.muted ? "🔇 Som Desligado" : "🔊 Som Ligado";
-        }
+        if (!btnMusicToggle) return;
+        btnMusicToggle.classList.toggle("playing", musicPlaying);
+        btnMusicToggle.setAttribute("aria-pressed", String(musicPlaying));
+        btnMusicToggle.textContent = musicPlaying ? "🔊 Música" : "🔇 Mudo";
       }
 
-      function startBackgroundMusic() {
+      function tryStartMusic() {
+        if (!bgAudio || userMuted) return;
+        bgAudio
+          .play()
+          .then(() => {
+            musicPlaying = true;
+            updateMusicUI();
+          })
+          .catch(() => {
+            musicPlaying = false;
+            updateMusicUI();
+          });
+      }
+
+      // Attempt immediate playback on load, and unlock on first gesture if blocked by browser
+      tryStartMusic();
+      ["pointerdown", "touchstart", "click", "keydown"].forEach((evtName) => {
+        window.addEventListener(
+          evtName,
+          () => {
+            if (!userMuted && bgAudio && bgAudio.paused) {
+              tryStartMusic();
+            }
+          },
+          { once: true, passive: true }
+        );
+      });
+
+      btnMusicToggle?.addEventListener("click", (e) => {
+        e.stopPropagation();
         if (!bgAudio) return;
-        musicEnabled = true;
-        bgAudio.play().catch(() => {
-          musicEnabled = false;
-        });
-        updateMusicUI();
-      }
-
-      function stopBackgroundMusic() {
-        if (bgAudio) bgAudio.pause();
-        musicEnabled = false;
-        updateMusicUI();
-      }
-
-      function enterMainPage(withMusic) {
-        inVideoStage = false;
-        if (introVideo) {
-          introVideo.pause();
-        }
-        if (introOverlay) {
-          introOverlay.classList.add("hidden-overlay");
-        }
-        if (withMusic) {
-          startBackgroundMusic();
+        if (musicPlaying) {
+          userMuted = true;
+          bgAudio.pause();
+          musicPlaying = false;
+          updateMusicUI();
         } else {
-          updateMusicUI();
-        }
-      }
-
-      function openVideoExperience() {
-        if (!introOverlay || !welcomeCurtain || !videoStage || !introVideo) {
-          enterMainPage(true);
-          return;
-        }
-        if (bgAudio) bgAudio.pause();
-        introOverlay.classList.remove("hidden-overlay");
-        welcomeCurtain.style.display = "none";
-        videoStage.classList.add("active");
-        inVideoStage = true;
-        musicEnabled = true;
-        introVideo.currentTime = 0;
-        introVideo.muted = false;
-        introVideo.play().catch(() => {
-          // Fallback if browser blocks unmuted play
-          introVideo.muted = true;
-          introVideo.play().catch(() => {});
-          musicEnabled = false;
-          updateMusicUI();
-        });
-        updateMusicUI();
-      }
-
-      document.getElementById("btn-start-experience")?.addEventListener("click", openVideoExperience);
-
-      document.getElementById("btn-skip-to-rsvp")?.addEventListener("click", () => {
-        enterMainPage(false);
-      });
-
-      document.getElementById("btn-video-to-rsvp")?.addEventListener("click", () => {
-        const keepSound = introVideo ? !introVideo.muted : true;
-        enterMainPage(keepSound);
-      });
-
-      document.getElementById("btn-replay-video")?.addEventListener("click", () => {
-        openVideoExperience();
-      });
-
-      introVideo?.addEventListener("ended", () => {
-        const keepSound = !introVideo.muted;
-        enterMainPage(keepSound);
-        showToast("🐚 Agora confirme sua presença para a festa da Laura!");
-      });
-
-      btnVideoMute?.addEventListener("click", () => {
-        if (!introVideo) return;
-        introVideo.muted = !introVideo.muted;
-        musicEnabled = !introVideo.muted;
-        updateMusicUI();
-      });
-
-      btnMusicToggle?.addEventListener("click", () => {
-        if (inVideoStage && introVideo) {
-          introVideo.muted = !introVideo.muted;
-          musicEnabled = !introVideo.muted;
-          updateMusicUI();
-          return;
-        }
-        if (musicEnabled) {
-          stopBackgroundMusic();
-        } else {
-          startBackgroundMusic();
+          userMuted = false;
+          tryStartMusic();
         }
       });
 
@@ -2201,13 +1335,6 @@
       // ─────────────────────────────────────────────────────────────────────
       // ISOLATED CLOUD DATABASE ENGINE
       // ─────────────────────────────────────────────────────────────────────
-      function setDbStatus(online, text) {
-        const dot = document.getElementById("db-dot");
-        const label = document.getElementById("db-status-text");
-        if (dot) dot.style.background = online ? "#1ea866" : "#f5a623";
-        if (label) label.textContent = text || "Conectado";
-      }
-
       function mergeRsvpLists(remoteList, localList) {
         const map = new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]);
         for (const item of localList || []) {
@@ -2260,7 +1387,6 @@
           }
         }
 
-        setDbStatus(true, "Salvo ✓");
         return serverRsvps;
       }
 
@@ -2324,12 +1450,10 @@
 
           rsvps = mergeRsvpLists(remoteRsvps, myRsvp ? [myRsvp, ...rsvps] : rsvps);
           saveLocal(STORAGE_KEYS.RSVPS, rsvps);
-          setDbStatus(true, "Conectado");
           renderAll();
           isSyncing = false;
           return true;
         } catch {
-          setDbStatus(true, "Conectado");
           renderAll();
           isSyncing = false;
           return false;
@@ -2368,7 +1492,7 @@
       // RENDERING
       // ─────────────────────────────────────────────────────────────────────
       function renderEventDetails() {
-        document.getElementById("hero-child-name").textContent = eventConfig.childName || "Laura";
+        document.getElementById("hero-child-name").textContent = eventConfig.childName || "Laurinha";
         document.getElementById("hero-subtitle").textContent = eventConfig.subtitle || OFFICIAL_EVENT.subtitle;
         document.getElementById("event-date-display").textContent = eventConfig.dateDisplay;
         document.getElementById("event-time-display").textContent = eventConfig.timeDisplay;
@@ -2390,187 +1514,70 @@
           banner.hidden = false;
           const isGoing = match.status === "confirmado";
           document.getElementById("already-reg-title").textContent = isGoing
-            ? `🎉 Olá, ${match.name}! Sua presença já está confirmada na lista da Laura!`
+            ? `🎉 Olá, ${match.name}! Sua presença já está confirmada na lista da Laurinha!`
             : `💙 Olá, ${match.name}! Recebemos seu aviso de que não poderá comparecer.`;
           document.getElementById("already-reg-details").textContent = isGoing
-            ? `Cadastrado no banco: ${match.adults || 1} adulto(s) e ${match.children || 0} criança(s). Precisa alterar? Clique ao lado para editar.`
+            ? `Registrado: ${match.adults || 1} adulto(s) e ${match.children || 0} criança(s). Precisa alterar? Clique ao lado para editar.`
             : `Caso seus planos mudem, você pode atualizar sua resposta a qualquer momento.`;
         } else {
           banner.hidden = true;
         }
       }
 
-      function renderStatsAndGuests() {
-        const confirmedList = rsvps.filter((r) => r.status === "confirmado");
-        const totalAdults = confirmedList.reduce(
-          (acc, r) => acc + Math.max(Number(r.adults) || 0, 0),
-          0
-        );
-        const totalChildren = confirmedList.reduce(
-          (acc, r) => acc + Math.max(Number(r.children) || 0, 0),
-          0
-        );
-        const totalPeople = totalAdults + totalChildren;
-
-        document.getElementById("nav-confirmed-count").textContent = String(totalPeople);
-        document.getElementById("stat-total-people").textContent = String(totalPeople);
-        document.getElementById("stat-total-adults").textContent = String(totalAdults);
-        document.getElementById("stat-total-children").textContent = String(totalChildren);
-        document.getElementById("stat-total-families").textContent = String(rsvps.length);
-
+      function renderMessagesFeed() {
         const messagesFeed = document.getElementById("messages-feed");
+        if (!messagesFeed) return;
+
         const withMessages = rsvps.filter(
           (r) => r.message && String(r.message).trim().length > 0
         );
-        if (messagesFeed) {
-          if (withMessages.length === 0) {
-            messagesFeed.innerHTML = `
-              <div class="message-bubble">
-                <div class="message-head">
-                  <span class="message-author">🐚 Família da Laura</span>
-                  <span class="message-tag">Anfitriões</span>
-                </div>
-                <p class="message-text">"Estamos preparando cada detalhe do Fundo do Mar com muito carinho! Deixe seu recado ao confirmar presença para guardarmos de recordação para a Laura."</p>
+        if (withMessages.length === 0) {
+          messagesFeed.innerHTML = `
+            <div class="message-bubble">
+              <div class="message-head">
+                <span class="message-author">🐚 Família da Laurinha</span>
+                <span class="message-tag">Anfitriões</span>
               </div>
-            `;
-          } else {
-            messagesFeed.innerHTML = withMessages
-              .map((r, idx) => {
-                const avatar = SEA_AVATARS[idx % SEA_AVATARS.length];
-                const totalFam = (Number(r.adults) || 0) + (Number(r.children) || 0);
-                return `
-                  <article class="message-bubble">
-                    <div class="message-head">
-                      <span class="message-author">${avatar} ${escapeHTML(r.name)}</span>
-                      <span class="message-tag">${
-                        r.status === "confirmado" ? `${totalFam} confirmado(s)` : "Enviou carinho"
-                      }</span>
-                    </div>
-                    <p class="message-text">"${escapeHTML(r.message)}"</p>
-                  </article>
-                `;
-              })
-              .join("");
-          }
-        }
-
-        const guestContainer = document.getElementById("guest-list-container");
-        if (!guestContainer) return;
-
-        const filtered = rsvps.filter((r) => {
-          if (currentGuestFilter === "confirmado" && r.status !== "confirmado") return false;
-          if (currentGuestFilter === "nao_vou" && r.status !== "nao_vou") return false;
-          if (
-            currentGuestFilter === "com_criancas" &&
-            (r.status !== "confirmado" || !(Number(r.children) > 0))
-          ) {
-            return false;
-          }
-          if (guestSearchTerm) {
-            const hay = `${r.name || ""} ${r.message || ""} ${r.kidsNotes || ""}`.toLowerCase();
-            if (!hay.includes(guestSearchTerm.toLowerCase())) return false;
-          }
-          return true;
-        });
-
-        if (filtered.length === 0) {
-          guestContainer.innerHTML = `
-            <div class="guest-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
-              <p style="margin: 0; font-size: 1.02rem; color: var(--ink-muted); font-weight: 600;">
-                🐚 Nenhum cadastro encontrado para este filtro. Seja o primeiro a confirmar presença na aba Convite!
-              </p>
+              <p class="message-text">"Estamos preparando cada detalhe do Fundo do Mar com muito carinho! Deixe seu recado ao confirmar presença para guardarmos de recordação para a Laurinha."</p>
             </div>
           `;
-          return;
+        } else {
+          messagesFeed.innerHTML = withMessages
+            .map((r, idx) => {
+              const avatar = SEA_AVATARS[idx % SEA_AVATARS.length];
+              const totalFam = (Number(r.adults) || 0) + (Number(r.children) || 0);
+              return `
+                <article class="message-bubble">
+                  <div class="message-head">
+                    <span class="message-author">${avatar} ${escapeHTML(r.name)}</span>
+                    <span class="message-tag">${
+                      r.status === "confirmado" ? `${totalFam} confirmado(s)` : "Enviou carinho"
+                    }</span>
+                  </div>
+                  <p class="message-text">"${escapeHTML(r.message)}"</p>
+                </article>
+              `;
+            })
+            .join("");
         }
-
-        guestContainer.innerHTML = filtered
-          .map((r, idx) => {
-            const avatar = SEA_AVATARS[idx % SEA_AVATARS.length];
-            const isGoing = r.status === "confirmado";
-            const dateStr = r.updatedAt
-              ? new Date(r.updatedAt).toLocaleDateString("pt-BR", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit"
-                })
-              : "Recente";
-
-            return `
-              <article class="guest-card">
-                <div class="guest-card-top">
-                  <div class="guest-identity">
-                    <div class="guest-avatar">${avatar}</div>
-                    <div>
-                      <h3 class="guest-name">${escapeHTML(r.name)}</h3>
-                      <span class="guest-time">Registrado em ${escapeHTML(dateStr)}</span>
-                    </div>
-                  </div>
-                  <span class="status-badge ${isGoing ? "confirmado" : "nao_vou"}">
-                    ${isGoing ? "✓ Confirmado" : "Não poderá ir"}
-                  </span>
-                </div>
-
-                ${
-                  isGoing
-                    ? `
-                  <div class="guest-counts">
-                    <span class="count-chip">🧑 ${Number(r.adults) || 1} adulto(s)</span>
-                    <span class="count-chip">👧 ${Number(r.children) || 0} criança(s)</span>
-                    ${r.kidsNotes ? `<span class="count-chip">🎈 ${escapeHTML(r.kidsNotes)}</span>` : ""}
-                  </div>
-                `
-                    : ""
-                }
-
-                ${
-                  r.message
-                    ? `<p class="message-text" style="margin-top: 0.25rem;">💬 "${escapeHTML(r.message)}"</p>`
-                    : ""
-                }
-              </article>
-            `;
-          })
-          .join("");
       }
 
       function renderAll() {
         renderEventDetails();
         renderAlreadyRegisteredBanner();
-        renderStatsAndGuests();
+        renderMessagesFeed();
       }
 
       // ─────────────────────────────────────────────────────────────────────
       // INTERACTIONS & EVENT HANDLERS
       // ─────────────────────────────────────────────────────────────────────
-      function switchTab(tabId) {
-        document.querySelectorAll(".tab-btn").forEach((btn) => {
-          const active = btn.dataset.tab === tabId;
-          btn.classList.toggle("active", active);
-          btn.setAttribute("aria-selected", String(active));
-        });
-        document.querySelectorAll(".tab-panel").forEach((panel) => {
-          panel.classList.toggle("active", panel.id === `tab-${tabId}`);
-        });
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-
-      document.querySelectorAll(".tab-btn").forEach((btn) => {
-        btn.addEventListener("click", () => switchTab(btn.dataset.tab));
-      });
-
       function scrollToRsvpForm() {
-        switchTab("convite");
-        setTimeout(() => {
-          document.getElementById("rsvp-section")?.scrollIntoView({ behavior: "smooth" });
-          document.getElementById("rsvp-name")?.focus();
-        }, 120);
+        document.getElementById("rsvp-section")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("rsvp-name")?.focus();
       }
 
       document.getElementById("btn-scroll-rsvp")?.addEventListener("click", scrollToRsvpForm);
       document.getElementById("btn-hero-confirm")?.addEventListener("click", scrollToRsvpForm);
-      document.getElementById("btn-gifts-to-rsvp")?.addEventListener("click", scrollToRsvpForm);
 
       function updateSteppersUI() {
         document.getElementById("val-adults").textContent = String(adultsCount);
@@ -2653,7 +1660,7 @@
         const submitBtn = document.getElementById("btn-submit-rsvp");
         const prevText = submitBtn.textContent;
         submitBtn.disabled = true;
-        submitBtn.textContent = "Salvando no banco de dados...";
+        submitBtn.textContent = "Salvando confirmação...";
 
         rsvps = mergeRsvpLists(rsvps, [record]);
         myRsvp = record;
@@ -2674,9 +1681,9 @@
           }
           showToast(
             message
-              ? `🎉 Presença e recado de ${name} salvos no Mural da Laura!`
+              ? `🎉 Presença e recado de ${name} salvos no Mural da Laurinha!`
               : isGoing
-              ? `🎉 Presença de ${name} confirmada e sincronizada!`
+              ? `🎉 Presença de ${name} confirmada!`
               : `💙 Obrigado por avisar, ${name}!`
           );
           if (message) {
@@ -2690,79 +1697,16 @@
         }
       });
 
-      document.getElementById("guest-search-input")?.addEventListener("input", (e) => {
-        guestSearchTerm = e.target.value || "";
-        renderStatsAndGuests();
-      });
-
-      document.querySelectorAll("#guest-filter-pills .filter-pill").forEach((pill) => {
-        pill.addEventListener("click", () => {
-          document
-            .querySelectorAll("#guest-filter-pills .filter-pill")
-            .forEach((p) => p.classList.remove("active"));
-          pill.classList.add("active");
-          currentGuestFilter = pill.dataset.filter;
-          renderStatsAndGuests();
-        });
-      });
-
-      document.getElementById("btn-refresh-list")?.addEventListener("click", async () => {
-        showToast("🔄 Sincronizando lista com o banco de dados...");
-        await fetchAllFromDatabase();
-      });
-
-      document.getElementById("btn-copy-whatsapp-summary")?.addEventListener("click", async () => {
-        const confirmed = rsvps.filter((r) => r.status === "confirmado");
-        const totalA = confirmed.reduce((s, r) => s + (Number(r.adults) || 0), 0);
-        const totalC = confirmed.reduce((s, r) => s + (Number(r.children) || 0), 0);
-        const lines = [
-          `🐚 *Lista de Confirmados — 1º Aniversário da Laura*`,
-          `Total: *${totalA + totalC} pessoas* (${totalA} adultos e ${totalC} crianças)`,
-          ``
-        ];
-        confirmed.forEach((r, i) => {
-          lines.push(`${i + 1}. *${r.name}* — ${r.adults} ad / ${r.children} cr`);
-        });
-        try {
-          await navigator.clipboard.writeText(lines.join("\n"));
-          showToast("📲 Resumo copiado para colar no WhatsApp!");
-        } catch {
-          showToast("Não foi possível copiar automaticamente.");
-        }
-      });
-
-      document.getElementById("btn-export-csv")?.addEventListener("click", () => {
-        const header = [
-          "Nome", "Status", "Adultos", "Criancas", "Detalhes Criancas", "Telefone", "Recado", "Data"
-        ];
-        const rows = rsvps.map((r) => [
-          r.name, r.status, r.adults, r.children, r.kidsNotes || "", r.phone || "", r.message || "", r.updatedAt || ""
-        ]);
-        const csv = [header, ...rows]
-          .map((row) => row.map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`).join(","))
-          .join("\n");
-        const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "confirmados-aniversario-laura.csv";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-        showToast("📥 Planilha CSV baixada!");
-      });
-
       document.getElementById("btn-add-calendar")?.addEventListener("click", () => {
         const parsed = parseEventDateTime(eventConfig);
         const startStr = `${parsed.year}${pad2(parsed.month)}${pad2(parsed.day)}T${pad2(parsed.hour)}${pad2(parsed.minute)}00`;
         const endHour = Math.min(parsed.hour + 4, 23);
         const endStr = `${parsed.year}${pad2(parsed.month)}${pad2(parsed.day)}T${pad2(endHour)}${pad2(parsed.minute)}00`;
 
-        const text = encodeURIComponent("1º Aniversário da Laura 🐚🧜‍♀️ (Fundo do Mar)");
+        const text = encodeURIComponent("1º Aniversário da Laurinha 🐚🧜‍♀️ (Fundo do Mar)");
         const location = encodeURIComponent(`${eventConfig.locationName} - ${eventConfig.locationAddress}`);
         const details = encodeURIComponent(
-          "Venha comemorar o 1º aninho da Laura no tema Fundo do Mar! Confirme presença em https://aniversariolaura.vercel.app"
+          "Venha comemorar o 1º aninho da Laurinha no tema Fundo do Mar! Confirme presença em https://aniversariolaura.vercel.app"
         );
         const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${startStr}/${endStr}&details=${details}&location=${location}&ctz=America/Sao_Paulo`;
         window.open(url, "_blank", "noopener,noreferrer");
@@ -2850,7 +1794,6 @@
       // Initialize
       initBubblesCanvas();
       initScrollReveal();
-      updateMusicUI();
       renderAll();
       resolveMapLocationDetails();
       fetchAllFromDatabase();

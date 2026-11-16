@@ -1,4 +1,11 @@
 {
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/adm",
+      "destination": "/adm.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
