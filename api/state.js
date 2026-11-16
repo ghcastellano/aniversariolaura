@@ -17,7 +17,7 @@ const INITIAL_RSVP = {
   children: 0,
   kidsNotes: "",
   phone: "",
-  message: "",
+  message: "Nós te amamos muito! 💕",
   updatedAt: "2026-11-16T04:00:58.820Z",
 };
 
@@ -90,6 +90,36 @@ function applyItemsToMap(rsvpsMap, currentConfig, items) {
   return nextConfig;
 }
 
+async function getPgClient() {
+  const dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl) return null;
+  try {
+    const sql = neon(dbUrl);
+    await sql`CREATE SCHEMA IF NOT EXISTS aniversario_laura`;
+    await sql`CREATE TABLE IF NOT EXISTS aniversario_laura.rsvps_store (
+      slug TEXT PRIMARY KEY,
+      payload JSONB NOT NULL,
+      status TEXT NOT NULL DEFAULT 'sim',
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )`;
+    return { type: "neon", sql };
+  } catch {
+    try {
+      const pool = new pg.Pool({ connectionString: dbUrl, ssl: { rejectUnauthorized: false } });
+      await pool.query("CREATE SCHEMA IF NOT EXISTS aniversario_laura");
+      await pool.query(`CREATE TABLE IF NOT EXISTS aniversario_laura.rsvps_store (
+        slug TEXT PRIMARY KEY,
+        payload JSONB NOT NULL,
+        status TEXT NOT NULL DEFAULT 'sim',
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )`);
+      return { type: "pg", pool };
+    } catch {
+      return null;
+    }
+  }
+}
+
 async function loadIsolatedCloudState() {
   const rsvpsMap = new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]);
   for (const [k, v] of memoryStore.rsvpsMap.entries()) {
@@ -99,6 +129,23 @@ async function loadIsolatedCloudState() {
   }
   let eventConfig = memoryStore.eventConfig;
   let blobUrl = memoryStore.blobUrl;
+
+  const db = await getPgClient();
+  if (db) {
+    try {
+      const rows = db.type === "neon"
+        ? await db.sql`SELECT slug, payload, updated_at FROM aniversario_laura.rsvps_store`
+        : (await db.pool.query("SELECT slug, payload, updated_at FROM aniversario_laura.rsvps_store")).rows;
+      if (db.type === "pg") await db.pool.end().catch(() => {});
+      eventConfig = applyItemsToMap(rsvpsMap, eventConfig, rows.map(r => ({
+        slug: r.slug,
+        payload: typeof r.payload === "string" ? JSON.parse(r.payload) : r.payload,
+        updatedAt: r.updated_at,
+      })));
+    } catch {
+      // fall through to ntfy/jsonblob
+    }
+  }
 
   try {
     const res = await fetch(`${NTFY_BASE_URL}/json?poll=1&since=all`, {
@@ -179,6 +226,40 @@ async function saveIsolatedCloudItems(items) {
   const current = await loadIsolatedCloudState();
   const rsvpsMap = new Map(memoryStore.rsvpsMap);
   const eventConfig = applyItemsToMap(rsvpsMap, current.eventConfig, items);
+
+  const db = await getPgClient();
+  if (db) {
+    try {
+      for (const item of items || []) {
+        if (!item?.slug || !item?.payload) continue;
+        const status = item.status === "nao" ? "nao" : "sim";
+        const payloadJson = JSON.stringify(item.payload);
+        if (db.type === "neon") {
+          await db.sql`
+            INSERT INTO aniversario_laura.rsvps_store (slug, payload, status, updated_at)
+            VALUES (${item.slug}, ${payloadJson}::jsonb, ${status}, NOW())
+            ON CONFLICT (slug) DO UPDATE SET
+              payload = EXCLUDED.payload,
+              status = EXCLUDED.status,
+              updated_at = NOW()
+          `;
+        } else {
+          await db.pool.query(
+            `INSERT INTO aniversario_laura.rsvps_store (slug, payload, status, updated_at)
+             VALUES ($1, $2::jsonb, $3, NOW())
+             ON CONFLICT (slug) DO UPDATE SET
+               payload = EXCLUDED.payload,
+               status = EXCLUDED.status,
+               updated_at = NOW()`,
+            [item.slug, payloadJson, status]
+          );
+        }
+      }
+      if (db.type === "pg") await db.pool.end().catch(() => {});
+    } catch {
+      // fallback to ntfy/jsonblob
+    }
+  }
 
   const rsvps = Array.from(rsvpsMap.values()).sort(
     (a, b) =>
