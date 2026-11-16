@@ -1370,8 +1370,20 @@
 
       const OFFICIAL_MAP_URL =
         "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x94ce017e1d1c58b5:0xfad5c4ce2297b083?entry=s&sa=X&ved=2ahUKEwjL_6SXq4uYAxU_LbkGHRCvMuoQ4kB6BAgEEAA&hl=pt";
-      const ISOLATED_CHANNEL = "aniversariolaura_db_v1_7c4e9a2f";
+      const ISOLATED_CHANNEL = "aniversariolaura_db_v2_clean";
       const DIRECT_CLOUD_URL = `https://ntfy.sh/${ISOLATED_CHANNEL}`;
+
+      const INITIAL_RSVP = {
+        slug: "laura1:rsvp:gustavo-e-sophia",
+        name: "Gustavo e Sophia",
+        status: "confirmado",
+        adults: 2,
+        children: 0,
+        kidsNotes: "",
+        phone: "",
+        message: "",
+        updatedAt: "2026-11-16T04:00:58.820Z"
+      };
 
       const OFFICIAL_EVENT = {
         childName: "Laura",
@@ -1389,17 +1401,19 @@
       };
 
       const STORAGE_KEYS = {
-        RSVPS: "laura1_rsvps_cache_v1",
-        MY_RSVP: "laura1_my_rsvp_v1",
+        RSVPS: "laura1_rsvps_cache_v2",
+        MY_RSVP: "laura1_my_rsvp_v2",
         EVENT_CFG: "laura1_event_cfg_v3"
       };
 
-      // Remove legacy caches so no phone displays old placeholder time/address
+      // Remove legacy caches so old deleted records are never re-uploaded from localStorage
       try {
         localStorage.removeItem("laura1_gifts_cache_v1");
         localStorage.removeItem("laura1_my_gifts_v1");
         localStorage.removeItem("laura1_event_cfg_v1");
         localStorage.removeItem("laura1_event_cfg_v2");
+        localStorage.removeItem("laura1_rsvps_cache_v1");
+        localStorage.removeItem("laura1_my_rsvp_v1");
       } catch {
         // ignore
       }
@@ -1407,12 +1421,11 @@
       const SEA_AVATARS = ["🐙", "🐢", "🐬", "🐠", "🦀", "🐳", "🐚", "⭐", "🧜‍♀️", "🦭"];
 
       let eventConfig = { ...OFFICIAL_EVENT };
-      let rsvps = loadLocal(STORAGE_KEYS.RSVPS, []);
+      let rsvps = loadLocal(STORAGE_KEYS.RSVPS, [INITIAL_RSVP]);
       let myRsvp = loadLocal(STORAGE_KEYS.MY_RSVP, null);
 
-      if (myRsvp && myRsvp.slug && !rsvps.some((r) => r && r.slug === myRsvp.slug)) {
-        rsvps.unshift(myRsvp);
-        saveLocal(STORAGE_KEYS.RSVPS, rsvps);
+      if (!rsvps.some((r) => r && r.slug === INITIAL_RSVP.slug)) {
+        rsvps.push(INITIAL_RSVP);
       }
 
       let currentGuestFilter = "all";
@@ -1558,7 +1571,7 @@
       }
 
       function mergeRsvpLists(remoteList, localList) {
-        const map = new Map();
+        const map = new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]);
         for (const item of localList || []) {
           if (item && item.slug && String(item.slug).startsWith("laura1:rsvp:")) {
             map.set(item.slug, item);
@@ -1619,7 +1632,7 @@
         if (!res.ok) throw new Error(`Direct cloud HTTP ${res.status}`);
         const text = await res.text();
         const lines = text.split("\n").filter(Boolean);
-        const list = [];
+        const list = [INITIAL_RSVP];
         for (const line of lines) {
           try {
             const evt = JSON.parse(line);
@@ -1673,25 +1686,7 @@
             remoteRsvps = await fetchDirectFromCloudChannel();
           }
 
-          // Push any unsynced local RSVPs from this phone to the cloud database
-          const itemsToPush = [];
-          const remoteSlugs = new Set(remoteRsvps.map((r) => r.slug));
-
-          for (const localR of rsvps) {
-            if (localR && localR.slug && !remoteSlugs.has(localR.slug)) {
-              itemsToPush.push({
-                slug: localR.slug,
-                payload: localR,
-                status: localR.status === "confirmado" ? "sim" : "nao"
-              });
-            }
-          }
-
-          if (itemsToPush.length > 0) {
-            await saveItemsToDatabase(itemsToPush);
-          }
-
-          rsvps = mergeRsvpLists(remoteRsvps, rsvps);
+          rsvps = mergeRsvpLists(remoteRsvps, myRsvp ? [myRsvp] : []);
           saveLocal(STORAGE_KEYS.RSVPS, rsvps);
           setDbStatus(true, "Banco Conectado");
           renderAll();

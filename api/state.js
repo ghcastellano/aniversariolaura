@@ -1,13 +1,25 @@
 import { neon } from "@neondatabase/serverless";
 import pg from "pg";
 
-// Canal de banco em nuvem 100% isolado e exclusivo do projeto Aniversário da Laura
-const ISOLATED_CHANNEL = "aniversariolaura_db_v1_7c4e9a2f";
+// Canal de banco em nuvem 100% isolado e exclusivo do projeto Aniversário da Laura (v2 limpo)
+const ISOLATED_CHANNEL = "aniversariolaura_db_v2_clean";
 const NTFY_BASE_URL = `https://ntfy.sh/${ISOLATED_CHANNEL}`;
 
-// Cache em memória da instância serverless para resposta instantânea
+const INITIAL_RSVP = {
+  slug: "laura1:rsvp:gustavo-e-sophia",
+  name: "Gustavo e Sophia",
+  status: "confirmado",
+  adults: 2,
+  children: 0,
+  kidsNotes: "",
+  phone: "",
+  message: "",
+  updatedAt: "2026-11-16T04:00:58.820Z",
+};
+
+// Cache em memória da instância serverless inicializado apenas com Gustavo e Sophia
 let memoryStore = {
-  rsvpsMap: new Map(),
+  rsvpsMap: new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]),
   eventConfig: null,
   blobUrl: process.env.LAURA_BLOB_URL || null,
 };
@@ -21,10 +33,6 @@ function sanitizeEventConfig(cfg) {
   return clean;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// OPÇÃO 1: Se o usuário adicionar DATABASE_URL / POSTGRES_URL no projeto
-// `aniversariolaura` da Vercel, usa esse banco PostgreSQL dedicado.
-// ─────────────────────────────────────────────────────────────────────────────
 function getCustomPostgresUrl() {
   return (
     process.env.DATABASE_URL ||
@@ -57,10 +65,6 @@ async function runPostgresQuery(connectionString, text, params = []) {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// OPÇÃO 2 (PADRÃO): Banco em nuvem isolado e exclusivo do projeto
-// `aniversariolaura` (combina documento JSON persistente + stream de eventos)
-// ─────────────────────────────────────────────────────────────────────────────
 function applyItemsToMap(rsvpsMap, currentConfig, items) {
   let nextConfig = currentConfig;
   for (const item of items || []) {
@@ -94,7 +98,10 @@ function applyItemsToMap(rsvpsMap, currentConfig, items) {
 }
 
 async function loadIsolatedCloudState() {
-  const rsvpsMap = new Map(memoryStore.rsvpsMap);
+  const rsvpsMap = new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]);
+  for (const [k, v] of memoryStore.rsvpsMap.entries()) {
+    rsvpsMap.set(k, v);
+  }
   let eventConfig = memoryStore.eventConfig;
   let blobUrl = memoryStore.blobUrl;
 
@@ -310,7 +317,7 @@ export default async function handler(req, res) {
             eventConfig,
           });
         } catch {
-          // Se DATABASE_URL falhar, usa automaticamente o banco isolado em nuvem
+          // fallback to isolated cloud
         }
       }
 
@@ -381,7 +388,7 @@ export default async function handler(req, res) {
             );
           }
         } catch {
-          // Continua e salva no banco isolado em nuvem
+          // fallback to isolated cloud
         }
       }
 

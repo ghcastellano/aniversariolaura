@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 window.LAURA_CONFIG = {
   NAMESPACE: "laura1",
-  ISOLATED_DB_CHANNEL: "aniversariolaura_db_v1_7c4e9a2f",
+  ISOLATED_DB_CHANNEL: "aniversariolaura_db_v2_clean",
 
   // Dados oficiais do evento
   DEFAULT_EVENT: {
