@@ -1370,8 +1370,9 @@
 
       const OFFICIAL_MAP_URL =
         "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x94ce017e1d1c58b5:0xfad5c4ce2297b083?entry=s&sa=X&ved=2ahUKEwjL_6SXq4uYAxU_LbkGHRCvMuoQ4kB6BAgEEAA&hl=pt";
-      const ISOLATED_CHANNEL = "aniversariolaura_db_v2_clean";
+      const ISOLATED_CHANNEL = "aniversariolaura_db_v3_clean";
       const DIRECT_CLOUD_URL = `https://ntfy.sh/${ISOLATED_CHANNEL}`;
+      const RESET_CUTOFF_TIME = new Date("2026-11-16T04:29:00.000Z").getTime();
 
       const INITIAL_RSVP = {
         slug: "laura1:rsvp:gustavo-e-sophia",
@@ -1384,6 +1385,18 @@
         message: "",
         updatedAt: "2026-11-16T04:00:58.820Z"
       };
+
+      function isDeletedLegacyRecord(item) {
+        if (!item || typeof item !== "object") return true;
+        const slug = String(item.slug || "");
+        if (!slug.startsWith("laura1:rsvp:") || slug === "laura1:rsvp:") return true;
+        if (slug === INITIAL_RSVP.slug) return false;
+        const name = String(item.name || "").trim();
+        if (!name || name === ".." || name === ".") return true;
+        const ts = new Date(item.updatedAt || 0).getTime();
+        if (!ts || Number.isNaN(ts) || ts < RESET_CUTOFF_TIME) return true;
+        return false;
+      }
 
       const OFFICIAL_EVENT = {
         childName: "Laura",
@@ -1401,12 +1414,12 @@
       };
 
       const STORAGE_KEYS = {
-        RSVPS: "laura1_rsvps_cache_v2",
-        MY_RSVP: "laura1_my_rsvp_v2",
+        RSVPS: "laura1_rsvps_cache_v3",
+        MY_RSVP: "laura1_my_rsvp_v3",
         EVENT_CFG: "laura1_event_cfg_v3"
       };
 
-      // Remove legacy caches so old deleted records are never re-uploaded from localStorage
+      // Remove legacy caches so old deleted records are never shown or re-uploaded
       try {
         localStorage.removeItem("laura1_gifts_cache_v1");
         localStorage.removeItem("laura1_my_gifts_v1");
@@ -1414,6 +1427,8 @@
         localStorage.removeItem("laura1_event_cfg_v2");
         localStorage.removeItem("laura1_rsvps_cache_v1");
         localStorage.removeItem("laura1_my_rsvp_v1");
+        localStorage.removeItem("laura1_rsvps_cache_v2");
+        localStorage.removeItem("laura1_my_rsvp_v2");
       } catch {
         // ignore
       }
@@ -1421,12 +1436,19 @@
       const SEA_AVATARS = ["🐙", "🐢", "🐬", "🐠", "🦀", "🐳", "🐚", "⭐", "🧜‍♀️", "🦭"];
 
       let eventConfig = { ...OFFICIAL_EVENT };
-      let rsvps = loadLocal(STORAGE_KEYS.RSVPS, [INITIAL_RSVP]);
+      let rsvps = loadLocal(STORAGE_KEYS.RSVPS, [INITIAL_RSVP]).filter(
+        (r) => !isDeletedLegacyRecord(r)
+      );
       let myRsvp = loadLocal(STORAGE_KEYS.MY_RSVP, null);
+      if (myRsvp && isDeletedLegacyRecord(myRsvp)) {
+        myRsvp = null;
+        saveLocal(STORAGE_KEYS.MY_RSVP, null);
+      }
 
       if (!rsvps.some((r) => r && r.slug === INITIAL_RSVP.slug)) {
         rsvps.push(INITIAL_RSVP);
       }
+      saveLocal(STORAGE_KEYS.RSVPS, rsvps);
 
       let currentGuestFilter = "all";
       let guestSearchTerm = "";
@@ -1573,12 +1595,12 @@
       function mergeRsvpLists(remoteList, localList) {
         const map = new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]);
         for (const item of localList || []) {
-          if (item && item.slug && String(item.slug).startsWith("laura1:rsvp:")) {
+          if (!isDeletedLegacyRecord(item)) {
             map.set(item.slug, item);
           }
         }
         for (const item of remoteList || []) {
-          if (item && item.slug && String(item.slug).startsWith("laura1:rsvp:")) {
+          if (!isDeletedLegacyRecord(item)) {
             const existing = map.get(item.slug);
             if (
               !existing ||
@@ -1640,14 +1662,17 @@
             const data = JSON.parse(evt.message);
             if (Array.isArray(data.items)) {
               for (const item of data.items) {
-                if (item?.slug && String(item.slug).startsWith("laura1:rsvp:") && item.payload) {
-                  list.push({ ...item.payload, slug: item.slug });
+                if (item?.slug && item?.payload) {
+                  const candidate = { ...item.payload, slug: item.slug };
+                  if (!isDeletedLegacyRecord(candidate)) {
+                    list.push(candidate);
+                  }
                 }
               }
             }
             if (Array.isArray(data.rsvps)) {
               for (const r of data.rsvps) {
-                if (r?.slug && String(r.slug).startsWith("laura1:rsvp:")) {
+                if (!isDeletedLegacyRecord(r)) {
                   list.push(r);
                 }
               }

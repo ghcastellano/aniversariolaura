@@ -1,9 +1,13 @@
 import { neon } from "@neondatabase/serverless";
 import pg from "pg";
 
-// Canal de banco em nuvem 100% isolado e exclusivo do projeto Aniversário da Laura (v2 limpo)
-const ISOLATED_CHANNEL = "aniversariolaura_db_v2_clean";
+// Canal de banco em nuvem 100% isolado e exclusivo do projeto Aniversário da Laura (v3)
+const ISOLATED_CHANNEL = "aniversariolaura_db_v3_clean";
 const NTFY_BASE_URL = `https://ntfy.sh/${ISOLATED_CHANNEL}`;
+
+// Corte temporal: qualquer registro antigo anterior a este instante (exceto Gustavo e Sophia)
+// é descartado, impedindo que abas antigas abertas em outros celulares reenviem registros excluídos.
+const RESET_CUTOFF_TIME = new Date("2026-11-16T04:28:00.000Z").getTime();
 
 const INITIAL_RSVP = {
   slug: "laura1:rsvp:gustavo-e-sophia",
@@ -17,11 +21,27 @@ const INITIAL_RSVP = {
   updatedAt: "2026-11-16T04:00:58.820Z",
 };
 
+function isDeletedLegacyRecord(slug, payload) {
+  if (!slug || typeof slug !== "string") return true;
+  if (!slug.startsWith("laura1:rsvp:")) return true;
+  if (slug === "laura1:rsvp:") return true;
+  if (slug === INITIAL_RSVP.slug) return false;
+
+  const name = String(payload?.name || "").trim();
+  if (!name || name === ".." || name === ".") return true;
+
+  const ts = new Date(payload?.updatedAt || 0).getTime();
+  if (!ts || Number.isNaN(ts) || ts < RESET_CUTOFF_TIME) {
+    return true;
+  }
+  return false;
+}
+
 // Cache em memória da instância serverless inicializado apenas com Gustavo e Sophia
 let memoryStore = {
   rsvpsMap: new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]),
   eventConfig: null,
-  blobUrl: process.env.LAURA_BLOB_URL || null,
+  blobUrl: null,
 };
 
 function sanitizeEventConfig(cfg) {
@@ -33,38 +53,6 @@ function sanitizeEventConfig(cfg) {
   return clean;
 }
 
-function getCustomPostgresUrl() {
-  return (
-    process.env.DATABASE_URL ||
-    process.env.POSTGRES_URL ||
-    process.env.NEON_DATABASE_URL ||
-    null
-  );
-}
-
-let pgPool = null;
-async function runPostgresQuery(connectionString, text, params = []) {
-  try {
-    const sql = neon(connectionString, { fullResults: true });
-    if (typeof sql.query === "function") {
-      const res = await sql.query(text, params);
-      return Array.isArray(res) ? { rows: res } : res;
-    }
-    const res = await sql(text, params);
-    return Array.isArray(res) ? { rows: res } : res;
-  } catch {
-    if (!pgPool) {
-      pgPool = new pg.Pool({
-        connectionString,
-        ssl: { rejectUnauthorized: false },
-        max: 3,
-        connectionTimeoutMillis: 6000,
-      });
-    }
-    return await pgPool.query(text, params);
-  }
-}
-
 function applyItemsToMap(rsvpsMap, currentConfig, items) {
   let nextConfig = currentConfig;
   for (const item of items || []) {
@@ -74,6 +62,11 @@ function applyItemsToMap(rsvpsMap, currentConfig, items) {
     if (item.slug === "laura1:config") {
       nextConfig = sanitizeEventConfig(item.payload);
     } else if (String(item.slug).startsWith("laura1:rsvp:")) {
+      if (isDeletedLegacyRecord(item.slug, item.payload)) {
+        rsvpsMap.delete(item.slug);
+        continue;
+      }
+
       const existing = rsvpsMap.get(item.slug);
       const itemTime = new Date(
         item.payload.updatedAt || item.updatedAt || 0
@@ -100,7 +93,9 @@ function applyItemsToMap(rsvpsMap, currentConfig, items) {
 async function loadIsolatedCloudState() {
   const rsvpsMap = new Map([[INITIAL_RSVP.slug, INITIAL_RSVP]]);
   for (const [k, v] of memoryStore.rsvpsMap.entries()) {
-    rsvpsMap.set(k, v);
+    if (!isDeletedLegacyRecord(k, v)) {
+      rsvpsMap.set(k, v);
+    }
   }
   let eventConfig = memoryStore.eventConfig;
   let blobUrl = memoryStore.blobUrl;
@@ -269,58 +264,8 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const customPgUrl = getCustomPostgresUrl();
-
   try {
     if (req.method === "GET") {
-      if (customPgUrl) {
-        try {
-          await runPostgresQuery(
-            customPgUrl,
-            `CREATE SCHEMA IF NOT EXISTS aniversario_laura`
-          );
-          await runPostgresQuery(
-            customPgUrl,
-            `CREATE TABLE IF NOT EXISTS aniversario_laura.rsvps_store (
-              slug TEXT PRIMARY KEY,
-              payload JSONB NOT NULL,
-              status TEXT NOT NULL DEFAULT 'sim',
-              updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-            )`
-          );
-          const result = await runPostgresQuery(
-            customPgUrl,
-            `SELECT slug, payload, status, updated_at
-             FROM aniversario_laura.rsvps_store
-             ORDER BY updated_at DESC`
-          );
-          const rsvps = [];
-          let eventConfig = null;
-          for (const r of result?.rows || []) {
-            const data =
-              typeof r.payload === "string" ? JSON.parse(r.payload) : r.payload;
-            if (!data) continue;
-            if (r.slug.startsWith("laura1:rsvp:")) {
-              rsvps.push({
-                ...data,
-                slug: r.slug,
-                updatedAt: r.updated_at || data.updatedAt,
-              });
-            } else if (r.slug === "laura1:config") {
-              eventConfig = sanitizeEventConfig(data);
-            }
-          }
-          return res.status(200).json({
-            ok: true,
-            source: "postgres",
-            rsvps,
-            eventConfig,
-          });
-        } catch {
-          // fallback to isolated cloud
-        }
-      }
-
       const state = await loadIsolatedCloudState();
       return res.status(200).json({
         ok: true,
@@ -340,56 +285,27 @@ export default async function handler(req, res) {
         ? [{ slug: body.slug, payload: body.payload, status: body.status }]
         : [];
 
-      if (items.length === 0) {
-        return res.status(400).json({ ok: false, error: "Dados inválidos" });
-      }
-
       const cleanedItems = items
         .filter(
           (item) =>
             item?.slug &&
             item?.payload &&
-            !String(item.slug).startsWith("laura1:gift:")
+            !String(item.slug).startsWith("laura1:gift:") &&
+            !isDeletedLegacyRecord(item.slug, item.payload)
         )
         .map((item) => ({
           slug: item.slug,
-          payload:
-            item.slug === "laura1:config"
-              ? sanitizeEventConfig(item.payload)
-              : item.payload,
+          payload: item.payload,
           status: item.status === "nao" ? "nao" : "sim",
         }));
 
-      if (customPgUrl) {
-        try {
-          await runPostgresQuery(
-            customPgUrl,
-            `CREATE SCHEMA IF NOT EXISTS aniversario_laura`
-          );
-          await runPostgresQuery(
-            customPgUrl,
-            `CREATE TABLE IF NOT EXISTS aniversario_laura.rsvps_store (
-              slug TEXT PRIMARY KEY,
-              payload JSONB NOT NULL,
-              status TEXT NOT NULL DEFAULT 'sim',
-              updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-            )`
-          );
-          for (const item of cleanedItems) {
-            await runPostgresQuery(
-              customPgUrl,
-              `INSERT INTO aniversario_laura.rsvps_store (slug, payload, status, updated_at)
-               VALUES ($1, $2::jsonb, $3, NOW())
-               ON CONFLICT (slug) DO UPDATE SET
-                 payload = EXCLUDED.payload,
-                 status = EXCLUDED.status,
-                 updated_at = NOW()`,
-              [item.slug, JSON.stringify(item.payload), item.status]
-            );
-          }
-        } catch {
-          // fallback to isolated cloud
-        }
+      if (cleanedItems.length === 0) {
+        const state = await loadIsolatedCloudState();
+        return res.status(200).json({
+          ok: true,
+          rsvps: state.rsvps,
+          eventConfig: state.eventConfig,
+        });
       }
 
       const saved = await saveIsolatedCloudItems(cleanedItems);
