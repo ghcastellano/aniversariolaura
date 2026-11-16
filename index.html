@@ -751,6 +751,41 @@
       transform: translate(-50%, 0);
     }
 
+    /* Smart Audio Unlock Pill (shown only if browser blocks autoplay on load) */
+    .audio-unlock-pill {
+      position: fixed;
+      bottom: 1.15rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 180;
+      border: 2px solid #fff;
+      background: linear-gradient(135deg, var(--turquoise), #1cc4b6);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.94rem;
+      font-weight: 700;
+      padding: 0.75rem 1.35rem;
+      border-radius: 999px;
+      box-shadow: 0 12px 32px rgba(18, 60, 86, 0.28);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      max-width: calc(100vw - 2rem);
+      animation: pulseGlow 2.2s ease-in-out infinite;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .audio-unlock-pill[hidden] {
+      display: none;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.04); }
+    }
+
     /* Footer */
     .ocean-footer {
       position: relative;
@@ -1068,6 +1103,10 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <button type="button" class="audio-unlock-pill" id="audio-unlock-pill" hidden>
+    🎵 Toque aqui para ouvir a música 🐚
+  </button>
+
   <script>
     (function () {
       "use strict";
@@ -1214,6 +1253,7 @@
       // ─────────────────────────────────────────────────────────────────────
       const bgAudio = document.getElementById("bg-ocean-audio");
       const btnMusicToggle = document.getElementById("btn-music-toggle");
+      const audioUnlockPill = document.getElementById("audio-unlock-pill");
       let userMuted = false;
       let musicEnabled = true;
 
@@ -1223,10 +1263,14 @@
       }
 
       function updateMusicUI() {
-        if (!btnMusicToggle) return;
-        btnMusicToggle.classList.toggle("playing", musicEnabled);
-        btnMusicToggle.setAttribute("aria-pressed", String(musicEnabled));
-        btnMusicToggle.textContent = musicEnabled ? "🔊 Música" : "🔇 Mudo";
+        if (btnMusicToggle) {
+          btnMusicToggle.classList.toggle("playing", musicEnabled);
+          btnMusicToggle.setAttribute("aria-pressed", String(musicEnabled));
+          btnMusicToggle.textContent = musicEnabled ? "🔊 Música" : "🔇 Mudo";
+        }
+        if (audioUnlockPill && bgAudio) {
+          audioUnlockPill.hidden = !musicEnabled || userMuted || !bgAudio.paused;
+        }
       }
 
       function tryStartMusic() {
@@ -1248,7 +1292,7 @@
         }
       }
 
-      const unlockEvents = ["touchend", "pointerup", "click", "keydown"];
+      const unlockEvents = ["click", "touchend", "keydown"];
       function handleFirstGesture(e) {
         if (e && e.target && btnMusicToggle && btnMusicToggle.contains(e.target)) {
           return;
@@ -1266,6 +1310,13 @@
 
       unlockEvents.forEach((evtName) => {
         document.addEventListener(evtName, handleFirstGesture, { capture: true, passive: true });
+      });
+
+      audioUnlockPill?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        userMuted = false;
+        musicEnabled = true;
+        tryStartMusic();
       });
 
       // Attempt immediate playback on load and when audio is ready
