@@ -1,11 +1,19 @@
-// Vercel Serverless Function (/api/state)
-// Usa banco PostgreSQL (Neon) com schema isolado exclusivo (`aniversario_laura`)
-// para nunca misturar tabelas com outros projetos. Se você conectar um banco novo
-// dedicado na aba Storage da Vercel (DATABASE_URL / POSTGRES_URL), ele passa a
-// usar esse banco automaticamente.
+import { neon } from "@neondatabase/serverless";
 
+// Se você conectar um banco dedicado na aba Storage do projeto `aniversariolaura` na Vercel,
+// a Vercel preenche DATABASE_URL / POSTGRES_URL automaticamente.
+// Enquanto não houver variável no painel da Vercel, usa o schema isolado `aniversario_laura`.
 const FALLBACK_NEON_URL =
   "postgresql://neondb_owner:npg_VHxOI2vsD3YP@ep-steep-surf-a4igari9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require";
+
+function getSql() {
+  const url =
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.NEON_DATABASE_URL ||
+    FALLBACK_NEON_URL;
+  return neon(url, { fullResults: true });
+}
 
 function sanitizeEventConfig(cfg) {
   if (!cfg || typeof cfg !== "object") return null;
@@ -16,38 +24,11 @@ function sanitizeEventConfig(cfg) {
   return clean;
 }
 
-// Neon HTTP SQL Driver (1 comando SQL por chamada HTTP, zero dependências npm)
-async function neonQuery(query, params = []) {
-  const dbUrl =
-    process.env.DATABASE_URL ||
-    process.env.POSTGRES_URL ||
-    process.env.NEON_DATABASE_URL ||
-    FALLBACK_NEON_URL;
-  const parsed = new URL(dbUrl);
-  const endpoint = `https://${parsed.hostname}/sql`;
-
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Neon-Connection-String": dbUrl,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query, params }),
-  });
-
-  if (!res.ok) {
-    const txt = await res.text();
-    throw new Error(`Neon HTTP error (${res.status}): ${txt}`);
-  }
-  return res.json();
-}
-
 let schemaReady = false;
-async function ensureIsolatedSchema() {
+async function ensureIsolatedSchema(sql) {
   if (schemaReady) return;
-  // Cria um schema 100% isolado exclusivo para o aniversário da Laura
-  await neonQuery(`CREATE SCHEMA IF NOT EXISTS aniversario_laura`);
-  await neonQuery(
+  await sql.query(`CREATE SCHEMA IF NOT EXISTS aniversario_laura`);
+  await sql.query(
     `CREATE TABLE IF NOT EXISTS aniversario_laura.rsvps_store (
       slug TEXT PRIMARY KEY,
       payload JSONB NOT NULL,
@@ -69,13 +50,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    await ensureIsolatedSchema();
+    const sql = getSql();
+    await ensureIsolatedSchema(sql);
 
     if (req.method === "GET") {
       const rsvps = [];
       let eventConfig = null;
 
-      const result = await neonQuery(
+      const result = await sql.query(
         `SELECT slug, payload, status, updated_at
          FROM aniversario_laura.rsvps_store
          ORDER BY updated_at DESC`
@@ -99,7 +81,6 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         ok: true,
-        source: process.env.DATABASE_URL ? "neon-dedicated" : "neon-isolated-schema",
         rsvps,
         eventConfig,
       });
@@ -128,7 +109,7 @@ export default async function handler(req, res) {
             ? sanitizeEventConfig(item.payload)
             : item.payload;
 
-        await neonQuery(
+        await sql.query(
           `INSERT INTO aniversario_laura.rsvps_store (slug, payload, status, updated_at)
            VALUES ($1, $2::jsonb, $3, NOW())
            ON CONFLICT (slug) DO UPDATE SET
