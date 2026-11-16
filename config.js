@@ -17,7 +17,7 @@ window.LAURA_CONFIG = {
     dateISO: "2027-02-14T17:30:00-03:00",
     timeDisplay: "Às 17h30",
     locationName: "Local da Festa — Guarujá",
-    locationAddress: "Clique abaixo para abrir a localização exata no Google Maps",
+    locationAddress: "Rua Antonio da Quinta — Jardim Alvorada, Guarujá - SP",
     mapUrl:
       "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x94ce017e1d1c58b5:0xfad5c4ce2297b083?entry=s&sa=X&ved=2ahUKEwjL_6SXq4uYAxU_LbkGHRCvMuoQ4kB6BAgEEAA&hl=pt",
     rsvpDeadline: "05 de Fevereiro"
